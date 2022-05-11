@@ -1,5 +1,6 @@
 package model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,16 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
-public class Barber implements Serializable {
+@AllArgsConstructor
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,23 +33,5 @@ public class Barber implements Serializable {
     @Getter @Setter private String email;
 
     @Getter @Setter private String passwordHash;
-
-    @Getter @Setter
-    private String address;
-
-    @Getter @Setter
-    private int age;
-
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.REMOVE)
-    @Getter
-    private List<Appointment> appointments = new ArrayList<>();
-
-    @OneToOne(mappedBy = "barber")
-    @Getter @Setter
-    private Queue queue;
-
-    @ManyToOne(optional = false)
-    @Getter @Setter
-    private Shop shop;
 
 }

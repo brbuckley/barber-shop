@@ -27,6 +27,8 @@ public class Haircut implements Serializable {
     @Getter @Setter
     private String description;
 
+    @Getter @Setter private double price;
+
     @OneToMany(mappedBy = "haircut", cascade = CascadeType.REMOVE)
     @Getter
     private List<Appointment> appointments = new ArrayList<>();

@@ -44,7 +44,7 @@ public class CustomerDao implements Dao<Customer> {
     public void remove(Customer customer) throws NotExistException {
         get(customer.getId());
         em.getTransaction().begin();
-        em.remove(customer);
+        em.merge(customer);
         em.getTransaction().commit();
     }
 }

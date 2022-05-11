@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 @NoArgsConstructor
@@ -21,6 +21,14 @@ public class Appointment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private long id;
+
+    @Getter
+    @Setter
+    private String status;
+
+    @Getter
+    @Setter
+    private Date date;
 
     @ManyToOne(optional = false)
     @Getter
@@ -46,10 +54,5 @@ public class Appointment implements Serializable {
     @Getter
     @Setter
     private Reservation reservation;
-
-    @ManyToOne
-    @Getter
-    @Setter
-    private GeneralQueue generalQueue;
 
 }

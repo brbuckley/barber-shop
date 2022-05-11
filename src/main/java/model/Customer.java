@@ -28,6 +28,12 @@ public class Customer implements Serializable {
 
     @Getter @Setter private String name;
 
+    @Getter @Setter private String username;
+
+    @Getter @Setter private String email;
+
+    @Getter @Setter private String passwordHash;
+
     @Getter @Setter
     private String address;
 

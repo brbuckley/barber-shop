@@ -18,6 +18,11 @@ public class CustomerRepo {
         setCustomerDao(new CustomerDao(em));
     }
 
+    public CustomerRepo(String persistence) {
+        EntityManager em = GetConnection.getConnection(persistence).getEm();
+        setCustomerDao(new CustomerDao(em));
+    }
+
     public void add(Customer customer) throws NotExistException {
         customerDao.add(customer);
     }
