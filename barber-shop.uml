@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Persistence</ID>
+  <OriginalElement>JavaeeElement:/70165e66/barber-shop/barber-shop/jpa/JPA/PersistenceModel</OriginalElement>
+  <nodes>
+    <node x="205.9999999999999" y="56.0">State#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/State.java</node>
+    <node x="0.0" y="1031.0">Admin#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Admin.java</node>
+    <node x="205.9999999999999" y="330.0">City#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/City.java</node>
+    <node x="882.9999999999999" y="316.0">Haircut#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Haircut.java</node>
+    <node x="819.9999999999999" y="70.0">Queue#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Queue.java</node>
+    <node x="641.9999999999999" y="0.0">Shop#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Shop.java</node>
+    <node x="615.9999999999999" y="722.0">Customer#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Customer.java</node>
+    <node x="615.9999999999999" y="260.0">Barber#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Barber.java</node>
+    <node x="411.9999999999999" y="330.0">Reservation#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Reservation.java</node>
+    <node x="638.9999999999999" y="548.0">Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java</node>
+    <node x="0.0" y="330.0">Payment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Payment.java</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" target="Haircut#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Haircut.java" relationship="RELATION">
+      <point x="0.0" y="-62.0" />
+      <point x="720.9999999999999" y="522.0" />
+      <point x="975.9999999999999" y="522.0" />
+      <point x="0.0" y="62.0" />
+    </edge>
+    <edge source="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" target="Queue#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Queue.java" relationship="RELATION">
+      <point x="0.0" y="-62.0" />
+      <point x="720.9999999999999" y="522.0" />
+      <point x="872.4999999999999" y="522.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" target="Barber#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Barber.java" relationship="RELATION">
+      <point x="0.0" y="-62.0" />
+      <point x="0.0" y="118.0" />
+    </edge>
+    <edge source="City#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/City.java" target="Shop#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Shop.java" relationship="RELATION">
+      <point x="0.0" y="-48.0" />
+      <point x="298.9999999999999" y="229.0" />
+      <point x="720.9999999999999" y="229.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" target="Reservation#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Reservation.java" relationship="RELATION">
+      <point x="0.0" y="-62.0" />
+      <point x="720.9999999999999" y="522.0" />
+      <point x="503.9999999999999" y="522.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="City#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/City.java" target="State#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/State.java" relationship="RELATION">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" target="Payment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Payment.java" relationship="RELATION">
+      <point x="0.0" y="-62.0" />
+      <point x="720.9999999999999" y="522.0" />
+      <point x="93.0" y="522.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="Customer#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Customer.java" target="Appointment#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Appointment.java" relationship="RELATION">
+      <point x="0.0" y="-132.0" />
+      <point x="0.0" y="62.0" />
+    </edge>
+    <edge source="Barber#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Barber.java" target="Shop#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Shop.java" relationship="RELATION">
+      <point x="0.0" y="-118.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="Barber#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Barber.java" target="Queue#file://C:/Users/buckl/IdeaProjects/barber-shop/src/main/java/model/Queue.java" relationship="RELATION">
+      <point x="0.0" y="-118.0" />
+      <point x="720.9999999999999" y="239.0" />
+      <point x="872.4999999999999" y="239.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.7077985377741673" showDependencies="false" x="822.9223538532661" y="568.0774704464593" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Embeddables</Category>
+    <Category>Properties</Category>
+    <Category>Superclasses</Category>
+  </Categories>
+</Diagram>
+
