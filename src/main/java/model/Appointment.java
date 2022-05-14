@@ -55,4 +55,7 @@ public class Appointment implements Serializable {
     @Setter
     private Reservation reservation;
 
+    @ManyToOne
+    @Getter @Setter
+    private Payment payment;
 }

@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ManyToOne;
 
 @Entity
 @NoArgsConstructor
@@ -42,4 +43,7 @@ public class Shop implements Serializable {
     @Getter
     private List<Barber> barbers = new ArrayList<>();
 
+    @ManyToOne
+    @Getter @Setter
+    private City city;
 }

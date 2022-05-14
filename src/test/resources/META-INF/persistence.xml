@@ -11,6 +11,9 @@
         <class>model.Reservation</class>
         <class>model.Haircut</class>
         <class>model.Admin</class>
+        <class>model.State</class>
+        <class>model.Payment</class>
+        <class>model.City</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <!-- Try this url if the DB is not saving "jdbc:h2:~/1-jpa;DB_CLOSE_ON_EXIT=FALSE" -->

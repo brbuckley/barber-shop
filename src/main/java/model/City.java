@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ManyToOne;
 
 @Entity
 @NoArgsConstructor
@@ -30,4 +31,7 @@ public class City implements Serializable {
     @Getter
     private List<Shop> shops = new ArrayList<>();
 
+    @ManyToOne
+    @Getter @Setter
+    private State state;
 }

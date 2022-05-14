@@ -23,9 +23,11 @@ public class State implements Serializable {
     @Getter
     private long id;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String description;
 
     @OneToMany(mappedBy = "state", cascade = CascadeType.REMOVE)
     @Getter
-    private List<city> cities = new ArrayList<>();
+    private List<City> cities = new ArrayList<>();
+}

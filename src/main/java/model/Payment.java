@@ -29,5 +29,4 @@ public class Payment implements Serializable {
     @OneToMany(mappedBy = "payment", cascade = CascadeType.REMOVE)
     @Getter
     private List<Appointment> appointments  = new ArrayList<>();
-
 }
