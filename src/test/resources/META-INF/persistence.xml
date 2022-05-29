@@ -3,17 +3,17 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="TestPersistence">
-        <class>model.Shop</class>
-        <class>model.Customer</class>
-        <class>model.Appointment</class>
-        <class>model.Queue</class>
-        <class>model.Barber</class>
-        <class>model.Reservation</class>
-        <class>model.Haircut</class>
-        <class>model.Admin</class>
-        <class>model.State</class>
-        <class>model.Payment</class>
-        <class>model.City</class>
+        <class>app.model.Shop</class>
+        <class>app.model.Customer</class>
+        <class>app.model.Appointment</class>
+        <class>app.model.Queue</class>
+        <class>app.model.Barber</class>
+        <class>app.model.Reservation</class>
+        <class>app.model.Haircut</class>
+        <class>app.model.Admin</class>
+        <class>app.model.State</class>
+        <class>app.model.Payment</class>
+        <class>app.model.City</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <!-- Try this url if the DB is not saving "jdbc:h2:~/1-jpa;DB_CLOSE_ON_EXIT=FALSE" -->
