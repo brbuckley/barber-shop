@@ -38,4 +38,12 @@ public class CustomerService {
   public Customer postCustomer(Customer customer) throws JsonProcessingException {
     return customerRepo.save(customer);
   }
+
+  public Customer updateCustomer(Customer customer){
+    Customer customerEntity = customerRepo.findById(customer.getId()).get();
+    customerEntity=customer;
+    customerRepo.save(customerEntity);
+    return customerEntity;
+  }
+
 }
