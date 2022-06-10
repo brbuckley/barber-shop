@@ -1,6 +1,6 @@
 package app.repository;
 
-import app.model.Customer;
+import app.model.Haircut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
