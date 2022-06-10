@@ -16,4 +16,4 @@ Você pode rodar o programa com sua IDE de escolha usando a classe "DemoApplicat
 
 ## Contribuindo
 
-Brendan Buckley, 'nome'.
+Brendan Buckley, Paulo Jr. Niche, 'nome'.
