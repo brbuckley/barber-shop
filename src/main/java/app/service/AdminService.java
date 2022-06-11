@@ -46,7 +46,7 @@ public class AdminService {
     return adminEntity;
   }
 
-    public void deleteAdmin(long adminId){
-        adminRepo.deleteById(adminId);
-    }
+  public void deleteAdmin(long adminId) {
+    adminRepo.deleteById(adminId);
+  }
 }

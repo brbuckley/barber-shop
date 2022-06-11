@@ -46,7 +46,7 @@ public class HaircutService {
     return haircutEntity;
   }
 
-  public void deleteHaircut(long haircutId){
+  public void deleteHaircut(long haircutId) {
     haircutRepo.deleteById(haircutId);
   }
 }

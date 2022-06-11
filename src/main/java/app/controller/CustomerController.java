@@ -3,7 +3,6 @@ package app.controller;
 import app.model.Customer;
 import app.repository.CustomerRepo;
 import app.service.CustomerService;
-import app.service.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -68,16 +67,17 @@ public class CustomerController {
         new CustomerService(customerRepo).postCustomer(customer), HttpStatus.OK);
   }
 
-  @PutMapping(value="/update", produces = "application/json")
-  public ResponseEntity updateCustomer(@RequestBody Customer customer) throws JsonProcessingException {
+  @PutMapping(value = "/update", produces = "application/json")
+  public ResponseEntity updateCustomer(@RequestBody Customer customer)
+      throws JsonProcessingException {
     return new ResponseEntity(
-            new CustomerService(customerRepo).updateCustomer(customer), HttpStatus.OK);
+        new CustomerService(customerRepo).updateCustomer(customer), HttpStatus.OK);
   }
 
-  @DeleteMapping(value="/delete/{customerId}", produces = "application/json")
-  public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId) throws JsonProcessingException {
+  @DeleteMapping(value = "/delete/{customerId}", produces = "application/json")
+  public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId)
+      throws JsonProcessingException {
     new CustomerService(customerRepo).deleteCustomer(customerId);
     return new ResponseEntity(HttpStatus.OK);
   }
-
 }
