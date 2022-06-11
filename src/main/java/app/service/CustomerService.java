@@ -46,4 +46,9 @@ public class CustomerService {
     return customerEntity;
   }
 
+  public void deleteCustomer(long customerId){
+    customerRepo.deleteById(customerId);
+  }
+
+
 }
