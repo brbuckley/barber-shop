@@ -9,13 +9,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** Controller for Barber services. */
 @RestController
@@ -60,16 +54,23 @@ public class BarberController {
                     @ApiResponse(code = 500, message = "Internal Server Error"),
             })
     @ApiOperation(value = "Creates a new barber.", response = Barber.class)
-    @PostMapping(value = "/newbarber", produces = "application/json")
+    @PostMapping(value = "/new", produces = "application/json")
     public ResponseEntity getBarber(@RequestBody Barber barber) throws JsonProcessingException {
         return new ResponseEntity(
                 new BarberService(barberRepo).postBarber(barber), HttpStatus.OK);
     }
 
-    @PutMapping(value="/updatebarber", produces = "application/json")
+    @PutMapping(value="/update", produces = "application/json")
     public ResponseEntity updateBarber(@RequestBody Barber barber) throws JsonProcessingException {
         return new ResponseEntity(
                 new BarberService(barberRepo).updateBarber(barber), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/delete/{barberId}")
+    public ResponseEntity deleteBarber(@PathVariable(value = "barberId") long id) {
+        BarberService barberSevice = new BarberService(barberRepo);
+        barberSevice.deleteBarber(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

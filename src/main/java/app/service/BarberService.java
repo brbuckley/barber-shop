@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,8 +47,8 @@ public class BarberService {
         return barberEntity;
     }
 
-    public Barber deleteBarber(Barber barber){
-        return barberRepo.deleteById(barber.getId()).get();
+    public void deleteBarber(long id){
+        barberRepo.deleteById(id);
     }
 
 }
