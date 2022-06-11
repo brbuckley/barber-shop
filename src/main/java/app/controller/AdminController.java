@@ -67,7 +67,7 @@ public class AdminController {
     }
 
     @DeleteMapping(value="/delete/{barberId}")
-    public ResponseEntity deleteAdmin(@PathVariable(value = "adminId") long adminId) {
+    public ResponseEntity deleteAdmin(@PathVariable(value = "adminId") long adminId) throws JsonProcessingException {
         AdminService adminService = new AdminService(adminRepo);
         adminService.deleteAdmin(adminId);
         return new ResponseEntity(HttpStatus.OK);

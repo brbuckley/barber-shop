@@ -67,7 +67,7 @@ public class BarberController {
     }
 
     @DeleteMapping(value="/delete/{barberId}")
-    public ResponseEntity deleteBarber(@PathVariable(value = "barberId") long barberId) {
+    public ResponseEntity deleteBarber(@PathVariable(value = "barberId") long barberId) throws JsonProcessingException {
         BarberService barberSevice = new BarberService(barberRepo);
         barberSevice.deleteBarber(barberId);
         return new ResponseEntity(HttpStatus.OK);
