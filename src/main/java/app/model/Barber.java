@@ -57,6 +57,6 @@ public class Barber implements Serializable {
   @ManyToOne(optional = false)
   @Getter
   @Setter
-  @JsonIgnore
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Shop shop;
 }
