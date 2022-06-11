@@ -67,9 +67,9 @@ public class BarberController {
     }
 
     @DeleteMapping(value="/delete/{barberId}")
-    public ResponseEntity deleteBarber(@PathVariable(value = "barberId") long id) {
+    public ResponseEntity deleteBarber(@PathVariable(value = "barberId") long barberId) {
         BarberService barberSevice = new BarberService(barberRepo);
-        barberSevice.deleteBarber(id);
+        barberSevice.deleteBarber(barberId);
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -47,8 +47,8 @@ public class BarberService {
         return barberEntity;
     }
 
-    public void deleteBarber(long id){
-        barberRepo.deleteById(id);
+    public void deleteBarber(long barberId){
+        barberRepo.deleteById(barberId);
     }
 
 }
