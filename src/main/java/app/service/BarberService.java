@@ -46,4 +46,8 @@ public class BarberService {
         return barberEntity;
     }
 
+    public Barber deleteBarber(Barber barber){
+        return barberRepo.deleteById(barber.getId()).get();
+    }
+
 }
