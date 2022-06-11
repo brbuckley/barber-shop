@@ -9,13 +9,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** Controller for Admin services. */
 @RestController
@@ -60,16 +54,23 @@ public class AdminController {
                     @ApiResponse(code = 500, message = "Internal Server Error"),
             })
     @ApiOperation(value = "Creates a new admin.", response = Admin.class)
-    @PostMapping(value = "/newadmin", produces = "application/json")
+    @PostMapping(value = "/new", produces = "application/json")
     public ResponseEntity getAdmin(@RequestBody Admin admin) throws JsonProcessingException {
         return new ResponseEntity(
                 new AdminService(adminRepo).postAdmin(admin), HttpStatus.OK);
     }
 
-    @PutMapping(value="/updateadmin", produces = "application/json")
+    @PutMapping(value="/update", produces = "application/json")
     public ResponseEntity updateAdmin(@RequestBody Admin admin) throws JsonProcessingException {
         return new ResponseEntity(
                 new AdminService(adminRepo).updateAdmin(admin), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/delete/{barberId}")
+    public ResponseEntity deleteAdmin(@PathVariable(value = "adminId") long id) {
+        AdminService adminService = new AdminService(adminRepo);
+        adminService.deleteAdmin(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
