@@ -45,4 +45,8 @@ public class HaircutService {
     haircutRepo.save(haircutEntity);
     return haircutEntity;
   }
+
+  public void deleteHaircut(long haircutId){
+    haircutRepo.deleteById(haircutId);
+  }
 }

@@ -75,7 +75,7 @@ public class CustomerController {
   }
 
   @DeleteMapping(value="/delete/{customerId}", produces = "application/json")
-  public ResponseEntity deleteHaircut(@PathVariable(value = "customerId") long customerId) throws JsonProcessingException {
+  public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId) throws JsonProcessingException {
     new CustomerService(customerRepo).deleteCustomer(customerId);
     return new ResponseEntity(HttpStatus.OK);
   }

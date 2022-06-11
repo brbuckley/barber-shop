@@ -72,11 +72,9 @@ public class HaircutController {
                 new HaircutService(haircutRepo).updateHaircut(haircut), HttpStatus.OK);
     }
 
-    /**
-    @DeleteMapping(value="/deleteHaircut", produces = "application/json")
-    public ResponseEntity deleteHaircut(@RequestBody Haircut haircut) throws JsonProcessingException {
-        return new ResponseEntity(
-                new HaircutService(haircutRepo).deleteHaircut(haircut), HttpStatus.OK);
+    @DeleteMapping(value="/delete/{haircutId}", produces = "application/json")
+    public ResponseEntity deleteHaircut(@PathVariable(value = "haircutId") long haircutId) throws JsonProcessingException {
+        new HaircutService(haircutRepo).deleteHaircut(haircutId);
+        return new ResponseEntity(HttpStatus.OK);
     }
-    */
 }

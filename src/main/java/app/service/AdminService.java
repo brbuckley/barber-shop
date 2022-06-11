@@ -45,4 +45,8 @@ public class AdminService {
     adminRepo.save(adminEntity);
     return adminEntity;
   }
+
+    public void deleteAdmin(long adminId){
+        adminRepo.deleteById(adminId);
+    }
 }
