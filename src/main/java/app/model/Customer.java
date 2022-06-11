@@ -2,6 +2,8 @@ package app.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,10 +18,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Customer implements Serializable {
 
   @Id
@@ -33,11 +38,14 @@ public class Customer implements Serializable {
 
   @Getter @Setter private String email;
 
-  @Getter @Setter private String passwordHash;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @Getter
+  @Setter
+  private String passwordHash;
 
   @Getter @Setter private String address;
 
-  @Getter @Setter private int age;
+  @Getter @Setter private Integer age;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
   private Date birthDay;

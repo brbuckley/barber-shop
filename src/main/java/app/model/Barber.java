@@ -1,5 +1,8 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Barber implements Serializable {
 
   @Id
@@ -30,23 +34,29 @@ public class Barber implements Serializable {
 
   @Getter @Setter private String email;
 
-  @Getter @Setter private String passwordHash;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @Getter
+  @Setter
+  private String passwordHash;
 
   @Getter @Setter private String address;
 
-  @Getter @Setter private int age;
+  @Getter @Setter private Integer age;
 
   @OneToMany(mappedBy = "barber", cascade = CascadeType.REMOVE)
   @Getter
+  @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
 
   @OneToOne(mappedBy = "barber")
   @Getter
   @Setter
+  @JsonIgnore
   private Queue queue;
 
   @ManyToOne(optional = false)
   @Getter
   @Setter
+  @JsonIgnore
   private Shop shop;
 }

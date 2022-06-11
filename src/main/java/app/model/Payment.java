@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +27,6 @@ public class Payment implements Serializable {
 
   @OneToMany(mappedBy = "payment", cascade = CascadeType.REMOVE)
   @Getter
+  @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
 }

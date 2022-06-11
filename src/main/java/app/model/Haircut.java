@@ -1,6 +1,8 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -24,9 +26,10 @@ public class Haircut implements Serializable {
 
   @Getter @Setter private String description;
 
-  @Getter @Setter private double price;
+  @Getter @Setter private BigDecimal price;
 
   @OneToMany(mappedBy = "haircut", cascade = CascadeType.REMOVE)
   @Getter
+  @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
 }

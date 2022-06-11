@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class City implements Serializable {
 
   @OneToMany(mappedBy = "city", cascade = CascadeType.REMOVE)
   @Getter
+  @JsonIgnore
   private List<Shop> shops = new ArrayList<>();
 
   @ManyToOne @Getter @Setter private State state;

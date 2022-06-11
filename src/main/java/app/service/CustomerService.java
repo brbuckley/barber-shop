@@ -39,16 +39,14 @@ public class CustomerService {
     return customerRepo.save(customer);
   }
 
-  public Customer updateCustomer(Customer customer){
+  public Customer updateCustomer(Customer customer) {
     Customer customerEntity = customerRepo.findById(customer.getId()).get();
-    customerEntity=customer;
+    customerEntity = customer;
     customerRepo.save(customerEntity);
     return customerEntity;
   }
 
-  public void deleteCustomer(long customerId){
+  public void deleteCustomer(long customerId) {
     customerRepo.deleteById(customerId);
   }
-
-
 }
