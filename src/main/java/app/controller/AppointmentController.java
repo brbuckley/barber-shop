@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.Appointment;
+import app.model.response.AppointmentRequest;
 import app.repository.AppointmentRepo;
 import app.service.AppointmentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,7 +38,7 @@ public class AppointmentController {
 
   @ApiOperation(value = "Creates a new appointment.", response = Appointment.class)
   @PostMapping(value = "/new", produces = "application/json")
-  public ResponseEntity getAppointment(@RequestBody Appointment appointment)
+  public ResponseEntity getAppointment(@RequestBody AppointmentRequest appointment)
       throws JsonProcessingException {
     return new ResponseEntity(
         new AppointmentService(appointmentRepo).postAppointment(appointment), HttpStatus.OK);
@@ -45,7 +46,7 @@ public class AppointmentController {
 
   @ApiOperation(value = "Updates an appointment.", response = Appointment.class)
   @PutMapping(value = "/update", produces = "application/json")
-  public ResponseEntity updateAppointment(@RequestBody Appointment appointment) {
+  public ResponseEntity updateAppointment(@RequestBody AppointmentRequest appointment) {
     return new ResponseEntity(
         new AppointmentService(appointmentRepo).updateAppointment(appointment), HttpStatus.OK);
   }

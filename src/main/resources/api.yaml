@@ -1,0 +1,1371 @@
+openapi: 3.0.3
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+    description: Inferred Url
+tags:
+  - name: admin-controller
+    description: Admin Controller
+  - name: appointment-controller
+    description: Appointment Controller
+  - name: barber-controller
+    description: Barber Controller
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: customer-controller
+    description: Customer Controller
+  - name: haircut-controller
+    description: Haircut Controller
+  - name: queue-controller
+    description: Queue Controller
+paths:
+  /admin/delete/{adminId}:
+    delete:
+      tags:
+        - admin-controller
+      summary: Deletes an admin.
+      operationId: deleteAdminUsingDELETE
+      parameters:
+        - name: adminId
+          in: path
+          description: adminId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /admin/new:
+    post:
+      tags:
+        - admin-controller
+      summary: Creates a new admin.
+      operationId: getAdminUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /admin/update:
+    put:
+      tags:
+        - admin-controller
+      summary: Updates an admin.
+      operationId: updateAdminUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /admin/{adminId}:
+    get:
+      tags:
+        - admin-controller
+      summary: Search admin by ID.
+      operationId: getAdminUsingGET
+      parameters:
+        - name: adminId
+          in: path
+          description: adminId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRes'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /appointment/delete/{appointmentId}:
+    delete:
+      tags:
+        - appointment-controller
+      summary: Deletes an appointment.
+      operationId: deleteAppointmentUsingDELETE
+      parameters:
+        - name: appointmentId
+          in: path
+          description: appointmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /appointment/new:
+    post:
+      tags:
+        - appointment-controller
+      summary: Creates a new appointment.
+      operationId: getAppointmentUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentRequest'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /appointment/update:
+    put:
+      tags:
+        - appointment-controller
+      summary: Updates an appointment.
+      operationId: updateAppointmentUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentRequest'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /appointment/{appointmentId}:
+    get:
+      tags:
+        - appointment-controller
+      summary: Search appointment by ID.
+      operationId: getAppointmentUsingGET
+      parameters:
+        - name: appointmentId
+          in: path
+          description: appointmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentRes'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /appointment/{appointmentId}/status/{status}:
+    put:
+      tags:
+        - appointment-controller
+      summary: Updates the status of an appointment by ID.
+      operationId: updateStatusUsingPUT
+      parameters:
+        - name: appointmentId
+          in: path
+          description: appointmentId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+        - name: status
+          in: path
+          description: status
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /barber/delete/{barberId}:
+    delete:
+      tags:
+        - barber-controller
+      summary: Deletes a barber.
+      operationId: deleteBarberUsingDELETE
+      parameters:
+        - name: barberId
+          in: path
+          description: barberId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /barber/new:
+    post:
+      tags:
+        - barber-controller
+      summary: Creates a new barber.
+      operationId: getBarberUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarberRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarberRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /barber/update:
+    put:
+      tags:
+        - barber-controller
+      summary: Updates a barber.
+      operationId: updateBarberUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarberRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarberRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /barber/{barberId}:
+    get:
+      tags:
+        - barber-controller
+      summary: Search barber by ID.
+      operationId: getBarberUsingGET
+      parameters:
+        - name: barberId
+          in: path
+          description: barberId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarberRes'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /error:
+    get:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    options:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    head:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    patch:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    trace:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingTRACE
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /customer/delete/{customerId}:
+    delete:
+      tags:
+        - customer-controller
+      summary: Deletes a customer.
+      operationId: deleteCustomerUsingDELETE
+      parameters:
+        - name: customerId
+          in: path
+          description: customerId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /customer/new:
+    post:
+      tags:
+        - customer-controller
+      summary: Creates a new customer.
+      operationId: getCustomerUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /customer/update:
+    put:
+      tags:
+        - customer-controller
+      summary: Updates a customer.
+      operationId: updateCustomerUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerRes'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /customer/{customerId}:
+    get:
+      tags:
+        - customer-controller
+      summary: Search customer by ID.
+      operationId: getCustomerUsingGET
+      parameters:
+        - name: customerId
+          in: path
+          description: customerId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerRes'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /haircut/delete/{haircutId}:
+    delete:
+      tags:
+        - haircut-controller
+      summary: Deletes a haircut.
+      operationId: deleteHaircutUsingDELETE
+      parameters:
+        - name: haircutId
+          in: path
+          description: haircutId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /haircut/new:
+    post:
+      tags:
+        - haircut-controller
+      summary: Creates a new haircut.
+      operationId: getHaircutUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HaircutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Haircut'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /haircut/update:
+    put:
+      tags:
+        - haircut-controller
+      summary: Updates a haircut.
+      operationId: updateHaircutUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HaircutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Haircut'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /haircut/{haircutId}:
+    get:
+      tags:
+        - haircut-controller
+      summary: Search haircut by ID.
+      operationId: getHaircutUsingGET
+      parameters:
+        - name: haircutId
+          in: path
+          description: haircutId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Haircut'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /queue/delete/{queueId}:
+    delete:
+      tags:
+        - queue-controller
+      summary: Deletes a queue.
+      operationId: deleteQueueUsingDELETE
+      parameters:
+        - name: queueId
+          in: path
+          description: queueId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmptyBody'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /queue/new:
+    post:
+      tags:
+        - queue-controller
+      summary: Creates a new queue.
+      operationId: postQueueUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /queue/update:
+    put:
+      tags:
+        - queue-controller
+      summary: Updates a queue.
+      operationId: updateQueueUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /queue/{queueId}:
+    get:
+      tags:
+        - queue-controller
+      summary: Get queue of waiting customers.
+      operationId: getQueueUsingGET
+      parameters:
+        - name: queueId
+          in: path
+          description: queueId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /queue/{queueId}/all:
+    get:
+      tags:
+        - queue-controller
+      summary: Get All information about a queue.
+      operationId: getAllQueueUsingGET
+      parameters:
+        - name: queueId
+          in: path
+          description: queueId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+components:
+  schemas:
+    AdminReq:
+      title: AdminReq
+      type: object
+      properties:
+        email:
+          type: string
+          example: viterbo@gmail.com
+        name:
+          type: string
+          example: José Viterbo
+        passwordHash:
+          type: string
+          example: dfb88348fd3752550838ce95418e76d76010d66c2a33cafe5345d5a4b522fff6
+        username:
+          type: string
+          example: jviterbo
+    AdminRes:
+      title: AdminRes
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: José Viterbo
+        username:
+          type: string
+          example: jviterbo
+        email:
+          type: string
+          example: viterbo@gmail.com
+    AppointmentReq:
+      title: AppointmentReq
+      type: object
+      properties:
+        barber:
+          $ref: '#/components/schemas/BarberReq'
+        customer:
+          $ref: '#/components/schemas/CustomerReq'
+        date:
+          type: string
+          format: date
+        haircut:
+          $ref: '#/components/schemas/HaircutReq'
+        payment:
+          $ref: '#/components/schemas/PaymentReq'
+        status:
+          type: string
+          example: Esperando
+          enum:
+            - CANCELED
+            - CUTTING
+            - FINISHED
+            - WAITING
+    AppointmentRequest:
+      title: AppointmentRequest
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        barber:
+          $ref: '#/components/schemas/BarberReq'
+        customer:
+          $ref: '#/components/schemas/CustomerReq'
+        date:
+          type: string
+          format: date
+        haircut:
+          $ref: '#/components/schemas/HaircutReq'
+        payment:
+          $ref: '#/components/schemas/PaymentReq'
+        status:
+          type: string
+          example: Esperando
+          enum:
+            - CANCELED
+            - CUTTING
+            - FINISHED
+            - WAITING
+    AppointmentRes:
+      title: AppointmentRes
+      type: object
+      properties:
+        barber:
+          $ref: '#/components/schemas/BarberRes'
+        customer:
+          $ref: '#/components/schemas/CustomerRes'
+        date:
+          type: string
+          format: date
+        haircut:
+          $ref: '#/components/schemas/Haircut'
+        id:
+          type: integer
+          format: int64
+          example: 1
+        payment:
+          $ref: '#/components/schemas/Payment'
+        status:
+          type: string
+          example: Esperando
+    AppointmentResponse:
+      title: AppointmentResponse
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerResponse'
+        date:
+          type: string
+          format: date
+        haircut:
+          $ref: '#/components/schemas/Haircut'
+        id:
+          type: integer
+          format: int64
+          example: 1
+        payment:
+          $ref: '#/components/schemas/Payment'
+        status:
+          type: string
+          example: Esperando
+    BarberReq:
+      title: BarberReq
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+    BarberRequest:
+      title: BarberRes
+      type: object
+      properties:
+        address:
+          type: string
+          example: Rua do Zé, 123
+        age:
+          type: integer
+          format: int32
+          example: 32
+        email:
+          type: string
+          example: zebarbeiro@gmail.com
+        name:
+          type: string
+          example: Zé
+        username:
+          type: string
+          example: zebarbeiro
+    BarberRes:
+      title: BarberRes
+      type: object
+      properties:
+        address:
+          type: string
+          example: Rua do Zé, 123
+        age:
+          type: integer
+          format: int32
+          example: 32
+        email:
+          type: string
+          example: zebarbeiro@gmail.com
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Zé
+        username:
+          type: string
+          example: zebarbeiro
+    City:
+      title: City
+      type: object
+      properties:
+        description:
+          type: string
+          example: Niterói
+        id:
+          type: integer
+          format: int64
+          example: 1
+        state:
+          $ref: '#/components/schemas/State'
+    CustomerReq:
+      title: CustomerReq
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+    CustomerRequest:
+      title: CustomerRes
+      type: object
+      properties:
+        address:
+          type: string
+          example: Rua do Joao, 12
+        age:
+          type: integer
+          format: int32
+          example: 23
+        birthDay:
+          type: string
+          example: 01/02/1999
+        email:
+          type: string
+          example: joao99silva@gmail.com
+        name:
+          type: string
+          example: João
+        username:
+          type: string
+          example: joaozinho99
+    CustomerRes:
+      title: CustomerRes
+      type: object
+      properties:
+        address:
+          type: string
+          example: Rua do Joao, 12
+        age:
+          type: integer
+          format: int32
+          example: 23
+        birthDay:
+          type: string
+          example: 01/02/1999
+        email:
+          type: string
+          example: joao99silva@gmail.com
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: João
+        username:
+          type: string
+          example: joaozinho99
+    CustomerResponse:
+      title: CustomerResponse
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: João
+    EmptyBody:
+      type: object
+      nullable: true
+    Haircut:
+      title: Haircut
+      type: object
+      properties:
+        description:
+          type: string
+          example: Barba
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: bigdecimal
+          example: 9.99
+    HaircutReq:
+      title: HaircutReq
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+    HaircutRequest:
+      title: Haircut
+      type: object
+      properties:
+        description:
+          type: string
+          example: Barba
+        price:
+          type: number
+          format: bigdecimal
+          example: 9.99
+    ModelAndView:
+      title: ModelAndView
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - ALREADY_REPORTED
+            - BAD_GATEWAY
+            - BAD_REQUEST
+            - BANDWIDTH_LIMIT_EXCEEDED
+            - CHECKPOINT
+            - CONFLICT
+            - CONTINUE
+            - CREATED
+            - DESTINATION_LOCKED
+            - EXPECTATION_FAILED
+            - FAILED_DEPENDENCY
+            - FORBIDDEN
+            - FOUND
+            - GATEWAY_TIMEOUT
+            - GONE
+            - HTTP_VERSION_NOT_SUPPORTED
+            - IM_USED
+            - INSUFFICIENT_SPACE_ON_RESOURCE
+            - INSUFFICIENT_STORAGE
+            - INTERNAL_SERVER_ERROR
+            - I_AM_A_TEAPOT
+            - LENGTH_REQUIRED
+            - LOCKED
+            - LOOP_DETECTED
+            - METHOD_FAILURE
+            - METHOD_NOT_ALLOWED
+            - MOVED_PERMANENTLY
+            - MOVED_TEMPORARILY
+            - MULTIPLE_CHOICES
+            - MULTI_STATUS
+            - NETWORK_AUTHENTICATION_REQUIRED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NOT_ACCEPTABLE
+            - NOT_EXTENDED
+            - NOT_FOUND
+            - NOT_IMPLEMENTED
+            - NOT_MODIFIED
+            - NO_CONTENT
+            - OK
+            - PARTIAL_CONTENT
+            - PAYLOAD_TOO_LARGE
+            - PAYMENT_REQUIRED
+            - PERMANENT_REDIRECT
+            - PRECONDITION_FAILED
+            - PRECONDITION_REQUIRED
+            - PROCESSING
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_HEADER_FIELDS_TOO_LARGE
+            - REQUEST_TIMEOUT
+            - REQUEST_URI_TOO_LONG
+            - RESET_CONTENT
+            - SEE_OTHER
+            - SERVICE_UNAVAILABLE
+            - SWITCHING_PROTOCOLS
+            - TEMPORARY_REDIRECT
+            - TOO_EARLY
+            - TOO_MANY_REQUESTS
+            - UNAUTHORIZED
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - UNPROCESSABLE_ENTITY
+            - UNSUPPORTED_MEDIA_TYPE
+            - UPGRADE_REQUIRED
+            - URI_TOO_LONG
+            - USE_PROXY
+            - VARIANT_ALSO_NEGOTIATES
+        view:
+          $ref: '#/components/schemas/View'
+        viewName:
+          type: string
+    Payment:
+      title: Payment
+      type: object
+      properties:
+        description:
+          type: string
+          example: Cartão
+        id:
+          type: integer
+          format: int64
+          example: 1
+    PaymentReq:
+      title: PaymentReq
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+    QueueReq:
+      title: QueueReq
+      type: object
+      properties:
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppointmentReq'
+        barber:
+          $ref: '#/components/schemas/BarberReq'
+        id:
+          type: integer
+          format: int64
+          example: 1
+    QueueResponse:
+      title: QueueResponse
+      type: object
+      properties:
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppointmentResponse'
+        barber:
+          $ref: '#/components/schemas/BarberRes'
+        id:
+          type: integer
+          format: int64
+          example: 1
+    Shop:
+      title: Shop
+      type: object
+      properties:
+        address:
+          type: string
+          example: Rua Mem de Sá, 151 - Icaraí
+        barbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BarberReq'
+        city:
+          $ref: '#/components/schemas/City'
+        email:
+          type: string
+          example: barbeariadoze@gmail.com
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Barbearia do Zé
+        phone1:
+          type: string
+          example: 3741-2500
+        phone2:
+          type: string
+          example: 3741-2600
+    State:
+      title: State
+      type: object
+      properties:
+        description:
+          type: string
+          example: Rio de Janeiro
+        id:
+          type: integer
+          format: int64
+          example: 1
+    View:
+      title: View
+      type: object
+      properties:
+        contentType:
+          type: string

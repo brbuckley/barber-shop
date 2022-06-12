@@ -76,4 +76,8 @@ public class Barber implements Serializable {
   @Setter
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Shop shop;
+
+  public Barber(long id){
+    this.id = id;
+  }
 }

@@ -72,4 +72,8 @@ public class Customer implements Serializable {
   @Getter
   @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
+
+  public Customer(long id) {
+    this.id = id;
+  }
 }

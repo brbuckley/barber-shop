@@ -27,4 +27,8 @@ public class Queue implements Serializable {
   @OneToMany(mappedBy = "queue")
   @Getter
   private List<Appointment> appointments = new ArrayList<>();
+
+    public Queue(long id) {
+      this.id = id;
+    }
 }

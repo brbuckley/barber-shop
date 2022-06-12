@@ -39,4 +39,8 @@ public class Haircut implements Serializable {
   @Getter
   @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
+
+  public Haircut(long id){
+    this.id=id;
+  }
 }

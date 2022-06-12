@@ -33,4 +33,8 @@ public class Payment implements Serializable {
   @Getter
   @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
+
+    public Payment(long id) {
+      this.id=id;
+    }
 }

@@ -2,6 +2,7 @@ package app.service;
 
 import app.model.Appointment;
 import app.model.Status;
+import app.model.response.AppointmentRequest;
 import app.repository.AppointmentRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -32,20 +33,20 @@ public class AppointmentService {
     this.mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
   }
 
-  public Appointment getAppointment(long id) throws JsonProcessingException {
+  public Appointment getAppointment(long id) {
     // findBy() vs getBy()
     return appointmentRepo.findById(id).get();
   }
 
-  public Appointment postAppointment(Appointment appointment) throws JsonProcessingException {
-    return appointmentRepo.save(appointment);
+  public AppointmentRequest postAppointment(AppointmentRequest appointment) {
+    return new AppointmentRequest().fromAppointment(appointmentRepo.save(appointment.toAppointment()));
   }
 
-  public Appointment updateAppointment(Appointment appointment) {
+  public AppointmentRequest updateAppointment(AppointmentRequest appointment) {
     Appointment appointmentEntity = appointmentRepo.findById(appointment.getId()).get();
-    appointmentEntity = appointment;
+    appointmentEntity = appointment.toAppointment();
     appointmentRepo.save(appointmentEntity);
-    return appointmentEntity;
+    return new AppointmentRequest().fromAppointment(appointmentEntity);
   }
 
   public Appointment updateStatus(long appointmentId, String status) {
