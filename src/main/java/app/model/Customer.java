@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,8 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,13 +34,19 @@ public class Customer implements Serializable {
   private long id;
 
   @ApiModelProperty(example = "João")
-  @Getter @Setter private String name;
+  @Getter
+  @Setter
+  private String name;
 
   @ApiModelProperty(example = "joaozinho99")
-  @Getter @Setter private String username;
+  @Getter
+  @Setter
+  private String username;
 
   @ApiModelProperty(example = "joao99silva@gmail.com")
-  @Getter @Setter private String email;
+  @Getter
+  @Setter
+  private String email;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Getter
@@ -50,10 +55,14 @@ public class Customer implements Serializable {
   private String passwordHash;
 
   @ApiModelProperty(example = "Rua do Joao, 12")
-  @Getter @Setter private String address;
+  @Getter
+  @Setter
+  private String address;
 
   @ApiModelProperty(example = "23")
-  @Getter @Setter private Integer age;
+  @Getter
+  @Setter
+  private Integer age;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
   @ApiModelProperty(example = "01/02/1999")

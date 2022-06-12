@@ -1,6 +1,7 @@
 package app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,10 +26,14 @@ public class Haircut implements Serializable {
   private long id;
 
   @ApiModelProperty(example = "Barba")
-  @Getter @Setter private String description;
+  @Getter
+  @Setter
+  private String description;
 
   @ApiModelProperty(example = "20,00")
-  @Getter @Setter private BigDecimal price;
+  @Getter
+  @Setter
+  private BigDecimal price;
 
   @OneToMany(mappedBy = "haircut", cascade = CascadeType.REMOVE)
   @Getter

@@ -1,6 +1,7 @@
 package app.service;
 
 import app.model.Queue;
+import app.model.response.QueueResponse;
 import app.repository.QueueRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,37 +17,37 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class QueueService {
 
-    private ObjectMapper mapper;
-    @Setter private RestTemplate restTemplate;
+  private ObjectMapper mapper;
+  @Setter private RestTemplate restTemplate;
 
-    @Setter private QueueRepo queueRepo;
+  @Setter private QueueRepo queueRepo;
 
-    /** Custom constructor with spring injected repository. */
-    public QueueService(QueueRepo queueRepo) {
-        this.restTemplate = new RestTemplateBuilder().build();
-        this.queueRepo = queueRepo;
-        this.mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        this.mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
-        this.mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
-    }
+  /** Custom constructor with spring injected repository. */
+  public QueueService(QueueRepo queueRepo) {
+    this.restTemplate = new RestTemplateBuilder().build();
+    this.queueRepo = queueRepo;
+    this.mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    this.mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+    this.mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+  }
 
-    public Queue getQueue(long id) throws JsonProcessingException {
-        // findBy() vs getBy()
-        return queueRepo.findById(id).get();
-    }
+  public Queue getQueue(long id) throws JsonProcessingException {
+    // findBy() vs getBy()
+    return queueRepo.findById(id).get();
+  }
 
-    public Queue postQueue(Queue queue) throws JsonProcessingException {
-        return queueRepo.save(queue);
-    }
+  public Queue postQueue(Queue queue) throws JsonProcessingException {
+    return queueRepo.save(queue);
+  }
 
-    public Queue updateQueue(Queue queue) {
-        Queue queueEntity = queueRepo.findById(queue.getId()).get();
-        queueEntity = queue;
-        queueRepo.save(queueEntity);
-        return queueEntity;
-    }
+  public Queue updateQueue(Queue queue) {
+    Queue queueEntity = queueRepo.findById(queue.getId()).get();
+    queueEntity = queue;
+    queueRepo.save(queueEntity);
+    return queueEntity;
+  }
 
-    public void deleteQueue(long queueId) {
-        queueRepo.deleteById(queueId);
-    }
+  public void deleteQueue(long queueId) {
+    queueRepo.deleteById(queueId);
+  }
 }

@@ -1,12 +1,11 @@
 package app.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,13 +22,19 @@ public class Admin {
   private long id;
 
   @ApiModelProperty(example = "José Viterbo")
-  @Getter @Setter private String name;
+  @Getter
+  @Setter
+  private String name;
 
   @ApiModelProperty(example = "jviterbo")
-  @Getter @Setter private String username;
+  @Getter
+  @Setter
+  private String username;
 
   @ApiModelProperty(example = "viterbo@gmail.com")
-  @Getter @Setter private String email;
+  @Getter
+  @Setter
+  private String email;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Getter

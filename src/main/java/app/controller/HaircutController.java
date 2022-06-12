@@ -5,8 +5,6 @@ import app.repository.HaircutRepo;
 import app.service.HaircutService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,18 +27,6 @@ public class HaircutController {
     this.haircutRepo = haircutRepo;
   }
 
-  /**
-   * GET request for haircut by id.
-   *
-   * @param id The id of the haircut.
-   * @return Haircut.
-   * @throws JsonProcessingException Exceptions while parsing the JSON response.
-   */
-  @ApiResponses(
-      value = {
-        @ApiResponse(code = 400, message = "Bad request"),
-        @ApiResponse(code = 500, message = "Internal Server Error"),
-      })
   @ApiOperation(value = "Search haircut by ID.", response = Haircut.class)
   @GetMapping(value = "/{haircutId}", produces = "application/json")
   public ResponseEntity getHaircut(@PathVariable(value = "haircutId") long id)
@@ -48,35 +34,22 @@ public class HaircutController {
     return new ResponseEntity(new HaircutService(haircutRepo).getHaircut(id), HttpStatus.OK);
   }
 
-  /**
-   * POST request to add a new Haircut.
-   *
-   * @param haircut The new haircut.
-   * @return Haircut.
-   * @throws JsonProcessingException Exceptions while parsing the JSON response.
-   */
-  @ApiResponses(
-      value = {
-        @ApiResponse(code = 400, message = "Bad request"),
-        @ApiResponse(code = 500, message = "Internal Server Error"),
-      })
   @ApiOperation(value = "Creates a new haircut.", response = Haircut.class)
   @PostMapping(value = "/new", produces = "application/json")
   public ResponseEntity getHaircut(@RequestBody Haircut haircut) throws JsonProcessingException {
     return new ResponseEntity(new HaircutService(haircutRepo).postHaircut(haircut), HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Update haircut.", response = Haircut.class)
+  @ApiOperation(value = "Updates a haircut.", response = Haircut.class)
   @PutMapping(value = "/update", produces = "application/json")
-  public ResponseEntity updateHaircut(@RequestBody Haircut haircut) throws JsonProcessingException {
+  public ResponseEntity updateHaircut(@RequestBody Haircut haircut) {
     return new ResponseEntity(
         new HaircutService(haircutRepo).updateHaircut(haircut), HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Delete haircut.", response = Haircut.class)
+  @ApiOperation(value = "Deletes a haircut.")
   @DeleteMapping(value = "/delete/{haircutId}", produces = "application/json")
-  public ResponseEntity deleteHaircut(@PathVariable(value = "haircutId") long haircutId)
-      throws JsonProcessingException {
+  public ResponseEntity deleteHaircut(@PathVariable(value = "haircutId") long haircutId) {
     new HaircutService(haircutRepo).deleteHaircut(haircutId);
     return new ResponseEntity(HttpStatus.OK);
   }

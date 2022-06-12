@@ -1,6 +1,7 @@
 package app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Entity;
@@ -8,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,11 +22,22 @@ public class Appointment implements Serializable {
   @Getter
   private long id;
 
-  @ApiModelProperty(example = "Em espera")
-  @Getter @Setter private String status;
+  @ApiModelProperty(example = "Esperando")
+  @Setter
+  private Status status;
+
+  public String getStatus() {
+    if (this.status == null) {
+      return null;
+    } else {
+      return this.status.getValue();
+    }
+  }
 
   @ApiModelProperty(example = "11/6/2022")
-  @Getter @Setter private Date date;
+  @Getter
+  @Setter
+  private Date date;
 
   @ManyToOne(optional = false)
   @Getter

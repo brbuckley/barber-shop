@@ -50,8 +50,8 @@ insert into queue (barber_id)
 values (2);
 
 insert into appointment (status,date,customer_id,barber_id,haircut_id,payment_id,queue_id)
-values('Cortando',DATE '2022-06-11',1,1,1,1,1);
+values(1,DATE '2022-06-11',1,1,1,1,1);
 insert into appointment (status,date,customer_id,barber_id,haircut_id,payment_id,queue_id)
-values('Em espera',DATE '2022-06-11',2,1,2,2,1);
+values(0,DATE '2022-06-11',2,1,2,2,1);
 insert into appointment (status,date,customer_id,barber_id,haircut_id,payment_id,queue_id)
-values('Cortando',DATE '2022-06-11',3,2,3,3,2);
+values(1,DATE '2022-06-11',3,2,3,3,2);

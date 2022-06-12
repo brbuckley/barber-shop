@@ -1,13 +1,10 @@
 package app.controller;
 
-import app.model.Barber;
 import app.model.Customer;
 import app.repository.CustomerRepo;
 import app.service.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,18 +27,6 @@ public class CustomerController {
     this.customerRepo = customerRepo;
   }
 
-  /**
-   * GET request for customer by id.
-   *
-   * @param id The id of the customer.
-   * @return Customer.
-   * @throws JsonProcessingException Exceptions while parsing the JSON response.
-   */
-  @ApiResponses(
-      value = {
-        @ApiResponse(code = 400, message = "Bad request"),
-        @ApiResponse(code = 500, message = "Internal Server Error"),
-      })
   @ApiOperation(value = "Search customer by ID.", response = Customer.class)
   @GetMapping(value = "/{customerId}", produces = "application/json")
   public ResponseEntity getCustomer(@PathVariable(value = "customerId") long id)
@@ -49,18 +34,6 @@ public class CustomerController {
     return new ResponseEntity(new CustomerService(customerRepo).getCustomer(id), HttpStatus.OK);
   }
 
-  /**
-   * POST request to add a new Customer.
-   *
-   * @param customer The new customer.
-   * @return Customer.
-   * @throws JsonProcessingException Exceptions while parsing the JSON response.
-   */
-  @ApiResponses(
-      value = {
-        @ApiResponse(code = 400, message = "Bad request"),
-        @ApiResponse(code = 500, message = "Internal Server Error"),
-      })
   @ApiOperation(value = "Creates a new customer.", response = Customer.class)
   @PostMapping(value = "/new", produces = "application/json")
   public ResponseEntity getCustomer(@RequestBody Customer customer) throws JsonProcessingException {
@@ -68,18 +41,16 @@ public class CustomerController {
         new CustomerService(customerRepo).postCustomer(customer), HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Update customer.", response = Customer.class)
+  @ApiOperation(value = "Updates a customer.", response = Customer.class)
   @PutMapping(value = "/update", produces = "application/json")
-  public ResponseEntity updateCustomer(@RequestBody Customer customer)
-      throws JsonProcessingException {
+  public ResponseEntity updateCustomer(@RequestBody Customer customer) {
     return new ResponseEntity(
         new CustomerService(customerRepo).updateCustomer(customer), HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Delete customer.", response = Customer.class)
+  @ApiOperation(value = "Deletes a customer.")
   @DeleteMapping(value = "/delete/{customerId}", produces = "application/json")
-  public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId)
-      throws JsonProcessingException {
+  public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId) {
     new CustomerService(customerRepo).deleteCustomer(customerId);
     return new ResponseEntity(HttpStatus.OK);
   }

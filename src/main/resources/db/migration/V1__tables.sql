@@ -7,7 +7,7 @@ CREATE TABLE admin(
 );
 CREATE TABLE appointment(
        id IDENTITY NOT NULL PRIMARY KEY,
-       status VARCHAR NOT NULL,
+       status integer NOT NULL,
        date DATE NOT NULL,
        customer_id BIGINT,
        barber_id BIGINT,

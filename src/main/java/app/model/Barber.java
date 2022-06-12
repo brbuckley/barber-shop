@@ -3,6 +3,7 @@ package app.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,13 +30,19 @@ public class Barber implements Serializable {
   private long id;
 
   @ApiModelProperty(example = "Zé")
-  @Getter @Setter private String name;
+  @Getter
+  @Setter
+  private String name;
 
   @ApiModelProperty(example = "zebarbeiro")
-  @Getter @Setter private String username;
+  @Getter
+  @Setter
+  private String username;
 
   @ApiModelProperty(example = "zebarbeiro@gmail.com")
-  @Getter @Setter private String email;
+  @Getter
+  @Setter
+  private String email;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Getter
@@ -46,10 +51,14 @@ public class Barber implements Serializable {
   private String passwordHash;
 
   @ApiModelProperty(example = "Rua do Zé, 123")
-  @Getter @Setter private String address;
+  @Getter
+  @Setter
+  private String address;
 
   @ApiModelProperty(example = "32")
-  @Getter @Setter private Integer age;
+  @Getter
+  @Setter
+  private Integer age;
 
   @OneToMany(mappedBy = "barber", cascade = CascadeType.REMOVE)
   @Getter

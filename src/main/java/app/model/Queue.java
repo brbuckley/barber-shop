@@ -3,7 +3,6 @@ package app.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +24,7 @@ public class Queue implements Serializable {
 
   @OneToOne @Getter @Setter private Barber barber;
 
-  @OneToMany(mappedBy = "queue", cascade = CascadeType.REMOVE)
+  @OneToMany(mappedBy = "queue")
   @Getter
   private List<Appointment> appointments = new ArrayList<>();
 }
