@@ -28,7 +28,7 @@ public class Queue implements Serializable {
   @Getter
   private List<Appointment> appointments = new ArrayList<>();
 
-    public Queue(long id) {
-      this.id = id;
-    }
+  public Queue(long id) {
+    this.id = id;
+  }
 }

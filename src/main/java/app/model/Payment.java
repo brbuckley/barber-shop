@@ -34,7 +34,7 @@ public class Payment implements Serializable {
   @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
 
-    public Payment(long id) {
-      this.id=id;
-    }
+  public Payment(long id) {
+    this.id = id;
+  }
 }

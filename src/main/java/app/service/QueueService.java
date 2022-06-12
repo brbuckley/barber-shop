@@ -1,7 +1,6 @@
 package app.service;
 
 import app.model.Queue;
-import app.model.response.QueueResponse;
 import app.repository.QueueRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

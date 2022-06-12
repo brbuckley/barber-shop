@@ -1,6 +1,5 @@
 package app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -56,7 +55,10 @@ public class Appointment implements Serializable {
   private Haircut haircut;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  @ManyToOne @Getter @Setter private Queue queue;
+  @ManyToOne
+  @Getter
+  @Setter
+  private Queue queue;
 
   @ManyToOne @Getter @Setter private Payment payment;
 }

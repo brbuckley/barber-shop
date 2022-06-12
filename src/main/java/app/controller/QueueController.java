@@ -32,7 +32,8 @@ public class QueueController {
   public ResponseEntity getAllQueue(@PathVariable(value = "queueId") long id)
       throws JsonProcessingException {
     Queue queue = new QueueService(queueRepo).getQueue(id);
-    QueueResponse response = new QueueResponse().fromQueue(new QueueService(queueRepo).getQueue(id));
+    QueueResponse response =
+        new QueueResponse().fromQueue(new QueueService(queueRepo).getQueue(id));
     return new ResponseEntity(response.fromAppointments(queue.getAppointments()), HttpStatus.OK);
   }
 
@@ -41,7 +42,8 @@ public class QueueController {
   public ResponseEntity getQueue(@PathVariable(value = "queueId") long id)
       throws JsonProcessingException {
     List<Appointment> appointments = new AppointmentService(appointmentRepo).filterWaiting(id);
-    QueueResponse response = new QueueResponse().fromQueue(new QueueService(queueRepo).getQueue(id));
+    QueueResponse response =
+        new QueueResponse().fromQueue(new QueueService(queueRepo).getQueue(id));
     return new ResponseEntity(response.fromAppointments(appointments), HttpStatus.OK);
   }
 

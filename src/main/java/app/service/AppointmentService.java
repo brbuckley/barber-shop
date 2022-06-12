@@ -4,7 +4,6 @@ import app.model.Appointment;
 import app.model.Status;
 import app.model.response.AppointmentRequest;
 import app.repository.AppointmentRepo;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -39,7 +38,8 @@ public class AppointmentService {
   }
 
   public AppointmentRequest postAppointment(AppointmentRequest appointment) {
-    return new AppointmentRequest().fromAppointment(appointmentRepo.save(appointment.toAppointment()));
+    return new AppointmentRequest()
+        .fromAppointment(appointmentRepo.save(appointment.toAppointment()));
   }
 
   public AppointmentRequest updateAppointment(AppointmentRequest appointment) {

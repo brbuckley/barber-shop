@@ -40,7 +40,7 @@ public class Haircut implements Serializable {
   @JsonIgnore
   private List<Appointment> appointments = new ArrayList<>();
 
-  public Haircut(long id){
-    this.id=id;
+  public Haircut(long id) {
+    this.id = id;
   }
 }
