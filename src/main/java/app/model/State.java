@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +27,7 @@ public class State implements Serializable {
   @Getter
   private long id;
 
+  @ApiModelProperty(example = "Rio de Janeiro")
   @Getter @Setter private String description;
 
   @OneToMany(mappedBy = "state", cascade = CascadeType.REMOVE)

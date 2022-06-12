@@ -4,9 +4,12 @@ import app.model.Barber;
 import app.repository.BarberRepo;
 import app.service.BarberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ExampleProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +47,7 @@ public class BarberController {
   /**
    * POST request to add a new Barber.
    *
-   * @param id The id of the barber.
+   * @param barber The new barber.
    * @return Barber.
    * @throws JsonProcessingException Exceptions while parsing the JSON response.
    */

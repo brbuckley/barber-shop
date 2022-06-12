@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,19 +30,25 @@ public class Barber implements Serializable {
   @Getter
   private long id;
 
+  @ApiModelProperty(example = "Zé")
   @Getter @Setter private String name;
 
+  @ApiModelProperty(example = "zebarbeiro")
   @Getter @Setter private String username;
 
+  @ApiModelProperty(example = "zebarbeiro@gmail.com")
   @Getter @Setter private String email;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Getter
   @Setter
+  @ApiModelProperty(example = "11253981b29c11f5c01a392db940846a809e2022993ab0ca5d13ae95c3b8456b")
   private String passwordHash;
 
+  @ApiModelProperty(example = "Rua do Zé, 123")
   @Getter @Setter private String address;
 
+  @ApiModelProperty(example = "32")
   @Getter @Setter private Integer age;
 
   @OneToMany(mappedBy = "barber", cascade = CascadeType.REMOVE)

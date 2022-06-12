@@ -51,7 +51,7 @@ public class HaircutController {
   /**
    * POST request to add a new Haircut.
    *
-   * @param id The id of the haircut.
+   * @param haircut The new haircut.
    * @return Haircut.
    * @throws JsonProcessingException Exceptions while parsing the JSON response.
    */
@@ -66,12 +66,14 @@ public class HaircutController {
     return new ResponseEntity(new HaircutService(haircutRepo).postHaircut(haircut), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Update haircut.", response = Haircut.class)
   @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity updateHaircut(@RequestBody Haircut haircut) throws JsonProcessingException {
     return new ResponseEntity(
         new HaircutService(haircutRepo).updateHaircut(haircut), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Delete haircut.", response = Haircut.class)
   @DeleteMapping(value = "/delete/{haircutId}", produces = "application/json")
   public ResponseEntity deleteHaircut(@PathVariable(value = "haircutId") long haircutId)
       throws JsonProcessingException {

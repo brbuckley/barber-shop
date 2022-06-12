@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,8 +23,10 @@ public class Appointment implements Serializable {
   @Getter
   private long id;
 
+  @ApiModelProperty(example = "Em espera")
   @Getter @Setter private String status;
 
+  @ApiModelProperty(example = "11/6/2022")
   @Getter @Setter private Date date;
 
   @ManyToOne(optional = false)

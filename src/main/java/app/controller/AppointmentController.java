@@ -51,7 +51,7 @@ public class AppointmentController {
     /**
      * POST request to add a new Appointment.
      *
-     * @param id The id of the appointment.
+     * @param appointment The new appointment.
      * @return Appointment.
      * @throws JsonProcessingException Exceptions while parsing the JSON response.
      */
@@ -67,6 +67,7 @@ public class AppointmentController {
                 new AppointmentService(appointmentRepo).postAppointment(appointment), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Search appointment by ID.", response = Appointment.class)
     @PutMapping(value = "/update", produces = "application/json")
     public ResponseEntity updateAppointment(@RequestBody Appointment appointment)
             throws JsonProcessingException {

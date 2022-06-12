@@ -29,11 +29,6 @@ public class AdminController {
    * @return Admin.
    * @throws JsonProcessingException Exceptions while parsing the JSON response.
    */
-  @ApiResponses(
-      value = {
-        @ApiResponse(code = 400, message = "Bad request"),
-        @ApiResponse(code = 500, message = "Internal Server Error"),
-      })
   @ApiOperation(value = "Search admin by ID.", response = Admin.class)
   @GetMapping(value = "/{adminId}", produces = "application/json")
   public ResponseEntity getAdmin(@PathVariable(value = "adminId") long id)
@@ -44,7 +39,7 @@ public class AdminController {
   /**
    * POST request to add a new Admin.
    *
-   * @param id The id of the admin.
+   * @param admin The new admin.
    * @return Admin.
    * @throws JsonProcessingException Exceptions while parsing the JSON response.
    */
@@ -59,11 +54,13 @@ public class AdminController {
     return new ResponseEntity(new AdminService(adminRepo).postAdmin(admin), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Update admin.", response = Admin.class)
   @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity updateAdmin(@RequestBody Admin admin) throws JsonProcessingException {
     return new ResponseEntity(new AdminService(adminRepo).updateAdmin(admin), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Delete admin.")
   @DeleteMapping(value = "/delete/{adminId}")
   public ResponseEntity deleteAdmin(@PathVariable(value = "adminId") long adminId)
       throws JsonProcessingException {

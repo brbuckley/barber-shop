@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class City implements Serializable {
   @Getter
   private long id;
 
+  @ApiModelProperty(example = "Niterói")
   @Getter @Setter private String description;
 
   @OneToMany(mappedBy = "city", cascade = CascadeType.REMOVE)

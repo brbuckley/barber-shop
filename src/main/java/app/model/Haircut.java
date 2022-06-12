@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,8 +26,10 @@ public class Haircut implements Serializable {
   @Getter
   private long id;
 
+  @ApiModelProperty(example = "Barba")
   @Getter @Setter private String description;
 
+  @ApiModelProperty(example = "20,00")
   @Getter @Setter private BigDecimal price;
 
   @OneToMany(mappedBy = "haircut", cascade = CascadeType.REMOVE)

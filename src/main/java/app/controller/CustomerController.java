@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.model.Barber;
 import app.model.Customer;
 import app.repository.CustomerRepo;
 import app.service.CustomerService;
@@ -51,7 +52,7 @@ public class CustomerController {
   /**
    * POST request to add a new Customer.
    *
-   * @param id The id of the customer.
+   * @param customer The new customer.
    * @return Customer.
    * @throws JsonProcessingException Exceptions while parsing the JSON response.
    */
@@ -67,6 +68,7 @@ public class CustomerController {
         new CustomerService(customerRepo).postCustomer(customer), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Update customer.", response = Customer.class)
   @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity updateCustomer(@RequestBody Customer customer)
       throws JsonProcessingException {
@@ -74,6 +76,7 @@ public class CustomerController {
         new CustomerService(customerRepo).updateCustomer(customer), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Delete customer.", response = Customer.class)
   @DeleteMapping(value = "/delete/{customerId}", produces = "application/json")
   public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId)
       throws JsonProcessingException {
