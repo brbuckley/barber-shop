@@ -14,6 +14,12 @@ mvn clean install
 
 Você pode rodar o programa com sua IDE de escolha usando a classe "DemoApplication", ou rodar pelo maven com o comando:  `mvn spring-boot:run`.
 
+## Versão do Heroku
+
+Existe uma versão da API publicada no heroku no endereço: https://uff-barber-shop.herokuapp.com/
+Ela deve funcionar de forma bastante parecida com esta versão do git, então sugerimos que use o mesmo swagger que se encontra em: `src/main/resources/api.yaml`.
+Outra dica é usar o [swagger editor](https://editor.swagger.io/) para ler este arquivo com uma interface mais amigável.
+
 ## Contribuindo
 
 Brendan Buckley, Paulo Jr. Niche, Vitor Rocha, 'nome'.
