@@ -1,0 +1,64 @@
+.login-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;    
+    text-align: center;    
+}
+
+.entrar{
+    display: '';
+    text-align: center;
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.entrar h3{
+    text-align: center;
+    color: #333;
+}
+.entrar .btnSubmit{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+.entrar .ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+.cadastrar{    
+    display: none;
+    padding: 5%;
+    background: #0062cc;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.cadastrar h3 {
+    text-align: center;
+    color: #fff;
+}
+
+.login-container form{
+    padding: 10%;
+}
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+.cadastrar .btnSubmit{
+    font-weight: 600;
+    color: #0062cc;
+    background-color: #fff;
+}
+.cadastrar .ForgetPwd{
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+

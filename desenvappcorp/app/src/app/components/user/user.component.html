@@ -1,0 +1,81 @@
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 entrar" id="entrar" >
+            <h3><u>Entrar</u></h3>
+            <form
+                [formGroup]="signInForm"
+                novalidate
+            >
+                <div class="form-group">
+                    <input type="text" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="Email" value="" formControlName="email" required />
+                </div>
+                <div *ngIf="signInForm.controls['email'].invalid && (signInForm.controls['email'].dirty || signInForm.controls['email'].touched)" class="alert alert-danger">
+                    <div *ngIf="signInForm.controls['email'].errors?.required">
+                      Email é obrigatório
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Senha" value="" formControlName="password" />
+                </div>
+                <div *ngIf="signInForm.controls['password'].invalid && (signInForm.controls['password'].dirty || signInForm.controls['password'].touched)" class="alert alert-danger">
+                    <div *ngIf="signInForm.controls['password'].errors?.required">
+                      Senha é obrigatória
+                    </div>
+                </div>
+                <div class="form-group alig">
+                    <input type="submit" class="btnSubmit" (click)="loginAsync()" [disabled]="signInForm.pristine || signInForm.invalid" value="Acessar" />
+                </div>
+            </form>
+            <a (click)="change()">
+                <u>Cadastrar-se</u>
+            </a>
+        </div>
+        <div class="col-md-6 cadastrar" id="cadastrar">
+            <h3>Cadastrar-se</h3>            
+            <form
+            [formGroup]="signUpForm"
+            novalidate
+            >
+            <div class="form-group">
+                <input type="text" id="cpf" name="cpf" [(ngModel)]="rCpf"  class="form-control" placeholder="CPF" formControlName="cpf" required/>
+            </div>
+            <div *ngIf="signUpForm.controls['cpf'].invalid && (signUpForm.controls['cpf'].dirty || signUpForm.controls['cpf'].touched)" class="alert alert-danger">
+                <div *ngIf="signUpForm.controls['cpf'].errors?.required">
+                    CPF é obrigatório
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" id="rEmail" name="rEmail" [(ngModel)]="rEmail" class="form-control" placeholder="Email" value="" formControlName="rEmail" required/>
+            </div>
+            <div *ngIf="signUpForm.controls['rEmail'].invalid && (signUpForm.controls['rEmail'].dirty || signUpForm.controls['rEmail'].touched)" class="alert alert-danger">
+                <div *ngIf="signUpForm.controls['rEmail'].errors?.required">
+                    Email é obrigatório
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="rPassword" name="rPassword" [(ngModel)]="rPassword" class="form-control" placeholder="Senha" formControlName="rPassword" value="" required/>
+            </div>
+            <div *ngIf="signUpForm.controls['rPassword'].invalid && (signUpForm.controls['rPassword'].dirty || signUpForm.controls['rPassword'].touched)" class="alert alert-danger">
+                <div *ngIf="signUpForm.controls['rPassword'].errors?.required">
+                    Senha é obrigatória
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" [disabled]="signUpForm.pristine || signUpForm.invalid" (click)="registerAsync()"  value="Confirmar" />
+            </div>               
+            </form>
+            <span type="button" (click)="change()">
+                <label><u>Logar no sistema</u></label>
+            </span>
+        </div>
+    </div>
+     <!-- Rodapé -->
+     <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Desenvolvimento de Aplicações Web &copy; <br>Web BarberShop 2022</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Fim do rodapé -->
+</div>
