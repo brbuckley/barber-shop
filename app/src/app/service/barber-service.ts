@@ -8,21 +8,21 @@ import {  map } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class AppointmentService implements OnInit {
+export class BarberService implements OnInit {
   
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {       
+  ngOnInit(): void {      
   }
 
   protected url(param: string = ""): string {
-    return `${environment.api_url}/appointment/${param}`;
+    return `${environment.api_url}/barber/${param}`;
   }
 
 
-  async createAppointmentAsync(appointmentDto: any): Promise<any> {    
+  async createBarberAsync(barberDto: any): Promise<any> {    
     try {
-      return await this.http.post<any>(this.url(`new`), appointmentDto)
+      return await this.http.post<any>(this.url(`new`), barberDto)
       .pipe(map(x => {
         return {
          // Ver o retorno
@@ -33,9 +33,9 @@ export class AppointmentService implements OnInit {
     }
   } 
 
-  async updateAppointmentAsync(appointId: number, status: string): Promise<any> {    
+  async updateBarberAsync(barber: any): Promise<any> {    
     try {
-      return await this.http.post<any>(this.url(`update`), {appointId, status})
+      return await this.http.post<any>(this.url(`update`), barber)
       .pipe(map(x => {
         return {
           // Ver o retorno
@@ -45,22 +45,21 @@ export class AppointmentService implements OnInit {
       throw error;
     }
   } 
-
-
-  async getAppointmentAsync(id: number): Promise<any> {
-      try {
-        return await this.http.get<any>(this.url(`${id}`))
-          .pipe(map(x => {
-            return {
-              // Ver o retorno
-            }
-          })).toPromise();         
-      } catch (error) {
-        throw error;
-      }
+  
+  async getBarberAsync(id: number) : Promise<any> {
+    try {
+      return await this.http.get<any>(this.url(`${id}`))
+        .pipe(map(x => {
+          return {
+           // Ver o retorno
+          }
+        })).toPromise();         
+    } catch (error) {      
+      throw error;
+    }
   }
 
-  async deleteAppointmentAsync(id: number) {
+  async deleteBarberAsync(id: number) {
     try {
       return await this.http.delete(this.url(`delete/${id}`))
       .subscribe({

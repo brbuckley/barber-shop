@@ -12,8 +12,7 @@ export class AdminService implements OnInit {
   
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.getAdminAsync();    
+  ngOnInit(): void {      
   }
 
   protected url(param: string = ""): string {
@@ -21,9 +20,9 @@ export class AdminService implements OnInit {
   }
 
 
-  async createAdminAsync(eventDto: any): Promise<any> {    
+  async createAdminAsync(adminDto: any): Promise<any> {    
     try {
-      return await this.http.post<any>(this.url(`new`), eventDto)
+      return await this.http.post<any>(this.url(`new`), adminDto)
       .pipe(map(x => {
         return {
          // Ver o retorno
@@ -34,10 +33,23 @@ export class AdminService implements OnInit {
     }
   } 
 
+  async updateAdminAsync(admin: any): Promise<any> {    
+    try {
+      return await this.http.post<any>(this.url(`update`), admin)
+      .pipe(map(x => {
+        return {
+          // Ver o retorno
+        }
+        })).toPromise();         
+    } catch (error) {
+      throw error;
+    }
+  } 
 
-  async getAdminAsync(): Promise<any> {
+
+  async getAdminAsync(id: number): Promise<any> {
       try {
-        return await this.http.get<any>(this.url())
+        return await this.http.get<any>(this.url(`${id}`))
           .pipe(map(x => {
             return {
              // Ver o retorno
@@ -60,6 +72,7 @@ export class AdminService implements OnInit {
       throw error;
     }
   }
+
   async deleteAdminAsync(id: number) {
     try {
       return await this.http.delete(this.url(`delete/${id}`))
