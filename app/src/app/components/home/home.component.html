@@ -1,0 +1,132 @@
+<router-outlet></router-outlet>
+    <!-- Wrapper da página -->
+    <div id="wrapper">
+        <!-- Wrapper do conteúdo -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Conteúdo principal -->
+            <div id="content">
+                <!-- Barra superior -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div class="logo"><img src="../assets/img/logo_principal.jpg" class="logo"></div>
+                   
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Menu do usuário -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.name }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="../assets/img/profile.svg">
+                            </a>
+                            <!-- Dropdown - Sair -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
+                                    Produtos
+                                </a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
+                                    Serviço
+                                </a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
+                                    Funcionário
+                                </a>
+                                <a class="dropdown-item"  href="#" data-toggle="modal" >
+                                    Sair
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- Fim da barra superior -->
+
+                <!-- Início do conteúdo da página -->
+                <div *ngFor="let cliente of listaClientes">
+                   <app-customer-card name="{{cliente.name}}"></app-customer-card>
+                </div>
+                
+                 <!-- Fim da área da tabela de investimentos -->
+
+            <!-- Rodapé -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Desenvolvimento de Aplicações Web &copy; <br>Web BarberShop 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Fim do rodapé -->
+        </div>        
+    </div>
+    <!-- Fim do wrapper principal -->
+
+    <!-- Depósito -->
+    <div class="modal fade bd-example-modal-sm" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="depositModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="depositModal">Depósito de Valores</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                   <div class="col-8">
+                    <label  class="col-form-label ">Código do Banco:</label>
+                    <input type="text" class="form-control" id="bankCode">
+                   </div>
+                   <div class="col-4">
+                    <label  class="col-form-label ">Agência:</label>
+                    <input type="text" class="form-control" id="agency">
+                   </div>
+                   <div class="col-12">
+                    <label  class="col-form-label ">CPF:</label>
+                    <input type="text" class="form-control" id="cpf">
+                   </div>
+                   <div class="col-12">
+                    <label  class="col-form-label ">Código Autorização:</label>
+                    <input type="text" class="form-control" id="authCode">
+                   </div>
+                   <div class="col-4">
+                    <label  class="col-form-label ">Valor:</label>
+                    <input type="text" class="form-control" id="amount">
+                   </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" >Confirmar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="purchaseModal">Compra de Ativo - {{ asset }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="form-group">
+                <div class="col-6">
+                    <label  class="col-form-label">Quantidade:</label>
+                    <input type="text" id="qtd" class="form-control">
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" >Comprar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
