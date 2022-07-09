@@ -8,22 +8,21 @@ import {  map } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class AdminService implements OnInit {
+export class AppointmentService implements OnInit {
   
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.getAdminAsync();    
+  ngOnInit(): void {       
   }
 
   protected url(param: string = ""): string {
-    return `${environment.api_url}/admin/${param}`;
+    return `${environment.api_url}/appointment/${param}`;
   }
 
 
-  async createAdminAsync(eventDto: any): Promise<any> {    
+  async createAppointmentAsync(appointmentDto: any): Promise<any> {    
     try {
-      return await this.http.post<any>(this.url(`new`), eventDto)
+      return await this.http.post<any>(this.url(`new`), appointmentDto)
       .pipe(map(x => {
         return {
          // Ver o retorno
@@ -34,33 +33,34 @@ export class AdminService implements OnInit {
     }
   } 
 
+  async updateAppointmentAsync(appointId: number, status: string): Promise<any> {    
+    try {
+      return await this.http.post<any>(this.url(`update`), {appointId, status})
+      .pipe(map(x => {
+        return {
+          // Ver o retorno
+        }
+        })).toPromise();         
+    } catch (error) {
+      throw error;
+    }
+  } 
 
-  async getAdminAsync(): Promise<any> {
+
+  async getAppointmentAsync(): Promise<any> {
       try {
         return await this.http.get<any>(this.url())
           .pipe(map(x => {
             return {
-             // Ver o retorno
+              // Ver o retorno
             }
           })).toPromise();         
       } catch (error) {
         throw error;
       }
-     }
-  
-  async getAdminByIdAsync(id: number) : Promise<any> {
-    try {
-      return await this.http.get<any>(this.url(`${id}`))
-        .pipe(map(x => {
-          return {
-           // Ver o retorno
-          }
-        })).toPromise();         
-    } catch (error) {      
-      throw error;
-    }
   }
-  async deleteAdminAsync(id: number) {
+
+  async deleteAppointmentAsync(id: number) {
     try {
       return await this.http.delete(this.url(`delete/${id}`))
       .subscribe({
@@ -75,5 +75,4 @@ export class AdminService implements OnInit {
       throw error;
     }
   }
-
 }
