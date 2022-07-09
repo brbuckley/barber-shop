@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/helpers/dialog-service';
-import { Asset } from 'src/app/model/asset';
+import { Asset } from 'src/app/model/appointment';
 import { TokenStorageService } from '../../service/auth/token-storage.service';
-import { Patrimony } from 'src/app/model/patrimony';
+import { Patrimony } from 'src/app/model/queue';
 
 
 @Component({
