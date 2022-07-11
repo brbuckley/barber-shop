@@ -1,9 +1,7 @@
 package app.controller;
 
 import app.model.Customer;
-import app.repository.CustomerRepo;
 import app.service.CustomerService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,37 +19,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customer")
 public class CustomerController {
 
-  private CustomerRepo customerRepo;
+  private CustomerService customerService;
 
-  public CustomerController(CustomerRepo customerRepo) {
-    this.customerRepo = customerRepo;
+  public CustomerController(CustomerService customerService) {
+    this.customerService = customerService;
   }
 
   @ApiOperation(value = "Search customer by ID.", response = Customer.class)
   @GetMapping(value = "/{customerId}", produces = "application/json")
-  public ResponseEntity getCustomer(@PathVariable(value = "customerId") long id)
-      throws JsonProcessingException {
-    return new ResponseEntity(new CustomerService(customerRepo).getCustomer(id), HttpStatus.OK);
+  public ResponseEntity getCustomer(@PathVariable(value = "customerId") long id) {
+    return new ResponseEntity(customerService.getCustomer(id), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/all", produces = "application/json")
+  public ResponseEntity getAllCustomers() {
+    return new ResponseEntity(customerService.getAllCustomers(), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Creates a new customer.", response = Customer.class)
   @PostMapping(value = "/new", produces = "application/json")
-  public ResponseEntity getCustomer(@RequestBody Customer customer) throws JsonProcessingException {
-    return new ResponseEntity(
-        new CustomerService(customerRepo).postCustomer(customer), HttpStatus.OK);
+  public ResponseEntity postCustomer(@RequestBody Customer customer) {
+    return new ResponseEntity(customerService.postCustomer(customer), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Updates a customer.", response = Customer.class)
   @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity updateCustomer(@RequestBody Customer customer) {
-    return new ResponseEntity(
-        new CustomerService(customerRepo).updateCustomer(customer), HttpStatus.OK);
+    return new ResponseEntity(customerService.updateCustomer(customer), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Deletes a customer.")
   @DeleteMapping(value = "/delete/{customerId}", produces = "application/json")
   public ResponseEntity deleteCustomer(@PathVariable(value = "customerId") long customerId) {
-    new CustomerService(customerRepo).deleteCustomer(customerId);
+    customerService.deleteCustomer(customerId);
     return new ResponseEntity(HttpStatus.OK);
   }
 }

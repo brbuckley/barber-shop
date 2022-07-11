@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
-    Customer getCustomerByEmailAndPasswordHash(String email, String passwordHash);
-
+  Customer getCustomerByEmailAndPasswordHash(String email, String passwordHash);
 }

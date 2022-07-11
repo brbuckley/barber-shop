@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BarberRepo extends JpaRepository<Barber, Long> {
 
-    Barber getBarberByEmailAndPasswordHash(String email, String passwordHash);
-
+  Barber getBarberByEmailAndPasswordHash(String email, String passwordHash);
 }
