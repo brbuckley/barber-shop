@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { registerLocaleData } from '@angular/common';
-import { authInterceptorProviders } from './helpers/auth-interceptor.service';
 import { CustomerCardComponent } from './components/customer-card/customer-card.component';
 
 
@@ -23,7 +22,6 @@ import { CustomerCardComponent } from './components/customer-card/customer-card.
     UserComponent,
     HomeComponent,
     CustomerCardComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -32,7 +30,7 @@ import { CustomerCardComponent } from './components/customer-card/customer-card.
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ authInterceptorProviders, 
+  providers: [
   {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

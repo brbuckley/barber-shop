@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-  api_url: "https://localhost:44370"
+  api_url: "https://uff-barber-shop.herokuapp.com"
 };
 

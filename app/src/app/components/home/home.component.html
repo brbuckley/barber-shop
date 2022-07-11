@@ -8,7 +8,8 @@
                 <!-- Barra superior -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="logo"><img src="../assets/img/logo_principal.jpg" class="logo"></div>
-                   
+                    <!-- Remover botão caso o usuário não seja barbeiro -->
+                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Iniciar Fila</a>
                     <ul class="navbar-nav ml-auto">
                         <!-- Menu do usuário -->
                         <li class="nav-item dropdown no-arrow">
@@ -20,30 +21,28 @@
                             </a>
                             <!-- Dropdown - Sair -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
-                                    Produtos
-                                </a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
+                                aria-labelledby="userDropdown">                               
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#servicetModal">
                                     Serviço
                                 </a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#depositModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#funcionariotModalLabel">
                                     Funcionário
                                 </a>
-                                <a class="dropdown-item"  href="#" data-toggle="modal" >
+                                <a class="dropdown-item"  href="#" data-toggle="modal" (click)="logoutAsync()">
                                     Sair
                                 </a>
                             </div>
                         </li>
-                    </ul>
+                    </ul>                    
                 </nav>
                 <!-- Fim da barra superior -->
 
                 <!-- Início do conteúdo da página -->
-                <div *ngFor="let cliente of listaClientes">
-                   <app-customer-card name="{{cliente.name}}"></app-customer-card>
+                <div class="container mt-5">
+                    <div *ngFor="let cliente of listaClientes" >
+                        <app-customer-card name="{{cliente.name}}"></app-customer-card>
+                     </div>
                 </div>
-                
                  <!-- Fim da área da tabela de investimentos -->
 
             <!-- Rodapé -->
@@ -59,12 +58,12 @@
     </div>
     <!-- Fim do wrapper principal -->
 
-    <!-- Depósito -->
-    <div class="modal fade bd-example-modal-sm" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <!-- Serviço -->
+    <div class="modal fade bd-example-modal-sm" id="servicetModal" tabindex="-1" role="dialog" aria-labelledby="servicetModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="depositModal">Depósito de Valores</h5>
+              <h5 class="modal-title" id="depositModal">Cadastro de Serviços</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -73,24 +72,48 @@
               <form>
                 <div class="form-group">
                    <div class="col-8">
-                    <label  class="col-form-label ">Código do Banco:</label>
-                    <input type="text" class="form-control" id="bankCode">
+                    <label  class="col-form-label ">Descrição</label>
+                    <input type="text" class="form-control" id="descricao">
                    </div>
                    <div class="col-4">
-                    <label  class="col-form-label ">Agência:</label>
-                    <input type="text" class="form-control" id="agency">
+                    <label  class="col-form-label ">Preço:</label>
+                    <input type="text" class="form-control" id="preco">
+                   </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="createNewService()" >Confirmar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Funcionário -->
+    <div class="modal fade bd-example-modal-sm" id="funcionariotModalLabel" tabindex="-1" role="dialog" aria-labelledby="funcionariotModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="depositModal">Cadastro de Funcionários</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                   <div class="col-12">
+                    <label  class="col-form-label ">Nome</label>
+                    <input type="text" class="form-control" id="nome">
                    </div>
                    <div class="col-12">
-                    <label  class="col-form-label ">CPF:</label>
-                    <input type="text" class="form-control" id="cpf">
-                   </div>
+                    <label  class="col-form-label ">Email:</label>
+                    <input type="text" class="form-control" id="email">
+                   </div>                   
                    <div class="col-12">
-                    <label  class="col-form-label ">Código Autorização:</label>
-                    <input type="text" class="form-control" id="authCode">
-                   </div>
-                   <div class="col-4">
-                    <label  class="col-form-label ">Valor:</label>
-                    <input type="text" class="form-control" id="amount">
+                    <label  class="col-form-label ">Senha:</label>
+                    <input type="password" class="form-control" id="senha">
                    </div>
                 </div>
               </form>
@@ -102,31 +125,3 @@
           </div>
         </div>
     </div>
-
-    <div class="modal fade bd-example-modal-sm" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="purchaseModal">Compra de Ativo - {{ asset }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form>
-            <div class="form-group">
-                <div class="col-6">
-                    <label  class="col-form-label">Quantidade:</label>
-                    <input type="text" id="qtd" class="form-control">
-                </div>
-            </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" >Comprar</button>
-        </div>
-        </div>
-    </div>
-    </div>
-

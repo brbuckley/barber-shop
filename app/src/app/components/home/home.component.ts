@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/helpers/dialog-service';
-import { Asset } from 'src/app/model/appointment';
+import { HairCutService } from 'src/app/service/haircut-service';
 import { TokenStorageService } from '../../service/auth/token-storage.service';
-import { Patrimony } from 'src/app/model/queue';
-
 
 @Component({
   selector: 'app-home',
@@ -13,16 +11,12 @@ import { Patrimony } from 'src/app/model/queue';
 })
 export class HomeComponent implements OnInit {
 
-  topAssets: Asset[] = [];
-  totalInvested: number = 0;
-  patrimony: Patrimony = { accountAmount: 0, totalAmount: 0, assets: null};
-  isLoggedIn = false;
-  user: any;
-  asset: any;
-  listaClientes: any[] = [];
+   isLoggedIn = false;
+   user: any;
+   listaClientes: any[] = [];
 
   constructor(private dialog: DialogService, private tokenStorage: TokenStorageService, 
-    private router: Router){}
+    private router: Router, private services: HairCutService){}
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -44,6 +38,22 @@ export class HomeComponent implements OnInit {
         {
           name: "Laurent"
       })
+  }
+
+  async logoutAsync() {    
+    if (await this.dialog.confirm('Sair', 'Deseja realmente sair?')){
+      this.tokenStorage.signOut();
+      window.location.reload();
+    }
+  }
+
+  async createNewService(){
+
+    let descricao = (document.getElementById('descricao') as HTMLInputElement).value;
+    let preco = (document.getElementById('preco') as HTMLInputElement).value;
+
+    var haircut = {  description: descricao, price: parseFloat(preco) }
+    this.services.createHairCutAsync(haircut)
   }
 }
 

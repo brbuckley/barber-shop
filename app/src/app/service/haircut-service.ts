@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
+import { DialogService } from '../helpers/dialog-service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import {  map } from 'rxjs/operators';
 
 export class HairCutService implements OnInit {
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: DialogService) {}
 
   ngOnInit(): void {      
   }
@@ -22,14 +23,14 @@ export class HairCutService implements OnInit {
 
   async createHairCutAsync(eventDto: any): Promise<any> {    
     try {
+      debugger
       return await this.http.post<any>(this.url(`new`), eventDto)
-      .pipe(map(x => {
-        return {
-         // Ver o retorno
-        }
+      .pipe(map(x => {     
+          this.dialog.showAlert('Sucesso', 'Serviço cadastrado com sucesso !'); 
+          this.dialog.reloadPage();         
         })).toPromise();         
     } catch (error) {
-      throw error;
+      this.dialog.showErr('Atenção', 'Falha no processo. Tente novamente');   
     }
   } 
 

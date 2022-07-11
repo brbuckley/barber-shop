@@ -78,8 +78,7 @@ async loginAsync() {
       }
   } 
   
-    change() {
-      debugger
+    change() {      
       const entrar = document.getElementById('entrar');
       const cadastrar = document.getElementById('cadastrar');
     
