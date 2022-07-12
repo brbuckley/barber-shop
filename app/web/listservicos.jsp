@@ -93,19 +93,18 @@
                     <span>Gerenciar Conta</span>
                 </div>            
 
-                <!-- Nav Item - Conta corrente -->
-                <li class="nav-item">
+                 <!-- Nav Item - Filas -->
+                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">
-                        <i class="fas fa-university"></i>
-                        <span>Conta Corrente</span></a>
-                </li>
-
-               <!-- Nav Item - Lançamentos -->
-                <li class="nav-item">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/LancamentoController?action=listLancamento&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">            
                         <i class="fas fa-file-invoice-dollar"></i>
-                        <span>Lançamentos</span>
-                     </a>
+                        <span>Filas</span></a>
+                </li>
+                
+                 <!-- Nav Item - Dados Pessoais -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Dados Pessoais</span></a>
                 </li>
 
                 <!-- Divisor -->
