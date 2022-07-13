@@ -33,12 +33,12 @@
                                     </div>
                                     <form class="user" method="post" action="${pageContext.request.contextPath}/AutenticacaoController">                                        
                                         <div class="form-group">
-                                            <input type="text" maxlength="11" class="form-control form-control-user"
-                                                id="cpf" name="cpf" placeholder="Informe seu email">                                               
+                                            <input type="text" class="form-control form-control-user"
+                                                id="email" name="email" placeholder="Informe seu email">                                               
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="senha" name="senha" onkeyup="validarNomeSenha()" placeholder="Senha">
+                                                id="senha" name="senha"  placeholder="Senha">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -46,7 +46,7 @@
                                                 <label class="custom-control-label" for="customCheck">Lembrar</label>                                                   
                                             </div>
                                         </div>
-                                        <button  value="Submit" disabled="true" type="submit" id="btnEntrar" class="btn btn-primary btn-user btn-block">
+                                        <button  value="Submit" type="submit" id="btnEntrar" class="btn btn-primary btn-user btn-block">
                                             Entrar
                                         </button>
                                         <hr>                                       

@@ -90,24 +90,23 @@
             <!-- Cabeçalho -->
             <div id="menuusuario" style="${usu}">
                 <div class="sidebar-heading">               
-                    <span>Gerenciar Conta</span>
+                    <span>Acessar</span>
                 </div>            
 
-                <!-- Nav Item - Conta corrente -->
+                <!-- Nav Item - Filas -->
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">
-                        <i class="fas fa-university"></i>
-                        <span>Conta Corrente</span></a>
-                </li>
-
-               <!-- Nav Item - Lançamentos -->
-                <li class="nav-item">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/LancamentoController?action=listLancamento&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">            
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
                         <i class="fas fa-file-invoice-dollar"></i>
-                        <span>Lançamentos</span>
-                     </a>
+                        <span>Filas</span></a>
                 </li>
-
+                
+                 <!-- Nav Item - Dados Pessoais -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Dados Pessoais</span></a>
+                </li>
+ 
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">
             </div> 
@@ -144,7 +143,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.usuarioLogado.nome}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.usuarioLogado}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -327,11 +326,11 @@
                   <form class="row g-3 needs-validation" novalidate>
                       <div class="col-md-6">
                         <label for="nomeValicacao" class="form-label">Nome</label>
-                        <label class="text-primary" for="nomeValicacao">${sessionScope.usuarioLogado.nome}</label>                          
+                        <label class="text-primary" for="nomeValicacao">${sessionScope.usuarioLogado}</label>                          
                       </div>
                       <div class="col-md-5">
                         <label class="form-label">CPF</label>
-                        <label class="text-primary" class="form-label">${sessionScope.cpf}</label>
+                        <label class="text-primary" class="form-label">teste</label>
                       </div>                     
                   </form>             
               </div>

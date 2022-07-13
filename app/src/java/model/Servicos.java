@@ -21,9 +21,6 @@ public class Servicos {
         return id;
     }
     
-   //  public String getPossuiLancamento() {
-   //     return this.possuiLancamento;
-   // }
     
     public String getDescription() {
         return this.description;

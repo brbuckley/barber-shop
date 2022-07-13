@@ -69,7 +69,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gerenciamentos</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/UsuarioController?action=listusuario?session=${sessionScope.usuarioLogado.nome}">Usuários</a>      
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/UsuarioController?action=listusuario?session=${sessionScope.usuarioLogado}">Usuários</a>      
                        <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>                                
                     </div>
                 </div>
@@ -84,16 +84,16 @@
                     <span>Gerenciar Conta</span>
                 </div>            
 
-                <!-- Nav Item - Conta corrente -->
+                <!-- Nav Item - Fila -->
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
                         <i class="fas fa-university"></i>
-                        <span>Conta Corrente</span></a>
+                        <span>Filas</span></a>
                 </li>
 
                <!-- Nav Item - Lançamentos -->
                 <li class="nav-item">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/LancamentoController?action=listLancamento&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado.nome}">            
+                     <a class="nav-link" href="${pageContext.request.contextPath}/LancamentoController?action=listLancamento&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">            
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Lançamentos</span>
                      </a>
@@ -155,7 +155,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.usuarioLogado.nome}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.usuarioLogado}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -303,7 +303,7 @@
                   <form class="row g-3 needs-validation" novalidate>
                       <div class="col-md-6">
                         <label for="nomeValicacao" class="form-label">Nome</label>
-                        <label class="text-primary" for="nomeValicacao">${sessionScope.usuarioLogado.nome} - Id: ${sessionScope.usuarioLogado.id}</label>                          
+                        <label class="text-primary" for="nomeValicacao">${sessionScope.usuarioLogado} - Id: ${sessionScope.usuarioLogado}</label>                          
                       </div>
                       <div class="col-md-5">
                         <label class="form-label">CPF</label>
