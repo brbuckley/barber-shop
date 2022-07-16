@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DAC - UFF - Web BarberShop - Serviços</title>
+    <title>DAC - UFF - Web BarberShop - Clientes</title>
 
     <!-- Fontes personalizados para o template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -79,7 +79,7 @@
                         <h6 class="collapse-header">Gerenciamentos</h6>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/ClienteController?action=listcliente">Clientes</a>      
                         <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>   
-                       <a class="collapse-item" href="${pageContext.request.contextPath}/BarbeiroController?action=listbarbeiro">Funcionários</a>                                
+                       <a class="collapse-item" href="${pageContext.request.contextPath}/BarbeiroController?action=listbarbeiro">Funcionários</a>                                  
                     </div>
                 </div>
             </li>
@@ -171,21 +171,15 @@
 
                     <div class="row">
                         <div class="col-md-11">
-                            <h1 class="h3 mb-2 text-gray-800">Serviços</h1>
-                            <p class="mb-4">Área para manutenção de serviços.</p> 
-                        </div>
-                        <div class="col-md-1">                            
-                            <a href="#" onclick="alternarOperacaoNovoOuEdicao('servicoModalLabel', 'novo', 'Serviços')" data-toggle="modal" data-target="#servicoModal">
-                                <i class="fas fa-4x fa-plus-circle"></i>                         
-                            </a>
-                            Adicionar
-                        </div>                                                
+                            <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
+                            <p class="mb-4">Área para manuteção de clientes.</p> 
+                        </div>                                   
                     </div>
 
                     <!-- Tabela de serviços -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Área Admin > Serviços</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Área Admin > Clientes</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -193,30 +187,31 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Descrição</th>     
-                                            <th>Preço</th>     
+                                            <th>Nome</th>     
+                                            <th>Email</th>     
                                             <th></th>                                         
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Descrição</th>                                                
+                                            <th>Nome</th>     
+                                            <th>Email</th>                                                 
                                             <th></th>                                          
                                         </tr>
                                     </tfoot>
                                     <tbody>                                       
-                                        <c:forEach items="${servicos}" var="servico">
+                                        <c:forEach items="${clientes}" var="cliente">
                                             <tr> 
-                                                <td><c:out value="${servico.id}" /></td>                                                
-                                                <td><c:out value="${servico.description}" /></td>        
-                                                <td><c:out value="${servico.price}" /></td>   
+                                                <td><c:out value="${cliente.id}" /></td>                                                
+                                                <td><c:out value="${cliente.name}" /></td>        
+                                                <td><c:out value="${cliente.email}" /></td>   
                                                 <td> 
                                                     <div class="text-center">
-                                                        <a href="#" onclick="carregarDadosEdicao('servicoModalLabel', 'edit', 'Serviço', ['idServico', 'description', 'price'], [ '<c:out value='${servico.id}'/>', '<c:out value='${servico.description}'/>', '<c:out value='${servico.price}'/>'])" data-toggle="modal" data-target="#servicoModal">
+                                                        <a href="#" onclick="carregarDadosEdicao('clienteModalLabel', 'edit', 'Cliente', ['idCliente', 'name', 'email'], [ '<c:out value='${cliente.id}'/>', '<c:out value='${cliente.name}'/>', '<c:out value='${cliente.email}'/>'])" data-toggle="modal" data-target="#clienteModal">
                                                                 <i class="fas fa-1x fa-edit pr-1"></i>                       
                                                         </a>
-                                                        <a href="#" data-toggle="modal" onclick="carregarDadosEdicao('lancamentoLabel', 'delete', 'Serviço', ['id_exclusao'], [ '<c:out value='${servico.id}'/>'])"   data-target="#exclusaoModal">
+                                                        <a href="#" data-toggle="modal" onclick="carregarDadosEdicao('lancamentoLabel', 'delete', 'Cliente', ['id_exclusao'], [ '<c:out value='${cliente.id}'/>'])"   data-target="#exclusaoModal">
                                                                        <i class="fas fa-1x fa-trash-alt"></i>                    
                                                        </a>
                                                     </div>                                                           
@@ -276,26 +271,26 @@
     <!--Fim do Modal de Logout -->
 
     <!-- Modal de criação/edição de serviços -->
-    <div class="modal fade" id="servicoModal" tabindex="-1" role="dialog" aria-labelledby="servicoModalLabel"
+    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel"
     aria-hidden="true">
        <div class="modal-dialog" role="document">
            <div class="modal-content">
                <div class="modal-header">
-                   <h5 class="modal-title" id="servicoModalLabel">Cadastro de Serviços</h5>
+                   <h5 class="modal-title" id="clienteModalLabel">Edição de Clientes</h5>
                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                        <span aria-hidden="true">×</span>
                    </button>
                </div>
                <!-- Corpo do modal -->
-               <form method="post" action="${pageContext.request.contextPath}/ServicoController?action=salvar">
+               <form method="post" action="${pageContext.request.contextPath}/ClienteController?action=salvar">
                     <div class="modal-body">                    
                         <div class="row g-3">
                             <div class="col-md-12">
-                              <input  name="idServico" class="form-control" type="hidden" value="<c:out value="${servico.id}"/>" id="idServico"> 
-                              <label for="validacaoNome" class="form-label">Descrição</label>
-                              <input  required="required" name="description" type="text" class="form-control" value="<c:out value="${servico.description}" />" id="description" required> 
-                               <label for="validacaoPreco" class="form-label">Preço</label>
-                              <input  required="required" name="price" type="text" class="form-control" value="<c:out value="${servico.price}" />" id="price" required>    
+                              <input  name="idCliente" class="form-control" type="hidden" value="<c:out value="${cliente.id}"/>" id="idCliente"> 
+                              <label for="validacaoNome" class="form-label">Nome</label>
+                              <input  required="required" name="name" type="text" class="form-control" value="<c:out value="${cliente.name}" />" id="name" required> 
+                               <label for="validacaoEmail" class="form-label">E-mail</label>
+                              <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${cliente.email}" />" id="email" required>    
                             </div>
                         </div>                    
                     </div>
@@ -329,8 +324,8 @@
                         <label class="text-primary" for="nomeValicacao">${sessionScope.usuarioLogado}</label>                          
                       </div>
                       <div class="col-md-5">
-                        <label class="form-label">CPF</label>
-                        <label class="text-primary" class="form-label">teste</label>
+                        <label class="form-label">Email</label>
+                        <label class="text-primary" class="form-label">${cliente.emai}</label>
                       </div>                     
                   </form>             
               </div>
@@ -350,7 +345,7 @@
             <div class="modal-dialog" role="document">
 
                     <div class="modal-content">    
-                        <form method="post" action="${pageContext.request.contextPath}/ServicoController?action=delete">                            
+                        <form method="post" action="${pageContext.request.contextPath}/ClienteController?action=delete">                            
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exclusaoModalLabel">Excluir Usuário</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">

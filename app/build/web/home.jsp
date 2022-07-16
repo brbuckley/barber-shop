@@ -69,8 +69,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gerenciamentos</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/UsuarioController?action=listusuario?session=${sessionScope.usuarioLogado}">Usuários</a>      
-                       <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>                                
+                         <a class="collapse-item" href="${pageContext.request.contextPath}/ClienteController?action=listcliente">Clientes</a>      
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>   
+                       <a class="collapse-item" href="${pageContext.request.contextPath}/BarbeiroController?action=listbarbeiro">Funcionários</a>               
                     </div>
                 </div>
             </li>
@@ -81,7 +82,7 @@
             <!-- Cabeçalho -->
             <div id="menuusuario" style="${usu}">
                 <div class="sidebar-heading">               
-                    <span>Gerenciar Conta</span>
+                    <span>ACESSAR</span>
                 </div>            
 
                 <!-- Nav Item - Fila -->

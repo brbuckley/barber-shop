@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Administrador;
 import model.Usuario;
 import service.AutenticacaoService;
 
@@ -50,6 +49,17 @@ public class AutenticacaoController extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response); 
                 return;
             }
+            
+            
+            if (_usuario.getTipo().equals("Admin"))
+            {
+                session.setAttribute("adm", "display: normal");
+                session.setAttribute("usu", "display: none");
+            }
+            else {
+                session.setAttribute("adm", "display: none");
+                session.setAttribute("usu", "display: normal");
+            }            
             
             session.setAttribute("usuarioLogado", _usuario.getName()); 
             session.setAttribute("idUsuarioLogado", _usuario.getId());

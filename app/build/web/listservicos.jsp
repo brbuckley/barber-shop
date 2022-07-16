@@ -77,9 +77,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gerenciamentos</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/UsuarioController?action=listusuario">Clientes</a>      
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/UsuarioController?action=listusuario">Funcionários</a>   
-                       <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>                                
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/ClienteController?action=listcliente">Clientes</a>      
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>   
+                       <a class="collapse-item" href="${pageContext.request.contextPath}/BarbeiroController?action=listbarbeiro">Funcionários</a>                                
                     </div>
                 </div>
             </li>
@@ -172,7 +172,7 @@
                     <div class="row">
                         <div class="col-md-11">
                             <h1 class="h3 mb-2 text-gray-800">Serviços</h1>
-                            <p class="mb-4">Área para cadastro de serviços.</p> 
+                            <p class="mb-4">Área para manutenção de serviços.</p> 
                         </div>
                         <div class="col-md-1">                            
                             <a href="#" onclick="alternarOperacaoNovoOuEdicao('servicoModalLabel', 'novo', 'Serviços')" data-toggle="modal" data-target="#servicoModal">

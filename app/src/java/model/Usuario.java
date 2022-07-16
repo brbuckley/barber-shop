@@ -1,29 +1,46 @@
 package model;
 
-public class Usuario {    
-    public Usuario(int id, String name, String tipo, String email) {
-         this.id = id;
-        this.name = name;
-        this.tipo = tipo;
-        this.email = email;       
-    }  
+public class Usuario { 
     
-    public Usuario(int id, String name, String tipo, String email, int idFila) {
+    public Usuario(int id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.tipo = tipo;
         this.email = email;
-        this.idFila = idFila;
-    } 
+    }
+    
+    public Usuario(String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
     
     private int id;
     private String name; 
     private String tipo;
     private String email; 
+    private String passwordHash;
     private int idFila;
+    private String username;
+    
     
     public int getId(){
         return id;
+    }
+    
+     public String getUserName() {
+        return this.username;
+    }
+    
+    public void setserName(String username) {
+        this.username = username;
+    }
+    
+     public String getPasswordHash() {
+        return this.passwordHash;
+    }
+    
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
     
     public String getName() {
