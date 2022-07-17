@@ -71,7 +71,7 @@ public class Barber implements Serializable {
   @JsonIgnore
   private Queue queue;
 
-  @ManyToOne(optional = false)
+  @ManyToOne
   @Getter
   @Setter
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

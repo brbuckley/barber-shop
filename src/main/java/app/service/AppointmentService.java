@@ -49,7 +49,7 @@ public class AppointmentService {
   }
 
   public List<Appointment> filterWaiting(long queueId) {
-    return appointmentRepo.filterWaiting(1);
+    return appointmentRepo.filterWaiting(queueId);
   }
 
   public void deleteAppointment(long appointmentId) {
