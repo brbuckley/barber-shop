@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class Agendamento {    
    
-    public Agendamento(int id, Date data, String status, Usuario cliente, Usuario barbeiro, Servicos servico) {
+    public Agendamento(int id, Date data, String status, Usuario cliente, Usuario barbeiro, Servicos servico, Pagamento pagamento) {
        this.id = id;
-       this.date = data;
        this.status = status;
+       this.date = data;       
        this.customer = cliente;
        this.barber = barbeiro;
-       this.haircut = servico;       
+       this.haircut = servico;  
+       this.payment = pagamento;
     } 
     
     private int id;
@@ -19,9 +20,18 @@ public class Agendamento {
     private Usuario customer;
     private Usuario barber;
     private Servicos haircut;
+    private Pagamento payment;
     
     public int getId(){
         return id;
+    }    
+    
+    public Pagamento getPagamento() {
+        return this.payment;
+    }
+    
+    public void setPagamento(Pagamento pagamento) {
+        this.payment = pagamento;
     }    
     
     public Date getDate() {

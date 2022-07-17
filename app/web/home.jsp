@@ -22,6 +22,8 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">    
 </head>
 
+
+
 <body id="page-top">
     <!-- Container da página -->
     <div id="wrapper">
@@ -89,14 +91,20 @@
             <!-- Gerencial das filas -->
             <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Operações</span>
+                    <span> Iniciar / Parar Fila</span>
                 </div>            
 
                 <!-- Nav Item - Fila -->                
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                            <i class="fa fa-cog fa-fw"></i>
-                            <span>Abrir/Fechar Filas</span></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                           <span>                                                                
+                                <label class="switch">
+                                    <input type="checkbox" ${filaIniciada} onclick="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                                   <span class="slider round"></span>
+                                 </label>
+                            
+                            </span>
+                        </a>
                     </li>  
 
                 <!-- Divisor -->
@@ -194,73 +202,32 @@
                 </nav>
                 <!-- Fim da barra superior  -->
 
-                <!-- Inicio do conteúdo da página -->
-                <div class="container-fluid">                   
-                    <!-- Conteúdo da linha -->
-                    <div class="row">                        
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Débitos</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ ${sessionScope.debitos}</td> </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas  fa-paper-plane fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Créditos</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ ${sessionScope.creditos}</td> </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                <div class="row">   
+                    <div class="container-fluid"> 
+                    <c:forEach items="${filas}" var="fila">
+                            <div class="col-xl-12 col-md-6 mb-4">
+                                <div class="cardFila border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="h5 mb-0 font-weight-bold text-danger">Barbeiro: ${fila.barbeiro.name}</div>
+                                                <br>
+                                                <c:forEach items="${fila.appointments}" var="pessoa">
+                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1">
+                                                       ${pessoa.customer.name}
+                                                    </div>
+                                                </c:forEach> 
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas  fa-paper-plane fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Saldo Atual</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ ${sessionScope.total}</td> </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-balance-scale fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row" style="padding-bottom: 13%;">  
-                        <!-- Project Card Example -->
-                        <div class="col-xl-12 col-lg-5">
-                            <div class="card shadow mb-4">
-                                
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <!-- Fim do conteúdo principal -->
+                              </div>      
+                     </c:forEach> 
+                   </div>   
+                 </div>
 
              <!-- Footer -->
             <footer class="sticky-footer  bg-white">

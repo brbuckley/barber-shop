@@ -1,14 +1,17 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Fila;
 import model.Usuario;
 import service.AutenticacaoService;
+import service.FilaService;
 
 
 @WebServlet(name = "Autenticacao", urlPatterns = {"/AutenticacaoController"})
@@ -16,9 +19,13 @@ public class AutenticacaoController extends HttpServlet {
    
     private AutenticacaoService autenticacao;   
     static String tipo = "";
+    private static String LIST_FILAS = "/listfilas.jsp";
+    private FilaService service;
+    private List<Fila> lstFilas = null;    
 
     public AutenticacaoController() {
         autenticacao = new AutenticacaoService();
+        service = new FilaService();
     }
     
     @Override
@@ -36,42 +43,61 @@ public class AutenticacaoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
             String email = request.getParameter("email");           
             String senha = request.getParameter("senha");   
-            HttpSession session = request.getSession(true);    
+            HttpSession session = request.getSession(true);   
             
             Usuario dto = autenticacao.Logar(email, senha);
             
-            
-            session.setAttribute("adm", "display: none");
-            session.setAttribute("cli", "display: none");
-            session.setAttribute("func", "display: normal");
-            
-            if (dto == null)
-            {
-                request.getRequestDispatcher("login.jsp").forward(request, response);                 
-                return;
+            try {
+              this.lstFilas =  service.ObterFilas();
+            } catch (Exception e) {
+                System.out.println("Erro ao requisitar: " + e);
             }
             
-            // Bloco que trata de visualização dos menus
-            if (AutenticacaoService._tipo.equals("Admin"))
-            {
-                session.setAttribute("adm", "display: normal");
-                session.setAttribute("usu", "display: none");
-                session.setAttribute("func", "display: none");
-            }
-            else if (AutenticacaoService._tipo.equals("Costumer")){
-                session.setAttribute("adm", "display: normal");
-                session.setAttribute("usu", "display: none");
-                session.setAttribute("func", "display: none");
-            }       
-            else
-            {
-                session.setAttribute("adm", "display: none");
-                session.setAttribute("usu", "display: none");
-                session.setAttribute("func", "display: normal");
-            }
-            
-            session.setAttribute("usuarioLogado", dto.getName()); 
-            session.setAttribute("idUsuarioLogado", dto.getId());
+//            if (dto == null)
+//            {
+//                request.getRequestDispatcher("login.jsp").forward(request, response);                 
+//                return;
+//            }
+//            
+//            // Bloco que trata de visualização dos menus
+//            if (AutenticacaoService._tipo.equals("Admin"))
+//            {
+//                session.setAttribute("adm", "display: normal");
+//                session.setAttribute("cli", "display: none");
+//                session.setAttribute("func", "display: none");
+//            }
+//            else if (AutenticacaoService._tipo.equals("Costumer")){
+//                session.setAttribute("adm", "display: none");
+//                session.setAttribute("cli", "display: normal");
+//                session.setAttribute("func", "display: none");
+//            }       
+//            else
+//            {
+//                session.setAttribute("adm", "display: none");
+//                session.setAttribute("cli", "display: none");
+//                session.setAttribute("func", "display: normal");
+//            }
+//            
+               // Vai ficar dentro do ultimo else
+               session.setAttribute("adm", "display: none");
+               session.setAttribute("cli", "display: none");
+               session.setAttribute("func", "display: normal");
+               
+               lstFilas.forEach((x) -> {
+                     if (x.getBarbeiro().getId() == dto.getId() /*&& x.getStatus() == "aberto" */ ) {                         
+                         session.setAttribute("filaIniciada", "checked");
+                         return;                         
+                     }
+                     else {
+                        session.setAttribute("filaIniciada", "");
+                        return;
+                     }  
+                });
+               
+
+//          session.setAttribute("usuarioLogado", dto.getName()); 
+//          session.setAttribute("idUsuarioLogado", dto.getId());
+            session.setAttribute("filas", this.lstFilas);
             request.getRequestDispatcher("home.jsp").forward(request, response);
      }     
 }

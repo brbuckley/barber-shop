@@ -101,7 +101,7 @@
 
                 <!-- Nav Item - Fila -->                
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
                             <i class="fa fa-cog fa-fw"></i>
                             <span>Abrir/Fechar Filas</span></a>
                     </li>  

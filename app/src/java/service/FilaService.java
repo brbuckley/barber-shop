@@ -14,10 +14,6 @@ public class FilaService implements IFilaService {
     
     public FilaService() { 
     }            
-  
-    
-    
-    
     
     public List<Fila> ObterFilas() {         
        List<Fila> listaFilas = null;

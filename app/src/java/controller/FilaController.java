@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Cliente;
 import model.Fila;
 import service.FilaService;
 
 @WebServlet(name = "Filas", urlPatterns = {"/FilasController"})
 public class FilaController extends HttpServlet {        
-    private static String LIST_FILAS = "/listfilass.jsp";
+    private static String LIST_FILAS = "/listfilas.jsp";
     private FilaService fila;
     
 
@@ -29,7 +28,7 @@ public class FilaController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
-        List<Fila> listaClientes = null;
+        List<Fila> listaFilas = null;
         
         if ("sim".equals(deslogou)){
             session.invalidate();
@@ -41,12 +40,12 @@ public class FilaController extends HttpServlet {
         }
         else {
             try {
-              listaClientes =  fila.ObterFilas();
+              listaFilas =  fila.ObterFilas();
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
-            request.setAttribute("clientes", listaClientes);
+            request.setAttribute("filas", listaFilas);
             RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);       
             view.forward(request, response);
         }
@@ -55,12 +54,36 @@ public class FilaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
         String acao = request.getParameter("action");           
+        List<Fila> lstFilas = null;
         
         if (acao.equalsIgnoreCase("salvar")){            
             try {
-                String clienteId = request.getParameter("idCliente");
+                String funcionarioId = request.getParameter("idUsuarioLogado");
+                
+                  try {
+                    lstFilas =  fila.ObterFilas();
+                    
+                    lstFilas.forEach((x) -> {
+                        if (x.getBarbeiro().getId() == parseInt(funcionarioId) /*&& x.getStatus() == "aberto" */ ) {
+                            
+                            request.setAttribute("filaIniciada", "");
+                            //Enviar request para parar a fila
+                            return;                         
 
-//                if(clienteId == null || clienteId.isEmpty()) {
+                        }
+                        else if (x.getBarbeiro().getId() == parseInt(funcionarioId) /*&& x.getStatus() == "fechado" */ ) {
+                            request.setAttribute("filaIniciada", "checked");
+                            //Enviar request para iniciarlizar a fila
+                            return;  
+                        }  
+                    });
+                    
+                  } catch (Exception e) {
+                      System.out.println("Erro ao requisitar: " + e);
+                  }
+//          
+
+//                if(filaId == null || filaId.isEmpty()) {
 //                   fila.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
 //                }
 //                else {
@@ -76,7 +99,7 @@ public class FilaController extends HttpServlet {
        }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);
-        request.setAttribute("clientes", fila.ObterFilas());
+        request.setAttribute("filas", fila.ObterFilas());
         view.forward(request, response);
     }
 }
