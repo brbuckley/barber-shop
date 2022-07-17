@@ -15,27 +15,15 @@ public class Usuario {
     }
     
     private int id;
-    private String name; 
-    private String tipo;
+    private String name;     
     private String email; 
-    private String passwordHash;
-    private int idFila;
-    private String username;
-    
+    private String passwordHash;    
     
     public int getId(){
         return id;
-    }
+    }      
     
-     public String getUserName() {
-        return this.username;
-    }
-    
-    public void setserName(String username) {
-        this.username = username;
-    }
-    
-     public String getPasswordHash() {
+    public String getPasswordHash() {
         return this.passwordHash;
     }
     
@@ -51,27 +39,11 @@ public class Usuario {
         this.name = name;
     }
     
-    public String getTipo() {
-        return this.tipo;
-    }
-    
-    public void setTipo(String tipo) {
-            this.tipo = tipo;
-    } 
-    
     public String getEmail() {
         return this.email;
     }
     
     public void setEmail(String email) {
         this.email = email;
-    }  
-    
-     public int getIdFila() {
-        return this.idFila;
-    }
-    
-    public void setIdFila(int idFila) {
-        this.idFila = idFila;
     }  
 }

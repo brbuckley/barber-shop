@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Administrador;
 import model.Usuario;
 import service.UsuarioService;
 
-@WebServlet(name = "Clientes", urlPatterns = {"/ClienteController"})
-public class ClienteController extends HttpServlet {        
-    private static String LIST_CLIENTES = "/listclientes.jsp";
-    private UsuarioService cliente;
-    private String _tipo = "cliente";
+@WebServlet(name = "Admins", urlPatterns = {"/AdminController"})
+public class AdminController extends HttpServlet {        
+    private static String LIST_ADMINS = "/listadmins.jsp";
+    private UsuarioService admin;   
+    private String _tipo = "Admin";
 
-    public ClienteController() {
+    public AdminController() {
         super();   
-        cliente = new UsuarioService();
+        admin = new UsuarioService();
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ClienteController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
-        List<Usuario> listaUsuarios = null;
+        List<Administrador> listaUsuarios = null;
         
         if ("sim".equals(deslogou)){
             session.invalidate();
@@ -41,13 +42,13 @@ public class ClienteController extends HttpServlet {
         }
         else {
             try {
-              listaUsuarios =  cliente.Recuperar("cliente");
+              listaUsuarios =  admin.RecuperarAdmin();
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
             request.setAttribute("clientes", listaUsuarios);
-            RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);       
+            RequestDispatcher view = request.getRequestDispatcher(LIST_ADMINS);       
             view.forward(request, response);
         }
     }
@@ -62,10 +63,10 @@ public class ClienteController extends HttpServlet {
                 String clienteId = request.getParameter("idCliente");
 
                 if(clienteId == null || clienteId.isEmpty()) {
-                   cliente.Salvar(new Usuario(request.getParameter("name"), request.getParameter("email")), _tipo);
+                   admin.Salvar(new Usuario(request.getParameter("name"), request.getParameter("email")), _tipo);
                 }
                 else {
-                   cliente.Salvar(new Usuario(parseInt(clienteId), request.getParameter("name"), request.getParameter("email")), _tipo);
+                   admin.Salvar(new Usuario(parseInt(clienteId), request.getParameter("name"), request.getParameter("email")), _tipo);
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -73,11 +74,11 @@ public class ClienteController extends HttpServlet {
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            cliente.Deletar(id);                       
+            admin.Deletar(id, "admin");                       
        }
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);
-        request.setAttribute("clientes", cliente.Recuperar("cliente"));
+        RequestDispatcher view = request.getRequestDispatcher(LIST_ADMINS);
+        request.setAttribute("clientes", admin.RecuperarAdmin());
         view.forward(request, response);
     }
 }

@@ -187,25 +187,34 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nome</th>     
-                                            <th>Email</th>     
-                                            <th></th>                                         
+                                            <th>Nome</th>   
+                                              <th>Idade</th>
+                                            <th>Email</th>   
+                                             <th>Data Nascimento</th>      
+                                               <th>Endereço</th>
+                                            <th></th> 
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nome</th>     
-                                            <th>Email</th>                                                 
-                                            <th></th>                                          
+                                            <th>Nome</th>   
+                                              <th>Idade</th>
+                                            <th>Email</th>       
+                                            <th>Data Nascimento</th>       
+                                               <th>Endereço</th>                                           
+                                            <th></th> 
                                         </tr>
                                     </tfoot>
                                     <tbody>                                       
                                         <c:forEach items="${clientes}" var="cliente">
                                             <tr> 
                                                 <td><c:out value="${cliente.id}" /></td>                                                
-                                                <td><c:out value="${cliente.name}" /></td>        
+                                                <td><c:out value="${cliente.name}" /></td>    
+                                                <td><c:out value="${cliente.age}" /></td> 
                                                 <td><c:out value="${cliente.email}" /></td>   
+                                                <td><c:out value="${cliente.birthday}" /></td> 
+                                                <td><c:out value="${cliente.address}" /></td> 
                                                 <td> 
                                                     <div class="text-center">
                                                         <a href="#" onclick="carregarDadosEdicao('clienteModalLabel', 'edit', 'Cliente', ['idCliente', 'name', 'email'], [ '<c:out value='${cliente.id}'/>', '<c:out value='${cliente.name}'/>', '<c:out value='${cliente.email}'/>'])" data-toggle="modal" data-target="#clienteModal">
@@ -270,7 +279,7 @@
     </div>
     <!--Fim do Modal de Logout -->
 
-    <!-- Modal de criação/edição de serviços -->
+    <!-- Modal de criação/edição de clientes -->
     <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel"
     aria-hidden="true">
        <div class="modal-dialog" role="document">
@@ -287,10 +296,26 @@
                         <div class="row g-3">
                             <div class="col-md-12">
                               <input  name="idCliente" class="form-control" type="hidden" value="<c:out value="${cliente.id}"/>" id="idCliente"> 
-                              <label for="validacaoNome" class="form-label">Nome</label>
-                              <input  required="required" name="name" type="text" class="form-control" value="<c:out value="${cliente.name}" />" id="name" required> 
-                               <label for="validacaoEmail" class="form-label">E-mail</label>
-                              <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${cliente.email}" />" id="email" required>    
+                                <span style="float:left;margin-right: 15px;">
+                                    <label for="username">Nome</label>
+                                    <input style="" required="required" name="name" type="text" size="30" class="form-control" value="<c:out value="${cliente.name}" />" id="name" required> 
+                                </span>
+                                <span style="float:left;">
+                                    <label for="name">Idade</label>
+                                    <input id="age" name="age" size="10" type="text"  class="form-control" value="<c:out value="${cliente.birthday}" />" id="age" required>
+                                </span>
+                                <span style="float:left;margin-right: 15px;">
+                                    <label for="username">Endereço</label>
+                                    <input required="required" name="address" type="text" size="30" class="form-control" value="<c:out value="${cliente.address}" />" id="address" required> 
+                                </span>
+                                <span style="float:left;">
+                                    <label for="name">Aniversário</label>
+                                    <input id="birthday" name="birthday" size="10" type="text"  class="form-control" value="<c:out value="${cliente.birthday}" />" id="birthday" required>
+                                </span>
+                                <span>
+                                    <label for="validacaoEmail" class="form-label">E-mail</label>
+                                    <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${cliente.email}" />" id="email" required> 
+                              </span>
                             </div>
                         </div>                    
                     </div>
@@ -347,13 +372,13 @@
                     <div class="modal-content">    
                         <form method="post" action="${pageContext.request.contextPath}/ClienteController?action=delete">                            
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exclusaoModalLabel">Excluir Usuário</h5>
+                                <h5 class="modal-title" id="exclusaoModalLabel">Excluir Cliente</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div class="modal-body">Tem certeza que deseja excluir?</div>
-                            <input  name="id_exclusao" class="form-control" type="hidden"  value="<c:out value="${servico.id}"/>" id="id_exclusao">   
+                            <input  name="id_exclusao" class="form-control" type="hidden"  value="<c:out value="${cliente.id}"/>" id="id_exclusao">   
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                                 <button class="btn btn-primary"  value="Submit" type="submit">Confirmar</button>

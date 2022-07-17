@@ -9,12 +9,14 @@ import java.net.URL;
 import model.Usuario;
 
 public class AutenticacaoService implements IAutenticacaoService {
+    public static String _tipo;
     
-    public AutenticacaoService() {       
+    public AutenticacaoService() { 
+        this._tipo = "cliente";
     }            
-     
   
     public Usuario Logar(String email, String senha) {         
+        
         Usuario usuario = null;
         try {
             String _url = new StringBuilder("http://uff-barber-shop.herokuapp.com/login/?email=").append(email).append("&password-hash=").append(senha).toString();
@@ -31,14 +33,17 @@ public class AutenticacaoService implements IAutenticacaoService {
             
             Gson g = new Gson();
             usuario = g.fromJson(br, Usuario.class);   
-            String tipo = requisicao.getHeaderField("Object-Class");
-            
-            usuario.setTipo(tipo);
-            requisicao.disconnect();
+            AutenticacaoService._tipo = requisicao.getHeaderField("Object-Class");            
            
+            requisicao.disconnect();
+            
         } catch (IOException | RuntimeException e) {
         }
 
         return usuario;
     }
+    
+    public static String ObterTipoUsuarioLogado() {
+        return AutenticacaoService._tipo;
+    }    
 }

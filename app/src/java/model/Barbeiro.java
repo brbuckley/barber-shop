@@ -1,77 +1,31 @@
 package model;
 
-public class Usuario { 
+public class Barbeiro extends Usuario  { 
     
-    public Usuario(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public Barbeiro(int id, String name, String email) {
+        super(id, name, email);
     }
     
-    public Usuario(String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public Barbeiro(String name, String email) {
+        super(name, email);
     }
     
-    private int id;
-    private String name; 
-    private String tipo;
-    private String email; 
-    private String passwordHash;
-    private int idFila;
-    private String username;
+    private int age;     
+    private Fila fila; 
     
-    
-    public int getId(){
-        return id;
+    public int getAge() {
+        return this.age;
     }
     
-     public String getUserName() {
-        return this.username;
+    public void setAge(int age) {
+        this.age = age;
     }
     
-    public void setserName(String username) {
-        this.username = username;
+    public Fila getFila() {
+        return this.fila;
     }
     
-     public String getPasswordHash() {
-        return this.passwordHash;
+    public void setFila(Fila fila) {
+        this.fila = fila;
     }
-    
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-    
-    public String getName() {
-        return this.name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getTipo() {
-        return this.tipo;
-    }
-    
-    public void setTipo(String tipo) {
-            this.tipo = tipo;
-    } 
-    
-    public String getEmail() {
-        return this.email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }  
-    
-     public int getIdFila() {
-        return this.idFila;
-    }
-    
-    public void setIdFila(int idFila) {
-        this.idFila = idFila;
-    }  
 }

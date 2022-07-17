@@ -1,77 +1,40 @@
 package model;
 
-public class Usuario { 
+public class Cliente extends Usuario  { 
     
-    public Usuario(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public Cliente(int id, String name, String email) {
+        super(id, name, email);
     }
     
-    public Usuario(String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public Cliente(String name, String email) {
+        super(name, email);
     }
     
-    private int id;
-    private String name; 
-    private String tipo;
-    private String email; 
-    private String passwordHash;
-    private int idFila;
-    private String username;
+    private String address;
+    private int age;     
+    private String birthday; 
     
-    
-    public int getId(){
-        return id;
+    public String getAddress() {
+        return this.address;
     }
     
-     public String getUserName() {
-        return this.username;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
-    public void setserName(String username) {
-        this.username = username;
+     public String getBirthday() {
+        return this.birthday;
     }
     
-     public String getPasswordHash() {
-        return this.passwordHash;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
     
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public int getAge() {
+        return this.age;
     }
     
-    public String getName() {
-        return this.name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getTipo() {
-        return this.tipo;
-    }
-    
-    public void setTipo(String tipo) {
-            this.tipo = tipo;
-    } 
-    
-    public String getEmail() {
-        return this.email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }  
-    
-     public int getIdFila() {
-        return this.idFila;
-    }
-    
-    public void setIdFila(int idFila) {
-        this.idFila = idFila;
+    public void setAge(int age) {
+        this.age = age;
     }  
 }

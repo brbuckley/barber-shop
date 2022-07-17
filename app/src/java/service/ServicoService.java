@@ -61,8 +61,6 @@ public class ServicoService implements IServicoService {
 
                     OutputStream stream = http.getOutputStream();
                     stream.write(out);
-
-                    System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
                     http.disconnect();
 
                 } catch (Exception e) {

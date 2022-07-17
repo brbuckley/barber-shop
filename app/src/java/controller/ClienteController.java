@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Cliente;
 import model.Usuario;
 import service.UsuarioService;
 
@@ -19,8 +20,7 @@ public class ClienteController extends HttpServlet {
     private UsuarioService cliente;
     private String _tipo = "cliente";
 
-    public ClienteController() {
-        super();   
+    public ClienteController() {        
         cliente = new UsuarioService();
     }
 
@@ -29,7 +29,7 @@ public class ClienteController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
-        List<Usuario> listaUsuarios = null;
+        List<Cliente> listaClientes = null;
         
         if ("sim".equals(deslogou)){
             session.invalidate();
@@ -41,12 +41,12 @@ public class ClienteController extends HttpServlet {
         }
         else {
             try {
-              listaUsuarios =  cliente.Recuperar("cliente");
+              listaClientes =  cliente.RecuperarCliente();
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
-            request.setAttribute("clientes", listaUsuarios);
+            request.setAttribute("clientes", listaClientes);
             RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);       
             view.forward(request, response);
         }
@@ -62,7 +62,8 @@ public class ClienteController extends HttpServlet {
                 String clienteId = request.getParameter("idCliente");
 
                 if(clienteId == null || clienteId.isEmpty()) {
-                   cliente.Salvar(new Usuario(request.getParameter("name"), request.getParameter("email")), _tipo);
+                   Usuario _usuario = new Usuario(request.getParameter("name"), request.getParameter("email"));
+                   cliente.Salvar(_usuario, _tipo);
                 }
                 else {
                    cliente.Salvar(new Usuario(parseInt(clienteId), request.getParameter("name"), request.getParameter("email")), _tipo);
@@ -73,11 +74,11 @@ public class ClienteController extends HttpServlet {
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            cliente.Deletar(id);                       
+            cliente.Deletar(id, "cliente");                       
        }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);
-        request.setAttribute("clientes", cliente.Recuperar("cliente"));
+        request.setAttribute("clientes", cliente.RecuperarCliente());
         view.forward(request, response);
     }
 }

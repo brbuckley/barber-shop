@@ -10,48 +10,13 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import model.Administrador;
+import model.Barbeiro;
+import model.Cliente;
 import model.Usuario;
 
 public class UsuarioService implements IUsuarioService {
     public UsuarioService() {       
-    }            
-     
-    @Override
-    public List<Usuario> Recuperar(String tipo) {         
-        List<Usuario> listaUsuarios = null;
-        URL url = null;
-        try {
-             switch (tipo) {
-                case "cliente":
-                    url = new URL("https://uff-barber-shop.herokuapp.com/customer/all");
-                    break;
-                case "administrador":
-                    url = new URL("https://uff-barber-shop.herokuapp.com/admin/all");                     
-                    break;
-                default:
-                    url = new URL("https://uff-barber-shop.herokuapp.com/barber/all");
-                    break;
-            }
-            
-            HttpURLConnection requisicao = (HttpURLConnection) url.openConnection();
-            requisicao.setRequestMethod("GET");
-            requisicao.setRequestProperty("Accept", "application/json");
-            if (requisicao.getResponseCode() != 200) {
-                throw new RuntimeException("Falha na requisição com código: "
-                        + requisicao.getResponseCode());
-            }
-            InputStreamReader in = new InputStreamReader(requisicao.getInputStream());
-            BufferedReader br = new BufferedReader(in);
-            
-            Gson json = new Gson();
-            listaUsuarios  = Arrays.asList(json.fromJson(br, Usuario[].class));               
-            requisicao.disconnect();
-           
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return listaUsuarios;
     }   
     
     @Override
@@ -60,7 +25,19 @@ public class UsuarioService implements IUsuarioService {
         try {            
             if (usuario.getId() == 0) {
                 try {
-                    url = new URL("https://uff-barber-shop.herokuapp.com/customer/new");
+                    
+                     switch (tipo) {
+                         case "cliente":
+                             url = new URL("https://uff-barber-shop.herokuapp.com/customer/new");
+                             break;
+                         case "admin":
+                             url = new URL("https://uff-barber-shop.herokuapp.com/admin/new");                     
+                             break;
+                         default:
+                             url = new URL("https://uff-barber-shop.herokuapp.com/barber/new");
+                             break;
+                     }
+                    
                     HttpURLConnection http = (HttpURLConnection)url.openConnection();
                     http.setRequestMethod("POST");
                     http.setDoOutput(true);
@@ -72,9 +49,8 @@ public class UsuarioService implements IUsuarioService {
                     byte[] out = data.getBytes(StandardCharsets.UTF_8);
 
                     OutputStream stream = http.getOutputStream();
-                    stream.write(out);
-
-                    System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
+                    stream.write(out);  
+                    http.getResponseCode();                    
                     http.disconnect();
 
                 } catch (Exception e) {
@@ -88,7 +64,7 @@ public class UsuarioService implements IUsuarioService {
                          case "cliente":
                              url = new URL("https://uff-barber-shop.herokuapp.com/customer/update");
                              break;
-                         case "administrador":
+                         case "admin":
                              url = new URL("https://uff-barber-shop.herokuapp.com/admin/update");                     
                              break;
                          default:
@@ -108,9 +84,10 @@ public class UsuarioService implements IUsuarioService {
 
                     OutputStream stream = http.getOutputStream();
                     stream.write(out);
-
+                    
                     System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
                     http.disconnect();
+                    
                 } catch (IOException e) {
                 }            
           }
@@ -121,9 +98,22 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public void Deletar(int id) {
-        try {
-            URL url = new URL("https://uff-barber-shop.herokuapp.com/customer/delete/"+id);
+    public void Deletar(int id, String tipo) {
+        URL url = null;
+        
+        try {            
+            switch (tipo) {
+                case "cliente":
+                    url = new URL("https://uff-barber-shop.herokuapp.com/customer/delete/"+id);
+                    break;
+                case "admin":
+                    url = new URL("https://uff-barber-shop.herokuapp.com/admin/delete/"+id);                     
+                    break;
+                default:
+                    url = new URL("https://uff-barber-shop.herokuapp.com/barber/delete/"+id);
+                    break;
+            }
+            
             HttpURLConnection requisicao = (HttpURLConnection) url.openConnection();
             requisicao.setRequestMethod("DELETE");
             requisicao.setRequestProperty("Accept", "application/json");
@@ -136,5 +126,49 @@ public class UsuarioService implements IUsuarioService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }    
+    }
+
+    private BufferedReader CriarRequisicao(URL url){
+        InputStreamReader in = null;
+        
+        try{
+            HttpURLConnection requisicao = (HttpURLConnection) url.openConnection();
+            requisicao.setRequestMethod("GET");
+            requisicao.setRequestProperty("Accept", "application/json");
+            if (requisicao.getResponseCode() != 200) {
+                throw new RuntimeException("Falha na requisição com código: "
+                        + requisicao.getResponseCode());
+            }
+            in = new InputStreamReader(requisicao.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new BufferedReader(in);
+    }
+
+    @Override
+    public List<Cliente> RecuperarCliente() {
+       List<Cliente> listaClientes = null;
+       
+        try {
+            URL url = new URL("https://uff-barber-shop.herokuapp.com/customer/all");
+            BufferedReader result = CriarRequisicao(url);
+            Gson json = new Gson();
+            listaClientes  = Arrays.asList(json.fromJson(result, Cliente[].class));  
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaClientes;
+    }
+
+    @Override
+    public List<Administrador> RecuperarAdmin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Barbeiro> RecuperarBarbeiro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

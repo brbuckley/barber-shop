@@ -1,8 +1,6 @@
 package controller;
 
-
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,12 +15,10 @@ import service.AutenticacaoService;
 public class AutenticacaoController extends HttpServlet {        
    
     private AutenticacaoService autenticacao;   
+    static String tipo = "";
 
     public AutenticacaoController() {
-        super();
         autenticacao = new AutenticacaoService();
-       
-        
     }
     
     @Override
@@ -42,16 +38,15 @@ public class AutenticacaoController extends HttpServlet {
             String senha = request.getParameter("senha");   
             HttpSession session = request.getSession(true);    
             
-            Usuario _usuario = autenticacao.Logar(email, senha);
+            Usuario dto = autenticacao.Logar(email, senha);
             
-            if (_usuario == null)
+            if (dto == null)
             {
                 request.getRequestDispatcher("login.jsp").forward(request, response); 
                 return;
             }
             
-            
-            if (_usuario.getTipo().equals("Admin"))
+            if (AutenticacaoService._tipo.equals("Admin"))
             {
                 session.setAttribute("adm", "display: normal");
                 session.setAttribute("usu", "display: none");
@@ -61,8 +56,8 @@ public class AutenticacaoController extends HttpServlet {
                 session.setAttribute("usu", "display: normal");
             }            
             
-            session.setAttribute("usuarioLogado", _usuario.getName()); 
-            session.setAttribute("idUsuarioLogado", _usuario.getId());
+            session.setAttribute("usuarioLogado", dto.getName()); 
+            session.setAttribute("idUsuarioLogado", dto.getId());
             request.getRequestDispatcher("home.jsp").forward(request, response);
      }     
 }
