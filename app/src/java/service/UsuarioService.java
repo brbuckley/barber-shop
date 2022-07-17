@@ -164,11 +164,33 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public List<Administrador> RecuperarAdmin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       List<Administrador> listaAdmins = null;
+       
+        try {
+            URL url = new URL("https://uff-barber-shop.herokuapp.com/admin/all");
+            BufferedReader result = CriarRequisicao(url);
+            Gson json = new Gson();
+            listaAdmins  = Arrays.asList(json.fromJson(result, Administrador[].class));  
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaAdmins;
     }
 
     @Override
     public List<Barbeiro> RecuperarBarbeiro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Barbeiro> listaBarbeiro = null;
+       
+        try {
+            URL url = new URL("https://uff-barber-shop.herokuapp.com/barber/all");
+            BufferedReader result = CriarRequisicao(url);
+            Gson json = new Gson();
+            listaBarbeiro = Arrays.asList(json.fromJson(result, Barbeiro[].class));  
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaBarbeiro;
     }
 }
