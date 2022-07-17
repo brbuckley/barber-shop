@@ -40,21 +40,35 @@ public class AutenticacaoController extends HttpServlet {
             
             Usuario dto = autenticacao.Logar(email, senha);
             
+            
+            session.setAttribute("adm", "display: none");
+            session.setAttribute("cli", "display: none");
+            session.setAttribute("func", "display: normal");
+            
             if (dto == null)
             {
                 request.getRequestDispatcher("login.jsp").forward(request, response);                 
                 return;
             }
             
+            // Bloco que trata de visualização dos menus
             if (AutenticacaoService._tipo.equals("Admin"))
             {
                 session.setAttribute("adm", "display: normal");
                 session.setAttribute("usu", "display: none");
+                session.setAttribute("func", "display: none");
             }
-            else {
+            else if (AutenticacaoService._tipo.equals("Costumer")){
+                session.setAttribute("adm", "display: normal");
+                session.setAttribute("usu", "display: none");
+                session.setAttribute("func", "display: none");
+            }       
+            else
+            {
                 session.setAttribute("adm", "display: none");
-                session.setAttribute("usu", "display: normal");
-            }            
+                session.setAttribute("usu", "display: none");
+                session.setAttribute("func", "display: normal");
+            }
             
             session.setAttribute("usuarioLogado", dto.getName()); 
             session.setAttribute("idUsuarioLogado", dto.getId());

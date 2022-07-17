@@ -60,19 +60,19 @@ public class FilaController extends HttpServlet {
             try {
                 String clienteId = request.getParameter("idCliente");
 
-                if(clienteId == null || clienteId.isEmpty()) {
-                   fila.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
-                }
-                else {
-                   fila.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
-                }
+//                if(clienteId == null || clienteId.isEmpty()) {
+//                   fila.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+//                }
+//                else {
+//                   fila.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+//                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } 
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            fila.Deletar(id, "cliente");                       
+          //  fila.Deletar(id, "cliente");                       
        }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);
