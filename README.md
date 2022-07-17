@@ -22,4 +22,4 @@ Outra dica é usar o [swagger editor](https://editor.swagger.io/) para ler este 
 
 ## Contribuindo
 
-Brendan Buckley, Paulo Jr. Niche, Vitor Rocha, 'nome'.
+Brendan Buckley, Bruno Peçanha, Paulo Jr. Niche, Vitor Rocha.
