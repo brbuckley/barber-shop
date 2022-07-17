@@ -1,16 +1,16 @@
 insert into customer (name, username, email, password_hash, address, age, birth_day )
-values ('Brendan','brbuckley','brbuckley@id.uff.br','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','Roberto Silveira, 463',23, DATE '1998-12-07');
+values ('Brendan','brbuckley','brbuckley@gmail.com','senha','Roberto Silveira, 463',23, DATE '1998-12-07');
 insert into customer (name, username, email, password_hash)
-values ('Paulo','pjniche','pjniche@gmail.com','f89678cc6765848121941f97f563647a0fe77cc7947842dbddb67ba8bacf3c21');
+values ('Paulo','pjniche','pjniche@gmail.com','senha');
 insert into customer (name, username, email, password_hash, age)
-values ('Vitor','vitorrocha98','vitorrocha98@gmail.com','6bca70f7710697ed1cd0d259d2d42a43ee4ddbe405f7e520a5194fb1f2e366a9',24);
+values ('Vitor','vitorrocha98','vitorrocha98@gmail.com','senha',24);
 
 insert into admin (name, username, email, password_hash)
-values ('Brendan','buckleyadmin','brbuckley@id.uff.br','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92');
+values ('Brendan','buckleyadmin','brbuckley@id.uff.br','senha');
 insert into admin (name, username, email, password_hash)
-values ('Vitor','vitoradmin','vitorrocha@id.uff.br','6bca70f7710697ed1cd0d259d2d42a43ee4ddbe405f7e520a5194fb1f2e366a9');
+values ('Vitor','vitoradmin','vitorrocha@id.uff.br','senha');
 insert into admin (name, username, email, password_hash)
-values ('Paulo','pauloadmin','paulojniche@id.uff.br','f89678cc6765848121941f97f563647a0fe77cc7947842dbddb67ba8bacf3c21');
+values ('Paulo','pauloadmin','paulojniche@id.uff.br','senha');
 
 insert into haircut (description, price)
 values ('Barba',20);
@@ -40,9 +40,9 @@ insert into shop (name, phone1, phone2, email, address, city_id)
 values ('Barbearia do Zé','3741-2500','3741-2600','barbeariadoze@gmail.com','Rua Mem de Sá, 151 - Icaraí',1);
 
 insert into barber (name, username, email, password_hash, shop_id)
-values ('Zé','zebarbeiro','zebarbeiro@gmail.com','11253981b29c11f5c01a392db940846a809e2022993ab0ca5d13ae95c3b8456b',1);
+values ('Zé','zebarbeiro','zebarbeiro@gmail.com','senha',1);
 insert into barber (name, username, email, password_hash, shop_id)
-values ('Pedrinho','pedrinhobarbeiro','pedrinhobarbeiro@gmail.com','75b05094712c2666d6c8b07ed6e710c347539078c1125c0a575009e6bdbd4316',1);
+values ('Pedrinho','pedrinhobarbeiro','pedrinhobarbeiro@gmail.com','senha',1);
 
 insert into queue (barber_id)
 values (1);

@@ -44,8 +44,12 @@ public class AppointmentRequest implements Serializable {
     appointment.setBarber(new Barber(this.barber.getId()));
     appointment.setCustomer(new Customer(this.customer.getId()));
     appointment.setHaircut(new Haircut(this.haircut.getId()));
-    appointment.setPayment(new Payment(this.payment.getId()));
-    appointment.setQueue(new Queue(this.queue.getId()));
+    if(this.payment!=null){
+      appointment.setPayment(new Payment(this.payment.getId()));
+    }
+    if(this.queue!=null){
+      appointment.setQueue(new Queue(this.queue.getId()));
+    }
 
     return appointment;
   }
@@ -54,8 +58,12 @@ public class AppointmentRequest implements Serializable {
     this.setBarber(new BarberRequest().fromBarber(appointment.getBarber()));
     this.setCustomer(new CustomerRequest().fromCustomer(appointment.getCustomer()));
     this.setHaircut(new HaircutRequest().fromHaircut(appointment.getHaircut()));
-    this.setPayment(new PaymentRequest().fromPayment(appointment.getPayment()));
-    this.setQueue(new QueueRequest().fromQueue(appointment.getQueue()));
+    if(appointment.getPayment()!=null) {
+      this.setPayment(new PaymentRequest().fromPayment(appointment.getPayment()));
+    }
+    if(appointment.getQueue()!=null) {
+      this.setQueue(new QueueRequest().fromQueue(appointment.getQueue()));
+    }
     this.setStatus(appointment.getStatus());
     this.setDate(appointment.getDate());
     this.id = appointment.getId();
