@@ -26,28 +26,18 @@ values ('Dinheiro');
 insert into payment (description)
 values ('Pix');
 
-insert into state_table (description)
-values ('Rio de Janeiro');
-
-insert into city (description, state_id)
-values ('Niterói', 1);
-insert into city (description, state_id)
-values ('Rio de Janeiro', 1);
-insert into city (description, state_id)
-values ('São Gonçalo', 1);
-
-insert into shop (name, phone1, phone2, email, address, city_id)
-values ('Barbearia do Zé','3741-2500','3741-2600','barbeariadoze@gmail.com','Rua Mem de Sá, 151 - Icaraí',1);
+insert into shop (name, phone1, phone2, email, address)
+values ('Barbearia do Zé','3741-2500','3741-2600','barbeariadoze@gmail.com','Rua Mem de Sá, 151 - Icaraí');
 
 insert into barber (name, username, email, password_hash, shop_id)
 values ('Zé','zebarbeiro','zebarbeiro@gmail.com','senha',1);
 insert into barber (name, username, email, password_hash, shop_id)
 values ('Pedrinho','pedrinhobarbeiro','pedrinhobarbeiro@gmail.com','senha',1);
 
-insert into queue (barber_id)
-values (1);
-insert into queue (barber_id)
-values (2);
+insert into queue (barber_id,status)
+values (1,'aberto');
+insert into queue (barber_id,status)
+values (2,'aberto');
 
 insert into appointment (status,date,customer_id,barber_id,haircut_id,payment_id,queue_id)
 values(1,DATE '2022-06-11',1,1,1,1,1);

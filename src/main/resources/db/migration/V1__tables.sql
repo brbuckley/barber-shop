@@ -51,6 +51,7 @@ CREATE TABLE payment(
 );
 CREATE TABLE queue(
        id IDENTITY NOT NULL PRIMARY KEY,
+       status VARCHAR,
        barber_id BIGINT
 );
 CREATE TABLE shop(

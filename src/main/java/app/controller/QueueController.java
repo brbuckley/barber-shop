@@ -6,6 +6,8 @@ import app.model.response.QueueResponse;
 import app.service.AppointmentService;
 import app.service.QueueService;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,14 @@ public class QueueController {
 
   @GetMapping(value = "/all", produces = "application/json")
   public ResponseEntity getAllQueues() {
-    return new ResponseEntity(queueService.getAllQueues(), HttpStatus.OK);
+    List<Queue> queues = queueService.getQueuesByStatus("aberto");
+    List<QueueResponse> responses = new ArrayList<>();
+    for (Queue queue: queues) {
+      List<Appointment> appointments = appointmentService.filterWaiting(queue.getId());
+      QueueResponse response = new QueueResponse().fromQueue(queue);
+      responses.add(response.fromAppointments(appointments));
+    }
+    return new ResponseEntity(responses, HttpStatus.OK);
   }
 
   @ApiOperation(value = "Get queue of waiting customers.", response = QueueResponse.class)
@@ -42,6 +51,14 @@ public class QueueController {
   public ResponseEntity getQueue(@PathVariable(value = "queueId") long id) {
     List<Appointment> appointments = appointmentService.filterWaiting(id);
     QueueResponse response = new QueueResponse().fromQueue(queueService.getQueue(id));
+    return new ResponseEntity(response.fromAppointments(appointments), HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Get queue by barber.", response = QueueResponse.class)
+  @GetMapping(value = "/barber/{barberId}", produces = "application/json")
+  public ResponseEntity getByBarber(@PathVariable(value = "barberId") long id) {
+    QueueResponse response = new QueueResponse().fromQueue(queueService.getByBarber(id));
+    List<Appointment> appointments = appointmentService.filterWaiting(response.getId());
     return new ResponseEntity(response.fromAppointments(appointments), HttpStatus.OK);
   }
 
@@ -55,6 +72,13 @@ public class QueueController {
   @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity updateQueue(@RequestBody Queue queue) {
     return new ResponseEntity(queueService.updateQueue(queue), HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Updates a queue's status.", response = Queue.class)
+  @PutMapping(value = "/{queueId}/status/{status}", produces = "application/json")
+  public ResponseEntity updateQueue(@PathVariable(value = "queueId") long queueId,
+                                    @PathVariable(value = "status") String status) {
+    return new ResponseEntity(queueService.updateStatus(queueId,status), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Deletes a queue.")

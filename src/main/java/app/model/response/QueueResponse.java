@@ -19,10 +19,15 @@ public class QueueResponse implements Serializable {
 
   @Getter @Setter private Barber barber;
 
+  @Getter @Setter private int resultCount;
+
+  @Getter @Setter private String status;
+
   @Getter private List<AppointmentResponse> appointments = new ArrayList<>();
 
   public QueueResponse fromQueue(Queue queue) {
     this.id = queue.getId();
+    this.status = queue.getStatus();
     this.barber = queue.getBarber();
     return this;
   }
@@ -31,6 +36,7 @@ public class QueueResponse implements Serializable {
     for (Appointment appointment : appointments) {
       this.appointments.add(new AppointmentResponse().fromAppointment(appointment));
     }
+    this.resultCount = appointments.size();
     return this;
   }
 }

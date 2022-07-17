@@ -22,6 +22,8 @@ public class Queue implements Serializable {
   @Getter
   private long id;
 
+  @Getter @Setter private String status;
+
   @OneToOne @Getter @Setter private Barber barber;
 
   @OneToMany(mappedBy = "queue")

@@ -41,4 +41,19 @@ public class QueueService {
   public void deleteQueue(long queueId) {
     queueRepo.deleteById(queueId);
   }
+
+  public Queue getByBarber(long id) {
+    return queueRepo.findQueueByBarberId(id);
+  }
+
+  public Queue updateStatus(long queueId, String status) {
+    Queue queue =queueRepo.findById(queueId).get();
+    queue.setStatus(status);
+    queueRepo.flush();
+    return queue;
+  }
+
+  public List<Queue> getQueuesByStatus(String status) {
+    return queueRepo.findAllByStatusEquals(status);
+  }
 }
