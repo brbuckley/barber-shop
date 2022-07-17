@@ -60,10 +60,16 @@
         <div class="sidebar-heading">
             Área Admin
         </div>
-            <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ServicoController?action=listservicos">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Serviços</span></a>
+            </li>
+            
+             <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/ServicoController?action=listservicos">
+                    <i class="fa fa-home fa-fw"></i>
+                    <span>Lojas</span></a>
             </li>
 
             <!-- Item de navegação - Funcionalidades do menu colapsado -->
@@ -181,7 +187,7 @@
 
                     <div class="row">
                         <div class="col-md-11">
-                            <h1 class="h3 mb-2 text-gray-800">Funcioários</h1>
+                            <h1 class="h3 mb-2 text-gray-800">Funcionários</h1>
                             <p class="mb-4">Área para manuteção de funcionários.</p> 
                         </div>                                   
                     </div>

@@ -60,10 +60,16 @@
         <div class="sidebar-heading">
             Área Admin
         </div>
-            <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ServicoController?action=listservicos">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Serviços</span></a>
+            </li>
+            
+             <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/ServicoController?action=listservicos">
+                    <i class="fa fa-home fa-fw"></i>
+                    <span>Lojas</span></a>
             </li>
 
             <!-- Item de navegação - Funcionalidades do menu colapsado -->

@@ -11,16 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cliente;
-import service.UsuarioService;
+import model.Fila;
+import service.FilaService;
 
-@WebServlet(name = "Clientes", urlPatterns = {"/ClienteController"})
-public class ClienteController extends HttpServlet {        
-    private static String LIST_CLIENTES = "/listclientes.jsp";
-    private UsuarioService cliente;
-    private String _tipo = "cliente";
+@WebServlet(name = "Filas", urlPatterns = {"/FilasController"})
+public class FilaController extends HttpServlet {        
+    private static String LIST_FILAS = "/listfilass.jsp";
+    private FilaService fila;
+    
 
-    public ClienteController() {        
-        cliente = new UsuarioService();
+    public FilaController() {        
+        fila = new FilaService();
     }
 
     @Override
@@ -28,7 +29,7 @@ public class ClienteController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
-        List<Cliente> listaClientes = null;
+        List<Fila> listaClientes = null;
         
         if ("sim".equals(deslogou)){
             session.invalidate();
@@ -40,13 +41,13 @@ public class ClienteController extends HttpServlet {
         }
         else {
             try {
-              listaClientes =  cliente.RecuperarCliente();
+              listaClientes =  fila.ObterFilas();
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
             request.setAttribute("clientes", listaClientes);
-            RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);       
+            RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);       
             view.forward(request, response);
         }
     }    
@@ -60,10 +61,10 @@ public class ClienteController extends HttpServlet {
                 String clienteId = request.getParameter("idCliente");
 
                 if(clienteId == null || clienteId.isEmpty()) {
-                   cliente.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+                   fila.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
                 }
                 else {
-                   cliente.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+                   fila.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -71,11 +72,11 @@ public class ClienteController extends HttpServlet {
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            cliente.Deletar(id, "cliente");                       
+            fila.Deletar(id, "cliente");                       
        }
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);
-        request.setAttribute("clientes", cliente.RecuperarCliente());
+        RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);
+        request.setAttribute("clientes", fila.ObterFilas());
         view.forward(request, response);
     }
 }

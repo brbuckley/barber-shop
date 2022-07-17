@@ -126,25 +126,7 @@ public class UsuarioService implements IUsuarioService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private BufferedReader CriarRequisicao(URL url){
-        InputStreamReader in = null;
-        
-        try{
-            HttpURLConnection requisicao = (HttpURLConnection) url.openConnection();
-            requisicao.setRequestMethod("GET");
-            requisicao.setRequestProperty("Accept", "application/json");
-            if (requisicao.getResponseCode() != 200) {
-                throw new RuntimeException("Falha na requisição com código: "
-                        + requisicao.getResponseCode());
-            }
-            in = new InputStreamReader(requisicao.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  new BufferedReader(in);
-    }
+    }   
 
     @Override
     public List<Cliente> RecuperarCliente() {
@@ -152,7 +134,7 @@ public class UsuarioService implements IUsuarioService {
        
         try {
             URL url = new URL("https://uff-barber-shop.herokuapp.com/customer/all");
-            BufferedReader result = CriarRequisicao(url);
+            BufferedReader result = RequestService.CriarRequisicaoGet(url);
             Gson json = new Gson();
             listaClientes  = Arrays.asList(json.fromJson(result, Cliente[].class));  
             
@@ -168,7 +150,7 @@ public class UsuarioService implements IUsuarioService {
        
         try {
             URL url = new URL("https://uff-barber-shop.herokuapp.com/admin/all");
-            BufferedReader result = CriarRequisicao(url);
+            BufferedReader result = RequestService.CriarRequisicaoGet(url);
             Gson json = new Gson();
             listaAdmins  = Arrays.asList(json.fromJson(result, Administrador[].class));  
             
@@ -184,7 +166,7 @@ public class UsuarioService implements IUsuarioService {
        
         try {
             URL url = new URL("https://uff-barber-shop.herokuapp.com/barber/all");
-            BufferedReader result = CriarRequisicao(url);
+            BufferedReader result = RequestService.CriarRequisicaoGet(url);
             Gson json = new Gson();
             listaBarbeiro = Arrays.asList(json.fromJson(result, Funcionario[].class));  
             
