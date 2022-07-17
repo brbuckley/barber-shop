@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Cliente;
+import model.Administrador;
+import model.Funcionario;
 import model.Usuario;
 import service.UsuarioService;
 
-@WebServlet(name = "Clientes", urlPatterns = {"/ClienteController"})
-public class ClienteController extends HttpServlet {        
-    private static String LIST_CLIENTES = "/listclientes.jsp";
-    private UsuarioService cliente;
-    private String _tipo = "cliente";
+@WebServlet(name = "Funcionarios", urlPatterns = {"/FuncionarioController"})
+public class FuncionarioController extends HttpServlet {        
+    private static String LIST_FUNCS = "/listfuncionarios.jsp";
+    private UsuarioService func;
+    private String _tipo = "func";
 
-    public ClienteController() {        
-        cliente = new UsuarioService();
+    public FuncionarioController() {        
+        func = new UsuarioService();
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ClienteController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
-        List<Cliente> listaClientes = null;
+        List<Funcionario> listaFuncionarios = null;
         
         if ("sim".equals(deslogou)){
             session.invalidate();
@@ -41,16 +42,17 @@ public class ClienteController extends HttpServlet {
         }
         else {
             try {
-              listaClientes =  cliente.RecuperarCliente();
+              listaFuncionarios =  func.RecuperarFuncionario();
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
-            request.setAttribute("clientes", listaClientes);
-            RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);       
+            request.setAttribute("funcionarios", listaFuncionarios);
+            RequestDispatcher view = request.getRequestDispatcher(LIST_FUNCS);       
             view.forward(request, response);
         }
-    }    
+    }
+    
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
@@ -58,13 +60,14 @@ public class ClienteController extends HttpServlet {
         
         if (acao.equalsIgnoreCase("salvar")){            
             try {
-                String clienteId = request.getParameter("idCliente");
+                String funcionarioId = request.getParameter("idFunc");
 
-                if(clienteId == null || clienteId.isEmpty()) {
-                   cliente.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+                if(funcionarioId == null || funcionarioId.isEmpty()) {
+                   Usuario _usuario = new Administrador(request.getParameter("name"), request.getParameter("email"));
+                   func.Salvar(_usuario, _tipo);
                 }
                 else {
-                   cliente.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
+                   func.Salvar(new Administrador(parseInt(funcionarioId), request.getParameter("name"), request.getParameter("email")), _tipo);
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -72,11 +75,11 @@ public class ClienteController extends HttpServlet {
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            cliente.Deletar(id, "cliente");                       
+            func.Deletar(id, "func");                       
        }
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_CLIENTES);
-        request.setAttribute("clientes", cliente.RecuperarCliente());
+        RequestDispatcher view = request.getRequestDispatcher(LIST_FUNCS);
+        request.setAttribute("admins", func.RecuperarFuncionario());
         view.forward(request, response);
     }
 }

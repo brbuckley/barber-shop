@@ -33,10 +33,10 @@
     <!-- Container principal da página -->
     <div id="wrapper">
 
-        <!-- Barra de menu lateral -->      
+         <!-- Barra de menu lateral -->      
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Barra lateral - Logo Uff -->
-           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.jsp">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.jsp">
                 <div class="sidebar-brand-icon">
                     <img src="img/logo_principal.png" alt="Logo UFF" width="100" height="100">
                 </div>
@@ -62,7 +62,7 @@
         </div>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ServicoController?action=listservicos">
-                    <i class="fas fa-sitemap"></i>
+                    <i class="fa fa-shopping-cart"></i>
                     <span>Serviços</span></a>
             </li>
 
@@ -77,9 +77,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gerenciamentos</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/ClienteController?action=listcliente">Clientes</a>      
+                         <a class="collapse-item" href="${pageContext.request.contextPath}/ClienteController?action=listcliente">Clientes</a>      
                         <a class="collapse-item" href="${pageContext.request.contextPath}/AdminController?action=listadmin">Administradores</a>   
-                       <a class="collapse-item" href="${pageContext.request.contextPath}/BarbeiroController?action=listbarbeiro">Funcionários</a>                                  
+                       <a class="collapse-item" href="${pageContext.request.contextPath}/FuncionarioController?action=listfuncionario">Funcionários</a>               
                     </div>
                 </div>
             </li>
@@ -87,26 +87,36 @@
             <hr class="sidebar-divider">
         </div>
                     
-            <!-- Cabeçalho -->
-            <div id="menuusuario" style="${usu}">
+            <!-- Gerencial das filas -->
+            <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Acessar</span>
+                    <span>Operações</span>
                 </div>            
 
-                <!-- Nav Item - Filas -->
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        <span>Filas</span></a>
-                </li>
-                
-                 <!-- Nav Item - Dados Pessoais -->
-                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        <span>Dados Pessoais</span></a>
-                </li>
- 
+                <!-- Nav Item - Fila -->                
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/ContaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                            <i class="fa fa-cog fa-fw"></i>
+                            <span>Abrir/Fechar Filas</span></a>
+                    </li>  
+
+                <!-- Divisor -->
+                <hr class="sidebar-divider d-none d-md-block">
+            </div> 
+                            
+                             <!-- Gerencial das filas -->
+            <div id="menuCliente" style="${cli}">
+                <div class="sidebar-heading">               
+                    <span>Acessos</span>
+                </div>            
+
+                <!-- Nav Item - Fila -->                
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                            <i class="fa fa-book fa-fw"></i>
+                            <span>Filas</span></a>
+                    </li>  
+
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">
             </div> 

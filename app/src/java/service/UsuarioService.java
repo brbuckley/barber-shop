@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import model.Administrador;
-import model.Barbeiro;
+import model.Funcionario;
 import model.Cliente;
 import model.Usuario;
 
@@ -179,14 +179,14 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public List<Barbeiro> RecuperarBarbeiro() {
-        List<Barbeiro> listaBarbeiro = null;
+    public List<Funcionario> RecuperarFuncionario() {
+        List<Funcionario> listaBarbeiro = null;
        
         try {
             URL url = new URL("https://uff-barber-shop.herokuapp.com/barber/all");
             BufferedReader result = CriarRequisicao(url);
             Gson json = new Gson();
-            listaBarbeiro = Arrays.asList(json.fromJson(result, Barbeiro[].class));  
+            listaBarbeiro = Arrays.asList(json.fromJson(result, Funcionario[].class));  
             
         } catch (Exception e) {
             e.printStackTrace();

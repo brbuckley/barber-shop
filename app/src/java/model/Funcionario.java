@@ -1,12 +1,12 @@
 package model;
 
-public class Barbeiro extends Usuario  { 
+public class Funcionario extends Usuario  { 
     
-    public Barbeiro(int id, String name, String email) {
+    public Funcionario(int id, String name, String email) {
         super(id, name, email);
     }
     
-    public Barbeiro(String name, String email) {
+    public Funcionario(String name, String email) {
         super(name, email);
     }
     

@@ -2,17 +2,25 @@ package model;
 
 public class Cliente extends Usuario  { 
     
-    public Cliente(int id, String name, String email) {
+    public Cliente(int id, String name, String email, String endereco, int idade, String dataAniversario) {
         super(id, name, email);
+        
+        this.address = endereco;
+        this.age = idade;
+        this.birthDay = dataAniversario;
     }
     
-    public Cliente(String name, String email) {
+    public Cliente(String name, String email, String endereco, int idade, String dataAniversario) {
         super(name, email);
+        
+        this.address = endereco;
+        this.age = idade;
+        this.birthDay = dataAniversario;
     }
     
     private String address;
     private int age;     
-    private String birthday; 
+    private String birthDay; 
     
     public String getAddress() {
         return this.address;
@@ -22,12 +30,12 @@ public class Cliente extends Usuario  {
         this.address = address;
     }
     
-     public String getBirthday() {
-        return this.birthday;
+     public String getBirthDay() {
+        return this.birthDay;
     }
     
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthDay(String birthday) {
+        this.birthDay = birthday;
     }
     
     public int getAge() {

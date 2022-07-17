@@ -33,7 +33,7 @@
     <!-- Container principal da página -->
     <div id="wrapper">
 
-         <!-- Barra de menu lateral -->      
+        <!-- Barra de menu lateral -->      
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Barra lateral - Logo Uff -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.jsp">
@@ -181,15 +181,15 @@
 
                     <div class="row">
                         <div class="col-md-11">
-                            <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
-                            <p class="mb-4">Área para manuteção de clientes.</p> 
+                            <h1 class="h3 mb-2 text-gray-800">Funcioários</h1>
+                            <p class="mb-4">Área para manuteção de funcionários.</p> 
                         </div>                                   
                     </div>
 
                     <!-- Tabela de serviços -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Área Admin > Clientes</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Área Admin > Funcionários</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -197,40 +197,31 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nome</th>   
-                                              <th>Idade</th>
-                                            <th>Email</th>   
-                                             <th>Data Nascimento</th>      
-                                               <th>Endereço</th>
-                                            <th></th> 
+                                            <th>Nome</th>     
+                                            <th>Email</th>     
+                                            <th></th>                                         
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nome</th>   
-                                              <th>Idade</th>
-                                            <th>Email</th>       
-                                            <th>Data Nascimento</th>       
-                                               <th>Endereço</th>                                           
-                                            <th></th> 
+                                            <th>Nome</th>     
+                                            <th>Email</th>                                                 
+                                            <th></th>                                          
                                         </tr>
                                     </tfoot>
                                     <tbody>                                       
-                                        <c:forEach items="${clientes}" var="cliente">
+                                        <c:forEach items="${funcionarios}" var="funcionario">
                                             <tr> 
-                                                <td><c:out value="${cliente.id}" /></td>                                                
-                                                <td><c:out value="${cliente.name}" /></td>    
-                                                <td><c:out value="${cliente.age}" /></td> 
-                                                <td><c:out value="${cliente.email}" /></td>   
-                                                <td><c:out value="${cliente.birthDay}" /></td> 
-                                                <td><c:out value="${cliente.address}" /></td> 
+                                                <td><c:out value="${funcionario.id}" /></td>                                                
+                                                <td><c:out value="${funcionario.name}" /></td>        
+                                                <td><c:out value="${funcionario.email}" /></td>   
                                                 <td> 
                                                     <div class="text-center">
-                                                        <a href="#" onclick="carregarDadosEdicao('clienteModalLabel', 'edit', 'Cliente', ['idCliente', 'name', 'email', 'endereco', 'aniversario', 'idade'], [ '<c:out value='${cliente.id}'/>', '<c:out value='${cliente.name}'/>', '<c:out value='${cliente.email}'/>', '<c:out value='${cliente.address}'/>', '<c:out value='${cliente.birthDay}'/>', '<c:out value='${cliente.age}'/>'])" data-toggle="modal" data-target="#clienteModal">
+                                                        <a href="#" onclick="carregarDadosEdicao('funcionarioModalLabel', 'edit', 'Funcionário', ['idFuncionario', 'name', 'email'], [ '<c:out value='${admin.id}'/>', '<c:out value='${admin.name}'/>', '<c:out value='${admin.email}'/>'])" data-toggle="modal" data-target="#funcionarioModal">
                                                                 <i class="fas fa-1x fa-edit pr-1"></i>                       
                                                         </a>
-                                                        <a href="#" data-toggle="modal" onclick="carregarDadosEdicao('lancamentoLabel', 'delete', 'Cliente', ['id_exclusao'], [ '<c:out value='${cliente.id}'/>'])"   data-target="#exclusaoModal">
+                                                        <a href="#" data-toggle="modal" onclick="carregarDadosEdicao('funcionarioLabel', 'delete', 'Funcionário', ['id_exclusao'], [ '<c:out value='${funcionario.id}'/>'])"   data-target="#exclusaoModal">
                                                                        <i class="fas fa-1x fa-trash-alt"></i>                    
                                                        </a>
                                                     </div>                                                           
@@ -289,43 +280,27 @@
     </div>
     <!--Fim do Modal de Logout -->
 
-    <!-- Modal de criação/edição de clientes -->
-    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel"
+    <!-- Modal de criação/edição de funcionários -->
+    <div class="modal fade" id="funcionarioModal" tabindex="-1" role="dialog" aria-labelledby="funcionarioModalLabel"
     aria-hidden="true">
        <div class="modal-dialog" role="document">
            <div class="modal-content">
                <div class="modal-header">
-                   <h5 class="modal-title" id="clienteModalLabel">Edição de Clientes</h5>
+                   <h5 class="modal-title" id="clienteModalLabel">Edição de Funcionários</h5>
                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                        <span aria-hidden="true">×</span>
                    </button>
                </div>
                <!-- Corpo do modal -->
-               <form method="post" action="${pageContext.request.contextPath}/ClienteController?action=salvar">
+               <form method="post" action="${pageContext.request.contextPath}/FuncionarioController?action=salvar">
                     <div class="modal-body">                    
                         <div class="row g-3">
                             <div class="col-md-12">
-                              <input  name="idCliente" class="form-control" type="hidden" value="<c:out value="${cliente.id}"/>" id="idCliente"> 
-                                <span style="float:left;margin-right: 15px;">
-                                    <label for="username">Nome</label>
-                                    <input style="" required="required" name="name" type="text" size="30" class="form-control" value="<c:out value="${cliente.name}" />" id="name" required> 
-                                </span>
-                                <span style="float:left;">
-                                    <label for="name">Idade</label>
-                                    <input id="idade" name="idade" size="10" type="text"  class="form-control" value="<c:out value="${cliente.age}" />" id="age" required>
-                                </span>
-                                <span style="float:left;margin-right: 15px;">
-                                    <label for="username">Endereço</label>
-                                    <input required="required" name="endereco" type="text" size="30" class="form-control" value="<c:out value="${cliente.address}" />" id="endereco" required> 
-                                </span>
-                                <span style="float:left;">
-                                    <label for="name">Aniversário</label>
-                                    <input name="aniversario"  size="10" type="text"  class="form-control" value="<c:out value="${cliente.birthDay}" />" id="aniversario" required>
-                                </span>
-                                <span>
-                                    <label for="validacaoEmail" class="form-label">E-mail</label>
-                                    <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${cliente.email}" />" id="email" required> 
-                              </span>
+                              <input  name="idFunc" class="form-control" type="hidden" value="<c:out value="${funcionario.id}"/>" id="idFunc"> 
+                              <label for="validacaoNome" class="form-label">Nome</label>
+                              <input  required="required" name="name" type="text" class="form-control" value="<c:out value="${funcionario.name}" />" id="name" required> 
+                               <label for="validacaoEmail" class="form-label">E-mail</label>
+                              <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${funcionario.email}" />" id="email" required>    
                             </div>
                         </div>                    
                     </div>
@@ -360,7 +335,7 @@
                       </div>
                       <div class="col-md-5">
                         <label class="form-label">Email</label>
-                        <label class="text-primary" class="form-label">${cliente.emai}</label>
+                        <label class="text-primary" class="form-label">${funcionario.emai}</label>
                       </div>                     
                   </form>             
               </div>
@@ -380,15 +355,15 @@
             <div class="modal-dialog" role="document">
 
                     <div class="modal-content">    
-                        <form method="post" action="${pageContext.request.contextPath}/ClienteController?action=delete">                            
+                        <form method="post" action="${pageContext.request.contextPath}/FuncionarioController?action=delete">                            
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exclusaoModalLabel">Excluir Cliente</h5>
+                                <h5 class="modal-title" id="exclusaoModalLabel">Excluir Usuário</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div class="modal-body">Tem certeza que deseja excluir?</div>
-                            <input  name="id_exclusao" class="form-control" type="hidden"  value="<c:out value="${cliente.id}"/>" id="id_exclusao">   
+                            <input  name="id_exclusao" class="form-control" type="hidden"  value="<c:out value="${funcionario.id}"/>" id="id_exclusao">   
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                                 <button class="btn btn-primary"  value="Submit" type="submit">Confirmar</button>

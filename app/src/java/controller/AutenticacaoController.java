@@ -42,7 +42,7 @@ public class AutenticacaoController extends HttpServlet {
             
             if (dto == null)
             {
-                request.getRequestDispatcher("login.jsp").forward(request, response); 
+                request.getRequestDispatcher("login.jsp").forward(request, response);                 
                 return;
             }
             

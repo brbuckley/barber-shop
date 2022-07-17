@@ -24,7 +24,7 @@ public class AutenticacaoService implements IAutenticacaoService {
             HttpURLConnection requisicao = (HttpURLConnection) url.openConnection();
             requisicao.setRequestMethod("GET");
             requisicao.setRequestProperty("Accept", "application/json");
-            if (requisicao.getResponseCode() != 200) {
+            if (requisicao.getResponseCode() != 200) {                
                 throw new RuntimeException("Falha na requisição com código: "
                         + requisicao.getResponseCode());
             }
@@ -39,7 +39,7 @@ public class AutenticacaoService implements IAutenticacaoService {
             
         } catch (IOException | RuntimeException e) {
         }
-
+        
         return usuario;
     }
     
