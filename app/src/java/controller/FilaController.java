@@ -65,47 +65,4 @@ public class FilaController extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }    
-   
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
-        String acao = request.getParameter("action");           
-        List<Fila> lstFilas;
-        
-        if (acao.equalsIgnoreCase("salvar")){            
-            try {
-                String funcionarioId = request.getParameter("idUsuarioLogado");
-                
-                  try {
-                    lstFilas =  fila.ObterFilas();
-                    
-                    lstFilas.forEach((x) -> {
-                        if (x.getBarbeiro().getId() == parseInt(funcionarioId) && x.getStatus().equals("aberto")) {
-                            
-                            request.setAttribute("filaIniciada", "");
-                            //Enviar request para parar a fila
-                            return;                         
-
-                        }
-                        else if (x.getBarbeiro().getId() == parseInt(funcionarioId) && x.getStatus().equals("fechado")) {
-                            request.setAttribute("filaIniciada", "checked");
-                            //Enviar request para iniciarlizar a fila
-                            return;  
-                        }  
-                    });                    
-                  } catch (Exception e) {
-                      System.out.println("Erro ao requisitar: " + e);
-                  }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            } 
-        }
-        else if (acao.equalsIgnoreCase("delete")){
-            int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            //fila (id, "cliente");                       
-       }
-        
-        RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);
-        request.setAttribute("filas", fila.ObterFilas());
-        view.forward(request, response);
-    }
 }
