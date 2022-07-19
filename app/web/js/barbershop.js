@@ -73,7 +73,9 @@ function alternaFila(url){
    ckb = $("#filaAtiva").is(':checked');
    url +=('&ativo='+ ckb);
   $.ajax({ url: url });    
-  
+  setTimeout(function(){
+      location.reload(true); 
+    }, 500);    
 }
 
 

@@ -202,9 +202,14 @@
                     </ul>
                 </nav>
                 <!-- Fim da barra superior  -->
-
+                
+                
                 <div class="row">   
+                    
                     <div class="container-fluid"> 
+                        <div class="center">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.reload(true)">Atualizar Status Filas</button>
+                        </div>                
                     <c:forEach items="${filas}" var="fila">
                             <div class="col-xl-12 col-md-6 mb-4">
                                 <div class="cardFila border-left-danger shadow h-100 py-2">
