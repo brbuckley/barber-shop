@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Administrador;
 import model.Funcionario;
 import model.Usuario;
 import service.UsuarioService;
@@ -63,11 +62,11 @@ public class FuncionarioController extends HttpServlet {
                 String funcionarioId = request.getParameter("idFunc");
 
                 if(funcionarioId == null || funcionarioId.isEmpty()) {
-                   Usuario _usuario = new Administrador(request.getParameter("name"), request.getParameter("email"));
+                   Usuario _usuario = new Funcionario(request.getParameter("name"), request.getParameter("email"), request.getParameter("senha") );
                    func.Salvar(_usuario, _tipo);
                 }
                 else {
-                   func.Salvar(new Administrador(parseInt(funcionarioId), request.getParameter("name"), request.getParameter("email")), _tipo);
+                   func.Salvar(new Funcionario(parseInt(funcionarioId), request.getParameter("name"), request.getParameter("email")), _tipo);
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -79,7 +78,7 @@ public class FuncionarioController extends HttpServlet {
        }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_FUNCS);
-        request.setAttribute("admins", func.RecuperarFuncionario());
+        request.setAttribute("funcionarios", func.RecuperarFuncionario());
         view.forward(request, response);
     }
 }

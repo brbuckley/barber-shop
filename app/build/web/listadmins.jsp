@@ -93,18 +93,13 @@
             <hr class="sidebar-divider">
         </div>
                     
-            <!-- Gerencial das filas -->
+             <!-- Gerencial das filas -->
             <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Operações</span>
+                    <span> Iniciar / Parar Fila</span>
                 </div>            
 
-                <!-- Nav Item - Fila -->                
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                            <i class="fa fa-cog fa-fw"></i>
-                            <span>Abrir/Fechar Filas</span></a>
-                    </li>  
+               
 
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -184,12 +179,18 @@
 
                 <!-- Inicio do conteúdo da página -->
                 <div class="container-fluid">
-
+                    
                     <div class="row">
                         <div class="col-md-11">
                             <h1 class="h3 mb-2 text-gray-800">Administradores</h1>
                             <p class="mb-4">Área para manuteção de Administradores.</p> 
-                        </div>                                   
+                        </div>      
+                        <div class="col-md-1">                            
+                            <a href="#" onclick="alternarOperacaoNovoOuEdicao('servicoModalLabel', 'novo', 'Serviços')" data-toggle="modal" data-target="#adminModal">
+                                <i class="fas fa-4x fa-plus-circle"></i>                         
+                            </a>
+                            Adicionar
+                        </div>   
                     </div>
 
                     <!-- Tabela de serviços -->
@@ -286,7 +287,7 @@
     </div>
     <!--Fim do Modal de Logout -->
 
-    <!-- Modal de criação/edição de serviços -->
+    <!-- Modal de criação/edição de admin -->
     <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
     aria-hidden="true">
        <div class="modal-dialog" role="document">

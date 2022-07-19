@@ -14,7 +14,7 @@ public class Servicos {
     
     private int id;
     private String description; 
-    private Double price;
+    private double price;
   
     
     public int getId(){

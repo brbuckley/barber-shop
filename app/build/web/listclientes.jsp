@@ -94,23 +94,17 @@
         </div>
                     
             <!-- Gerencial das filas -->
+             <!-- Gerencial das filas -->
             <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Operações</span>
+                    <span> Iniciar / Parar Fila</span>
                 </div>            
-
-                <!-- Nav Item - Fila -->                
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                            <i class="fa fa-cog fa-fw"></i>
-                            <span>Abrir/Fechar Filas</span></a>
-                    </li>  
 
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">
             </div> 
                             
-                             <!-- Gerencial das filas -->
+            <!-- Gerencial das filas -->
             <div id="menuCliente" style="${cli}">
                 <div class="sidebar-heading">               
                     <span>Acessos</span>
@@ -189,7 +183,13 @@
                         <div class="col-md-11">
                             <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
                             <p class="mb-4">Área para manuteção de clientes.</p> 
-                        </div>                                   
+                        </div>     
+                        <div class="col-md-1">                            
+                            <a href="#" onclick="alternarOperacaoNovoOuEdicao('servicoModalLabel', 'novo', 'Serviços')" data-toggle="modal" data-target="#clienteModal">
+                                <i class="fas fa-4x fa-plus-circle"></i>                         
+                            </a>
+                            Adicionar
+                        </div>   
                     </div>
 
                     <!-- Tabela de serviços -->

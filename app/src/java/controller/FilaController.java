@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.Fila;
 import service.FilaService;
 
-@WebServlet(name = "Filas", urlPatterns = {"/FilasController"})
+@WebServlet(name = "Filas", urlPatterns = {"/FilaController"})
 public class FilaController extends HttpServlet {        
     private static String LIST_FILAS = "/listfilas.jsp";
     private FilaService fila;
@@ -28,6 +28,8 @@ public class FilaController extends HttpServlet {
         HttpSession session = request.getSession(true);   
         String sessaoValida = request.getParameter("session");        
         String deslogou = request.getParameter("deslogar");
+        String ativaDesativaFila = request.getParameter("ativo");
+        String barbeiroId = request.getParameter("id");
         List<Fila> listaFilas = null;
         
         if ("sim".equals(deslogou)){
@@ -40,21 +42,34 @@ public class FilaController extends HttpServlet {
         }
         else {
             try {
+                if (ativaDesativaFila != null && !ativaDesativaFila.isEmpty()){
+                   int filaId = fila.ObterFilaDoBarbeiro(parseInt(barbeiroId));
+                   if (ativaDesativaFila.equals("false")) 
+                       fila.AlteraStatusFila(filaId, "fechado");
+                   else
+                       fila.AlteraStatusFila(filaId, "aberto");
+            }
               listaFilas =  fila.ObterFilas();
+              
+              listaFilas.forEach((x) -> {
+                        if (x.getBarbeiro().getId() == parseInt(barbeiroId) && x.getStatus().equals("aberto")) {
+                            session.setAttribute("filaIniciada", "checked");
+                        }
+                });
+              session.setAttribute("filaIniciada", "");
             } catch (Exception e) {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
             request.setAttribute("filas", listaFilas);
-            RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);       
-            view.forward(request, response);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }    
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
         String acao = request.getParameter("action");           
-        List<Fila> lstFilas = null;
+        List<Fila> lstFilas;
         
         if (acao.equalsIgnoreCase("salvar")){            
             try {
@@ -64,38 +79,29 @@ public class FilaController extends HttpServlet {
                     lstFilas =  fila.ObterFilas();
                     
                     lstFilas.forEach((x) -> {
-                        if (x.getBarbeiro().getId() == parseInt(funcionarioId) /*&& x.getStatus() == "aberto" */ ) {
+                        if (x.getBarbeiro().getId() == parseInt(funcionarioId) && x.getStatus().equals("aberto")) {
                             
                             request.setAttribute("filaIniciada", "");
                             //Enviar request para parar a fila
                             return;                         
 
                         }
-                        else if (x.getBarbeiro().getId() == parseInt(funcionarioId) /*&& x.getStatus() == "fechado" */ ) {
+                        else if (x.getBarbeiro().getId() == parseInt(funcionarioId) && x.getStatus().equals("fechado")) {
                             request.setAttribute("filaIniciada", "checked");
                             //Enviar request para iniciarlizar a fila
                             return;  
                         }  
-                    });
-                    
+                    });                    
                   } catch (Exception e) {
                       System.out.println("Erro ao requisitar: " + e);
                   }
-//          
-
-//                if(filaId == null || filaId.isEmpty()) {
-//                   fila.Salvar(new Cliente(request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
-//                }
-//                else {
-//                   fila.Salvar(new Cliente(parseInt(clienteId), request.getParameter("name"), request.getParameter("email"), request.getParameter("endereco"), parseInt(request.getParameter("idade")), request.getParameter("aniversario")), _tipo);
-//                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } 
         }
         else if (acao.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id_exclusao"));
-          //  fila.Deletar(id, "cliente");                       
+            //fila (id, "cliente");                       
        }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_FILAS);

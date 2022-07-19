@@ -6,7 +6,11 @@ public class Funcionario extends Usuario  {
         super(id, name, email);
     }
     
-    public Funcionario(String name, String email) {
+    public Funcionario(String name, String email, String password) {
+        super(name, email);
+    }
+    
+     public Funcionario(String name, String email) {
         super(name, email);
     }
     

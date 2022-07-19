@@ -69,6 +69,14 @@ var alternarOperacaoNovoOuEdicao = function(event, op, descricao) {
   }
 }
 
+function alternaFila(url){
+   ckb = $("#filaAtiva").is(':checked');
+   url +=('&ativo='+ ckb);
+  $.ajax({ url: url });    
+  
+}
+
+
 function carregarDadosEdicao(event, op, descricao, listParams, listValores) { 
    
    for (var i = 0; i < listParams.length; i++) {

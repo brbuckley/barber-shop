@@ -93,18 +93,11 @@
             <hr class="sidebar-divider">
         </div>
                     
-            <!-- Gerencial das filas -->
+             <!-- Gerencial das filas -->
             <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Operações</span>
-                </div>            
-
-                <!-- Nav Item - Fila -->                
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                            <i class="fa fa-cog fa-fw"></i>
-                            <span>Abrir/Fechar Filas</span></a>
-                    </li>  
+                    <span> Iniciar / Parar Fila</span>
+                </div>       
 
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">

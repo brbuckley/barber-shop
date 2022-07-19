@@ -96,14 +96,20 @@
             <!-- Gerencial das filas -->
             <div id="menuFuncionario" style="${func}">
                 <div class="sidebar-heading">               
-                    <span>Operações</span>
+                    <span> Iniciar / Parar Fila</span>
                 </div>            
 
                 <!-- Nav Item - Fila -->                
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
-                            <i class="fa fa-cog fa-fw"></i>
-                            <span>Abrir/Fechar Filas</span></a>
+                           <span>                                                                
+                                <label class="switch">
+                                    <input type="checkbox" ${filaIniciada} onclick="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                                   <span class="slider round"></span>
+                                 </label>
+                            
+                            </span>
+                        </a>
                     </li>  
 
                 <!-- Divisor -->
@@ -189,7 +195,13 @@
                         <div class="col-md-11">
                             <h1 class="h3 mb-2 text-gray-800">Funcionários</h1>
                             <p class="mb-4">Área para manuteção de funcionários.</p> 
-                        </div>                                   
+                        </div>      
+                        <div class="col-md-1">                            
+                            <a href="#" onclick="alternarOperacaoNovoOuEdicao('funcionarioModalLabel', 'novo', 'Funcionários')" data-toggle="modal" data-target="#funcionarioModal">
+                                <i class="fas fa-4x fa-plus-circle"></i>                         
+                            </a>
+                            Adicionar
+                        </div>   
                     </div>
 
                     <!-- Tabela de serviços -->
@@ -224,7 +236,7 @@
                                                 <td><c:out value="${funcionario.email}" /></td>   
                                                 <td> 
                                                     <div class="text-center">
-                                                        <a href="#" onclick="carregarDadosEdicao('funcionarioModalLabel', 'edit', 'Funcionário', ['idFuncionario', 'name', 'email'], [ '<c:out value='${admin.id}'/>', '<c:out value='${admin.name}'/>', '<c:out value='${admin.email}'/>'])" data-toggle="modal" data-target="#funcionarioModal">
+                                                        <a href="#" onclick="carregarDadosEdicao('funcionarioModalLabel', 'edit', 'Funcionário', ['idFunc', 'name', 'email'], [ '<c:out value='${funcionario.id}'/>', '<c:out value='${funcionario.name}'/>', '<c:out value='${funcionario.email}'/>'])" data-toggle="modal" data-target="#funcionarioModal">
                                                                 <i class="fas fa-1x fa-edit pr-1"></i>                       
                                                         </a>
                                                         <a href="#" data-toggle="modal" onclick="carregarDadosEdicao('funcionarioLabel', 'delete', 'Funcionário', ['id_exclusao'], [ '<c:out value='${funcionario.id}'/>'])"   data-target="#exclusaoModal">
@@ -306,7 +318,9 @@
                               <label for="validacaoNome" class="form-label">Nome</label>
                               <input  required="required" name="name" type="text" class="form-control" value="<c:out value="${funcionario.name}" />" id="name" required> 
                                <label for="validacaoEmail" class="form-label">E-mail</label>
-                              <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${funcionario.email}" />" id="email" required>    
+                              <input  required="required" name="email" type="text" class="form-control" value="<c:out value="${funcionario.email}" />" id="email" required>   
+                              <label for="validacaoSenha" class="form-label">Senha</label>
+                              <input  required="required" name="senha" type="password" class="form-control" value="<c:out value="${funcionario.passwordHash}" />" id="senha" required> 
                             </div>
                         </div>                    
                     </div>

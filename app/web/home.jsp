@@ -96,16 +96,17 @@
 
                 <!-- Nav Item - Fila -->                
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                        <a class="nav-link">
                            <span>                                                                
                                 <label class="switch">
-                                    <input type="checkbox" ${filaIniciada} onclick="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                                    <input id="filaAtiva" type="checkbox" ${filaIniciada} onclick="alternaFila('${pageContext.request.contextPath}/FilaController?action=salvar&id=${sessionScope.idUsuarioLogado}')">
                                    <span class="slider round"></span>
                                  </label>
                             
                             </span>
                         </a>
                     </li>  
+
 
                 <!-- Divisor -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -119,7 +120,7 @@
 
                 <!-- Nav Item - Fila -->                
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=listconta&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/FilaController?action=istfilas&id=${sessionScope.idUsuarioLogado}&session=${sessionScope.usuarioLogado}">
                             <i class="fa fa-book fa-fw"></i>
                             <span>Filas</span></a>
                     </li>  
@@ -210,11 +211,12 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
+                                                Pessoas na fila: <span>${fila.resultCount}</span>
                                                 <div class="h5 mb-0 font-weight-bold text-danger">Barbeiro: ${fila.barbeiro.name}</div>
                                                 <br>
                                                 <c:forEach items="${fila.appointments}" var="pessoa">
                                                     <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1">
-                                                       ${pessoa.customer.name}
+                                                        ${pessoa.customer.name}
                                                     </div>
                                                 </c:forEach> 
                                             </div>
@@ -230,7 +232,7 @@
                  </div>
 
              <!-- Footer -->
-            <footer class="sticky-footer  bg-white">
+            <footer class="sticky-footer mb-0 bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; DAC - Web BarberShop<br>Desenvolvimento de aplicações Coorporativas - 2022.1</span>

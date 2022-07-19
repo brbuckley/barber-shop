@@ -53,50 +53,39 @@ public class AutenticacaoController extends HttpServlet {
                 System.out.println("Erro ao requisitar: " + e);
             }
             
-//            if (dto == null)
-//            {
-//                request.getRequestDispatcher("login.jsp").forward(request, response);                 
-//                return;
-//            }
-//            
-//            // Bloco que trata de visualização dos menus
-//            if (AutenticacaoService._tipo.equals("Admin"))
-//            {
-//                session.setAttribute("adm", "display: normal");
-//                session.setAttribute("cli", "display: none");
-//                session.setAttribute("func", "display: none");
-//            }
-//            else if (AutenticacaoService._tipo.equals("Costumer")){
-//                session.setAttribute("adm", "display: none");
-//                session.setAttribute("cli", "display: normal");
-//                session.setAttribute("func", "display: none");
-//            }       
-//            else
-//            {
-//                session.setAttribute("adm", "display: none");
-//                session.setAttribute("cli", "display: none");
-//                session.setAttribute("func", "display: normal");
-//            }
-//            
-               // Vai ficar dentro do ultimo else
-               session.setAttribute("adm", "display: none");
-               session.setAttribute("cli", "display: none");
-               session.setAttribute("func", "display: normal");
-               
-               lstFilas.forEach((x) -> {
-                     if (x.getBarbeiro().getId() == dto.getId() /*&& x.getStatus() == "aberto" */ ) {                         
-                         session.setAttribute("filaIniciada", "checked");
-                         return;                         
-                     }
-                     else {
-                        session.setAttribute("filaIniciada", "");
-                        return;
-                     }  
-                });
-               
+            if (dto == null)
+            {
+                request.getRequestDispatcher("login.jsp").forward(request, response);                 
+                return;
+            }
+            
+            // Bloco que trata de visualização dos menus
+            switch (AutenticacaoService._tipo) {
+                case "Admin":
+                    session.setAttribute("adm", "display: normal");
+                    session.setAttribute("cli", "display: none");
+                    session.setAttribute("func", "display: none");
+                    break;
+                case "Barber": {
+                    session.setAttribute("adm", "display: none");
+                    session.setAttribute("cli", "display: none");
+                    session.setAttribute("func", "display: normal");
+                    lstFilas.forEach((x) -> {
+                        if (x.getBarbeiro().getId() == dto.getId() && x.getStatus().equals("aberto")) {
+                            session.setAttribute("filaIniciada", "checked");
+                        }
+                    });
+                    break;
+                }                    
+                default:
+                    session.setAttribute("adm", "display: none");
+                    session.setAttribute("cli", "display: normal");
+                    session.setAttribute("func", "display: none");//               
+                    break;  
+            }
 
-//          session.setAttribute("usuarioLogado", dto.getName()); 
-//          session.setAttribute("idUsuarioLogado", dto.getId());
+            session.setAttribute("usuarioLogado", dto.getName()); 
+            session.setAttribute("idUsuarioLogado", dto.getId());
             session.setAttribute("filas", this.lstFilas);
             request.getRequestDispatcher("home.jsp").forward(request, response);
      }     
