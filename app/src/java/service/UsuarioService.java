@@ -3,7 +3,6 @@ package service;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -128,6 +127,17 @@ public class UsuarioService implements IUsuarioService {
         }
     }   
 
+    @Override
+    public Cliente RecuperarClientePorId(int id) {
+       List<Cliente> listaClientes = this.RecuperarCliente();
+       Cliente _cliente = null;
+        for (final Cliente cliente : listaClientes) {
+            if (cliente.getId()==id)
+                _cliente = cliente;
+        }
+        return _cliente;
+    }
+        
     @Override
     public List<Cliente> RecuperarCliente() {
        List<Cliente> listaClientes = null;

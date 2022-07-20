@@ -2,6 +2,10 @@ package model;
 
 public class Funcionario extends Usuario  { 
     
+    public Funcionario(int id) {
+        super(id);
+    }
+    
     public Funcionario(int id, String name, String email) {
         super(id, name, email);
     }

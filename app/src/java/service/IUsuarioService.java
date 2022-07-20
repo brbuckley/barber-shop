@@ -7,6 +7,7 @@ import model.Cliente;
 import model.Usuario;
 
 public interface IUsuarioService {
+    public Cliente RecuperarClientePorId(int id);
     public List<Cliente> RecuperarCliente();
     public List<Administrador> RecuperarAdmin();
     public List<Funcionario> RecuperarFuncionario();

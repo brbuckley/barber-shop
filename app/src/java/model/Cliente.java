@@ -2,6 +2,10 @@ package model;
 
 public class Cliente extends Usuario  { 
     
+    public Cliente(int id) {
+        super(id);
+    }
+    
     public Cliente(int id, String name, String email, String endereco, int idade, String dataAniversario) {
         super(id, name, email);
         

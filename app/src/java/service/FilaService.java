@@ -17,7 +17,6 @@ public class FilaService implements IFilaService {
     
     public List<Fila> ObterFilas() {         
        List<Fila> listaFilas = null;
-       
         try {
             URL url = new URL("https://uff-barber-shop.herokuapp.com/queue/all");
             BufferedReader result = RequestService.CriarRequisicaoGet(url);
@@ -58,5 +57,20 @@ public class FilaService implements IFilaService {
             
         } catch (IOException | RuntimeException e){}  
         return filaId;
+    }
+
+    @Override
+    public Fila ObterFila(int id) {
+         Fila fila = null;
+        try {
+            URL url = new URL("https://uff-barber-shop.herokuapp.com/queue/"+id);
+            BufferedReader result = RequestService.CriarRequisicaoGet(url);
+            Gson json = new Gson();
+            fila  = json.fromJson(result, Fila.class);  
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fila;
     }
 }

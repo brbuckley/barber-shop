@@ -319,7 +319,7 @@
    </div>
    <!--Fim modal de criação de serviços -->
 
-    <!-- Modal de informações de usuários -->
+    <!-- Modal de informações de serviços -->
    <div class="modal fade" id="perfilModal" tabindex="-1" role="dialog" aria-labelledby="perfilModalLabel"
    aria-hidden="true">
       <div class="modal-dialog" role="document">

@@ -1,6 +1,10 @@
 package model;
 
-public class Servicos {    
+public class Servicos {  
+    public Servicos(int id){
+        this.id = id;
+    }
+    
     public Servicos(String descricao, Double preco) {
         this.description = descricao;       
         this.price = preco;

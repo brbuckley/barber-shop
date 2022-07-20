@@ -70,6 +70,7 @@ var alternarOperacaoNovoOuEdicao = function(event, op, descricao) {
 }
 
 function alternaFila(url){
+    debugger
    ckb = $("#filaAtiva").is(':checked');
    url +=('&ativo='+ ckb);
   $.ajax({ url: url });    
@@ -113,4 +114,27 @@ function formatarCPF(evt){
     let value = cpf.value.replace(/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/, "$1.$2.$3-$4");        
     cpf.value = value;  
   } 
+}
+
+function recuperarServicosSelecionados(url) {
+    var options = document.getElementById('servicosSelecionados').selectedOptions;
+    var servicos = Array.from(options).map(({ value }) => value);
+    var fila = document.getElementById("filaSelect").value;
+    
+    url+="&fila=" + fila + "&servicos=" + servicos;
+    
+    $.ajax({ url: url, type: "POST" });    
+    setTimeout(function(){
+      location.reload(true); 
+    }, 1000);    
+    
+}
+
+function charmarProximo(url) {
+    debugger
+    $.ajax({ url: url, type: "POST" });    
+    setTimeout(function(){
+      location.reload(true); 
+    }, 1000);    
+    
 }

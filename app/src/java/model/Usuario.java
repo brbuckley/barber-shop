@@ -2,6 +2,10 @@ package model;
 
 public class Usuario { 
     
+    public Usuario(int id){
+        this.id = id;
+    }
+    
     public Usuario(int id, String name, String email) {
         this.id = id;
         this.name = name;

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Fila;
+import model.Servicos;
 import model.Usuario;
 import service.AutenticacaoService;
 import service.FilaService;
+import service.ServicoService;
 
 
 @WebServlet(name = "Autenticacao", urlPatterns = {"/AutenticacaoController"})
@@ -21,11 +23,14 @@ public class AutenticacaoController extends HttpServlet {
     static String tipo = "";
     private static String LIST_FILAS = "/listfilas.jsp";
     private FilaService service;
+    private ServicoService servicoService;
     private List<Fila> lstFilas = null;    
+    private List<Servicos> lstServicos = null; 
 
     public AutenticacaoController() {
         autenticacao = new AutenticacaoService();
         service = new FilaService();
+        servicoService = new ServicoService();        
     }
     
     @Override
@@ -77,11 +82,16 @@ public class AutenticacaoController extends HttpServlet {
                     });
                     break;
                 }                    
-                default:
+                default: {
+                    lstServicos = servicoService.Recuperar();
+                    
+                    session.setAttribute("servicos", lstServicos );
                     session.setAttribute("adm", "display: none");
                     session.setAttribute("cli", "display: normal");
                     session.setAttribute("func", "display: none");//               
                     break;  
+                }
+                    
             }
 
             session.setAttribute("usuarioLogado", dto.getName()); 

@@ -3,14 +3,18 @@ package model;
 import java.util.List;
 
 public class Fila {    
-    public Fila(List<Agendamento> agendamentos, Usuario usuario) {
+    public Fila(List<Agendamento> agendamentos, Funcionario usuario) {
         this.appointments = agendamentos;       
         this.barber = usuario;        
     }  
     
+    public Fila(int id) {
+       this.id = id;
+    }
+    
     private int id;
     private List<Agendamento> appointments; 
-    private Usuario barber;
+    private Funcionario barber;
     private String status;
     private int resultCount;
     
@@ -26,6 +30,10 @@ public class Fila {
         this.appointments = agendamentos;
     }    
     
+     public void setAppointment(Agendamento agendamento) {
+        this.appointments.add(agendamento);
+    }   
+    
       public String getStatus() {
         return this.status;
     }
@@ -34,11 +42,11 @@ public class Fila {
         this.status = status;
     }    
     
-     public Usuario getBarbeiro() {
+     public Funcionario getBarbeiro() {
         return this.barber;
     }
     
-    public void setBarbeiro(Usuario barbeiro) {
+    public void setBarbeiro(Funcionario barbeiro) {
         this.barber = barbeiro;
     }    
     

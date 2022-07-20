@@ -204,9 +204,26 @@
                 <!-- Fim da barra superior  -->
                 
                 
+                
                 <div class="row">   
-                    
                     <div class="container-fluid"> 
+                        
+                        <div class="col-md-1" style="${cli}">                            
+                            <a href="#" data-toggle="modal" data-target="#entrarFilaModal">
+                                 <i class="fas fa-4x fa-plus-circle"></i>                   
+                            </a>
+                            <br>
+                            Entrar Fila
+                        </div>  
+                            
+                         <div class="col-md-1" style="${func}" onclick="charmarProximo('${pageContext.request.contextPath}/AgendamentoController?action=proximo&barbeiro=${sessionScope.idUsuarioLogado}')">                            
+                            <a href="#">
+                                 <i class="fa fa-4x fa-arrow-right" aria-hidden="true"></i> 
+                            </a>
+                            <br>
+                            Chamar Próximo
+                        </div>  
+                        
                         <div class="center">
                             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.reload(true)">Atualizar Status Filas</button>
                         </div>                
@@ -252,10 +269,54 @@
     </div>
     <!-- Fim do Container principal da página -->
 
-    <!--Botão para rolagem para o topo -->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    <!-- Modal para entrar na fila -->
+    <div class="modal fade" id="entrarFilaModal" tabindex="-1" role="dialog" aria-labelledby="entrarFilaModalLabel"
+    aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title" id="servicoModalLabel">Entrar para Fila</h5>
+                   <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">×</span>
+                   </button>
+               </div>
+               <!-- Corpo do modal -->
+               <form>
+                    <div class="modal-body">                    
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-group">                          
+                                    <label for="filaSelect">Escolha uma fila</label>
+                                    <select class="form-control" id="filaSelect">
+                                         <c:forEach items="${filas}" var="fila">
+                                             <option value="${fila.id}">${fila.barbeiro.name} - Qtd Pessoas: ${fila.resultCount}</option>
+                                        </c:forEach>   
+                                    </select>
+                                </div>
+                                <div class="form-group">                          
+                                    <label for="ServicosCheck">Escolha os serviços:</label>
+                                    <select class="form-control" id="servicosSelecionados" multiple>
+                                        <c:forEach items="${servicos}" var="servico">
+                                            <option value="${servico.id}">${servico.description} - R$${servico.price}</option>                                                   
+                                        </c:forEach> 
+                                    </select>
+                                    <small>Para mais de um serviço, segure o CTRL</small>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="modal-footer" style="padding-left: 60%">
+                        <button class="btn btn-primary"  type="submitt" data-dismiss="modal" onclick="recuperarServicosSelecionados('${pageContext.request.contextPath}/AgendamentoController?action=salvar&id=${sessionScope.idUsuarioLogado}')">Entrar</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>                   
+                    </div> 
+               </form>
+           </div>
+           
+       </div>
+   </div>
+   <!--Fim modal de criação de serviços -->
+
+    
     
     <!-- Modal de Logout-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

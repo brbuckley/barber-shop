@@ -2,83 +2,69 @@ package controller;
 
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Administrador;
-import model.Usuario;
+import model.Agendamento;
+import model.Cliente;
+import model.Fila;
+import model.Funcionario;
+import model.Pagamento;
+import model.Servicos;
+import service.AgendamentoService;
+import service.FilaService;
 import service.UsuarioService;
 
-@WebServlet(name = "Admins", urlPatterns = {"/AdminController"})
-public class AdminController extends HttpServlet {        
-    private static String LIST_ADMINS = "/listadmins.jsp";
-    private UsuarioService admin;
-    private String _tipo = "admin";
+@WebServlet(name = "Agend", urlPatterns = {"/AgendamentoController"})
+public class AgendamentoController extends HttpServlet {
+    private UsuarioService barbeiroService;   
+    private FilaService filaService;  
+    private UsuarioService clienteService;
+    private AgendamentoService agendamentoService;   
 
-    public AdminController() {        
-        admin = new UsuarioService();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
-        HttpSession session = request.getSession(true);   
-        String sessaoValida = request.getParameter("session");        
-        String deslogou = request.getParameter("deslogar");
-        List<Administrador> listaAdmins = null;
-        
-        if ("sim".equals(deslogou)){
-            session.invalidate();
-            request.getRequestDispatcher("login.jsp").forward(request, response);     
-            
-        } else if ("".equals(sessaoValida)){
-            session.invalidate();
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        else {
-            try {
-              listaAdmins =  admin.RecuperarAdmin();
-            } catch (Exception e) {
-                System.out.println("Erro ao requisitar: " + e);
-            }
-            
-            request.setAttribute("admins", listaAdmins);
-            RequestDispatcher view = request.getRequestDispatcher(LIST_ADMINS);       
-            view.forward(request, response);
-        }
-    }
-    
+    public AgendamentoController() {        
+        barbeiroService = new UsuarioService();
+        filaService = new FilaService();
+        clienteService = new UsuarioService();
+        agendamentoService = new AgendamentoService();
+    }    
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
-        String acao = request.getParameter("action");           
+        String acao = request.getParameter("action"); 
         
-        if (acao.equalsIgnoreCase("salvar")){            
+        if (acao.equalsIgnoreCase("salvar")){    
+             String filaId = request.getParameter("fila"); 
+             String clienteId = request.getParameter("id"); 
+             String[] arrayServicos = request.getParameter("servicos").split(","); 
+             
             try {
-                String clienteId = request.getParameter("idAdmin");
-
-                if(clienteId == null || clienteId.isEmpty()) {
-                   Usuario _usuario = new Administrador(request.getParameter("name"), request.getParameter("email"));
-                   admin.Salvar(_usuario, _tipo);
-                }
-                else {
-                   admin.Salvar(new Administrador(parseInt(clienteId), request.getParameter("name"), request.getParameter("email")), _tipo);
-                }
+                             
+                Funcionario barbeiro = filaService.ObterFila(parseInt(filaId)).getBarbeiro();
+                Pagamento pagamento = new Pagamento(1); // Por enquanto só está aceitando dinheiro; xD
+                Cliente cliente = new Cliente(parseInt(clienteId));
+                Fila fila = new Fila(parseInt(filaId));
+                Servicos servico = new Servicos(parseInt(arrayServicos[0]));
+               
+                String data = Instant.now().atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_LOCAL_DATE);
+                
+                Agendamento agendamento = new Agendamento(data, "Esperando", cliente, barbeiro, servico, pagamento, fila);
+                agendamentoService.AdicionarAFila(agendamento);
+              
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } 
+        } 
+        else {
+             String barbeiroId = request.getParameter("barbeiro"); 
+             agendamentoService.ChamarOProximo(parseInt(barbeiroId));
         }
-        else if (acao.equalsIgnoreCase("delete")){
-            int id = Integer.parseInt(request.getParameter("id_exclusao"));
-            admin.Deletar(id, "admin");                       
-       }
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_ADMINS);
-        request.setAttribute("admins", admin.RecuperarAdmin());
-        view.forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 }

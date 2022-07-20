@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Agendamento {    
    
-    public Agendamento(int id, Date data, String status, Usuario cliente, Usuario barbeiro, Servicos servico, Pagamento pagamento) {
+    public Agendamento(String data, String status, Cliente cliente, Funcionario barbeiro, Servicos servico, Pagamento pagamento, Fila fila) {
        this.id = id;
        this.status = status;
        this.date = data;       
@@ -12,19 +12,31 @@ public class Agendamento {
        this.barber = barbeiro;
        this.haircut = servico;  
        this.payment = pagamento;
+       this.queue = fila;
     } 
     
     private int id;
-    private Date date; 
+    private String date; 
     private String status;
-    private Usuario customer;
-    private Usuario barber;
+    private Cliente customer;
+    private Funcionario barber;
     private Servicos haircut;
     private Pagamento payment;
+    private Fila queue;
     
     public int getId(){
         return id;
     }    
+    
+    
+     public Fila getPFila() {
+        return this.queue;
+    }
+    
+    public void setFila(Fila queue) {
+        this.queue = queue;
+    }    
+    
     
     public Pagamento getPagamento() {
         return this.payment;
@@ -34,11 +46,11 @@ public class Agendamento {
         this.payment = pagamento;
     }    
     
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
     
-    public void setDate(Date data) {
+    public void setDate(String data) {
         this.date = data;
     }    
     
@@ -50,11 +62,11 @@ public class Agendamento {
         this.status = status;
     }    
     
-     public Usuario getCustomer() {
+     public Cliente getCustomer() {
         return this.customer;
     }
     
-    public void setCustomer(Usuario cliente) {
+    public void setCustomer(Cliente cliente) {
         this.customer = cliente;
     }    
     
@@ -62,7 +74,7 @@ public class Agendamento {
         return this.barber;
     }
     
-    public void setBarber(Usuario barbeiro) {
+    public void setBarber(Funcionario barbeiro) {
         this.barber = barbeiro;
     }    
     
